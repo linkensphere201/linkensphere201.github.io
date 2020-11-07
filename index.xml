@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>My New Hugo Site</title>
-    <link>/</link>
+    <link>https://hazy2019.github.io/</link>
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 07 Nov 2020 21:26:49 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Nov 2020 21:26:49 +0800</lastBuildDate><atom:link href="https://hazy2019.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
-      <link>/posts/my-first-post/</link>
+      <link>https://hazy2019.github.io/posts/my-first-post/</link>
       <pubDate>Sat, 07 Nov 2020 21:26:49 +0800</pubDate>
       
-      <guid>/posts/my-first-post/</guid>
+      <guid>https://hazy2019.github.io/posts/my-first-post/</guid>
       <description></description>
     </item>
     
