@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CheatSheets on 坏Fd</title>
+    <link>/categories/cheatsheets/</link>
+    <description>Recent content in CheatSheets on 坏Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 07 Nov 2020 21:20:49 +0000</lastBuildDate><atom:link href="/categories/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>备忘:Commit Message Words</title>
+      <link>/posts/frequently-used-words/</link>
+      <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
+      
+      <guid>/posts/frequently-used-words/</guid>
+      <description>en words used in coding  toggle quote snippet typo delimiter bundle anchor  </description>
+    </item>
+    
+    <item>
+      <title>启用一个新blog（Hugo试用）</title>
+      <link>/posts/try-hugo/</link>
+      <pubDate>Sat, 07 Nov 2020 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/try-hugo/</guid>
+      <description>Hugo试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
+  DeviantArt   Test for markdown   a1
+  a2xxx</description>
+    </item>
+    
+  </channel>
+</rss>

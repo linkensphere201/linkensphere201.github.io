@@ -3,26 +3,48 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://hazy2019.github.io/posts/my-first-post/</loc>
+    <loc>/categories/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/cheatsheets/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/other/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/frequently-used-words/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/hugo/</loc>
     <lastmod>2020-11-07T21:26:49+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://hazy2019.github.io/</loc>
+    <loc>/posts/try-hugo/</loc>
     <lastmod>2020-11-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hazy2019.github.io/posts/</loc>
-    <lastmod>2020-11-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hazy2019.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://hazy2019.github.io/tags/</loc>
   </url>
   
 </urlset>
