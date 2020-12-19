@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on 坏Fd</title>
+    <title>hugo on BadFd</title>
     <link>/tags/hugo/</link>
-    <description>Recent content in hugo on 坏Fd</description>
+    <description>Recent content in hugo on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 20 Dec 2020 07:26:49 +0800</lastBuildDate><atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
