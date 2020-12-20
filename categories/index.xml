@@ -5,6 +5,34 @@
     <link>/categories/</link>
     <description>Recent content in Categories on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 20 Dec 2020 07:26:49 +0800</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>杂谈</title>
+      <link>/categories/%E6%9D%82%E8%B0%88/</link>
+      <pubDate>Sun, 20 Dec 2020 07:26:49 +0800</pubDate>
+      
+      <guid>/categories/%E6%9D%82%E8%B0%88/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>基础架构</title>
+      <link>/categories/%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/</link>
+      <pubDate>Sat, 19 Dec 2020 21:20:49 +0000</pubDate>
+      
+      <guid>/categories/%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>CheatSheets</title>
+      <link>/categories/cheatsheets/</link>
+      <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
+      
+      <guid>/categories/cheatsheets/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
