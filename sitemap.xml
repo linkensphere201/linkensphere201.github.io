@@ -3,77 +3,20 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/posts/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/hugo/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/other_thoughts_about_life/</loc>
-    <lastmod>2020-12-20T07:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
-    <lastmod>2020-12-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2020-12-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/storage_deep_dive_raft/</loc>
-    <lastmod>2020-12-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/cheatsheets/</loc>
-    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/other/</loc>
-    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/other_frequently-used-words/</loc>
-    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/other_try-hugo/</loc>
-    <lastmod>2020-11-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/cpp_design_a_thread_shared_object/</loc>
   </url>
   
 </urlset>

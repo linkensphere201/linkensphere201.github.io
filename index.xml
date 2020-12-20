@@ -5,55 +5,15 @@
     <link>/</link>
     <description>Recent content on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Sun, 20 Dec 2020 07:26:49 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>杂谈</title>
-      <link>/posts/other_thoughts_about_life/</link>
-      <pubDate>Sun, 20 Dec 2020 07:26:49 +0800</pubDate>
-      
-      <guid>/posts/other_thoughts_about_life/</guid>
-      <description>杂1 既然所有的生命都要死亡，那么生命的意义是什么？
- 在bug中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  {{ $image := resources.Get &amp;ldquo;posts/ss1.png&amp;rdquo; }} {{ $image := $image.Fit &amp;ldquo;600x400&amp;rdquo; }}</description>
-    </item>
-    
-    <item>
-      <title>理解raft</title>
-      <link>/posts/storage_deep_dive_raft/</link>
-      <pubDate>Sat, 19 Dec 2020 21:20:49 +0000</pubDate>
-      
-      <guid>/posts/storage_deep_dive_raft/</guid>
-      <description> 首先带几个疑问:
- commit和apply分别指什么？ 收到RequestVote RPC的Server在什么情况下会Grant Vote? raft-log必须要顺序apply吗？为什么？ 每条raft-log是否都需要对应的termId？为什么？ raft-group的配置变更是怎么做的？    raft算法笔记 </description>
-    </item>
-    
-    <item>
-      <title>备忘:Commit Message Words</title>
-      <link>/posts/other_frequently-used-words/</link>
-      <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
-      
-      <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增  </description>
-    </item>
-    
-    <item>
-      <title>启用一个新blog（Hugo试用）</title>
-      <link>/posts/other_try-hugo/</link>
-      <pubDate>Sat, 07 Nov 2020 21:26:49 +0800</pubDate>
-      
-      <guid>/posts/other_try-hugo/</guid>
-      <description>Hugo试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
-  DeviantArt   Test for markdown   a1
-  a2xxx</description>
-    </item>
-    
+    <language>zh-cn</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>/posts/cpp_design_a_thread_shared_object/</link>
+      <link>/posts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/cpp_design_a_thread_shared_object/</guid>
-      <description></description>
+      <guid>/posts/</guid>
+      <description>date: &amp;ldquo;2018-01-25&amp;rdquo; resources:
+ name: ss1 src: posts/ss1.png  </description>
     </item>
     
   </channel>
