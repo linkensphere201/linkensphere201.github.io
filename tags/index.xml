@@ -34,5 +34,23 @@
       <description></description>
     </item>
     
+    <item>
+      <title>debug</title>
+      <link>/tags/debug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/debug/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>systemtap</title>
+      <link>/tags/systemtap/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/systemtap/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

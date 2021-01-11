@@ -24,7 +24,7 @@
       
       <guid>/posts/storage_deep_dive_raft/</guid>
       <description> 首先带几个疑问:
- commit和apply分别指什么？ 收到RequestVote RPC的Server在什么情况下会Grant Vote? raft-log必须要顺序apply吗？为什么？ 每条raft-log是否都需要对应的termId？为什么？ raft-group的配置变更是怎么做的？    raft算法笔记 </description>
+ commit和apply分别指什么？ commitIndex lastApplied为何不需要持久化？ 收到RequestVote RPC的Server在什么情况下会Grant Vote? 每条raft-log是否都需要对应的termId？为什么？ raft-group的配置变更是怎么做的？ raft-log必须要顺序apply吗？为什么？   raft算法笔记 </description>
     </item>
     
     <item>
@@ -33,7 +33,7 @@
       <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
       
       <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增  </description>
+      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision  </description>
     </item>
     
     <item>
@@ -63,6 +63,15 @@
       
       <guid>/posts/cpp_design_a_thread_shared_object/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>using systemtap to track your user-space program - 1</title>
+      <link>/posts/debugging_use-systemtap-to-debug-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_use-systemtap-to-debug-1/</guid>
+      <description> </description>
     </item>
     
   </channel>

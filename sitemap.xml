@@ -81,4 +81,20 @@
     <loc>/posts/cpp_design_a_thread_shared_object/</loc>
   </url>
   
+  <url>
+    <loc>/tags/debug/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/debugging/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/systemtap/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/debugging_use-systemtap-to-debug-1/</loc>
+  </url>
+  
 </urlset>
