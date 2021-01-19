@@ -6,17 +6,7 @@
     <description>Recent content in 分布式 on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 19 Dec 2020 21:20:49 +0000</lastBuildDate><atom:link href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>理解raft</title>
-      <link>/posts/storage_deep_dive_raft/</link>
-      <pubDate>Sat, 19 Dec 2020 21:20:49 +0000</pubDate>
-      
-      <guid>/posts/storage_deep_dive_raft/</guid>
-      <description> 首先带几个疑问:
- commit和apply分别指什么？ commitIndex lastApplied为何不需要持久化？ 收到RequestVote RPC的Server在什么情况下会Grant Vote? 每条raft-log是否都需要对应的termId？为什么？ raft-group的配置变更是怎么做的？ raft-log必须要顺序apply吗？为什么？   raft算法笔记 </description>
-    </item>
-    
+    <lastBuildDate>Wed, 19 Apr 2017 21:20:49 +0000</lastBuildDate><atom:link href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>分布式笔记 - Raft(入门)</title>
       <link>/posts/storage_deep_dive_for_raft/</link>

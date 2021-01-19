@@ -18,16 +18,6 @@
     </item>
     
     <item>
-      <title>理解raft</title>
-      <link>/posts/storage_deep_dive_raft/</link>
-      <pubDate>Sat, 19 Dec 2020 21:20:49 +0000</pubDate>
-      
-      <guid>/posts/storage_deep_dive_raft/</guid>
-      <description> 首先带几个疑问:
- commit和apply分别指什么？ commitIndex lastApplied为何不需要持久化？ 收到RequestVote RPC的Server在什么情况下会Grant Vote? 每条raft-log是否都需要对应的termId？为什么？ raft-group的配置变更是怎么做的？ raft-log必须要顺序apply吗？为什么？   raft算法笔记 </description>
-    </item>
-    
-    <item>
       <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>
       <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
