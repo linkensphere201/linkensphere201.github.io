@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>其他 on BadFd</title>
+    <link>/tags/%E5%85%B6%E4%BB%96/</link>
+    <description>Recent content in 其他 on BadFd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 07 Nov 2020 21:20:49 +0000</lastBuildDate><atom:link href="/tags/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cheatsheet for FUW</title>
+      <link>/posts/other_frequently-used-words/</link>
+      <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
+      
+      <guid>/posts/other_frequently-used-words/</guid>
+      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation &amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 ======= increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision &amp;laquo;&amp;laquo;&amp;laquo;&amp;lt; HEAD complement  cplusplus concepts:
+ pod types non-trivial types =======         c52df6ccc9318a6cedc95e6c07f32d9ecbf9b69a 05445d82f7c9a0532e5f81d530f62504e7d2b160
+       </description>
+    </item>
+    
+  </channel>
+</rss>
