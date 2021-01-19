@@ -28,12 +28,13 @@
     </item>
     
     <item>
-      <title>备忘:Commit Message Words</title>
+      <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>
       <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
       
       <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision  </description>
+      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement  cplusplus concepts:
+ pod types non-trivial types  </description>
     </item>
     
     <item>
@@ -63,6 +64,15 @@
       
       <guid>/posts/cpp_design_a_thread_shared_object/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/deep_dive_rocksdb/some_questions/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/deep_dive_rocksdb/some_questions/</guid>
+      <description> 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener  </description>
     </item>
     
     <item>

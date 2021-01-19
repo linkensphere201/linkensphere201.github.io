@@ -8,12 +8,13 @@
     <language>zh-cn</language>
     <lastBuildDate>Sat, 07 Nov 2020 21:20:49 +0000</lastBuildDate><atom:link href="/categories/cheatsheets/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>备忘:Commit Message Words</title>
+      <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>
       <pubDate>Sat, 07 Nov 2020 21:20:49 +0000</pubDate>
       
       <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision  </description>
+      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement  cplusplus concepts:
+ pod types non-trivial types  </description>
     </item>
     
     <item>

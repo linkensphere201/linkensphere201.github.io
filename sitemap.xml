@@ -53,17 +53,17 @@
   </url>
   
   <url>
+    <loc>/posts/other_frequently-used-words/</loc>
+    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/cheatsheets/</loc>
     <lastmod>2020-11-07T21:20:49+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/other/</loc>
-    <lastmod>2020-11-07T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/other_frequently-used-words/</loc>
     <lastmod>2020-11-07T21:20:49+00:00</lastmod>
   </url>
   
@@ -79,6 +79,10 @@
   
   <url>
     <loc>/posts/cpp_design_a_thread_shared_object/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/deep_dive_rocksdb/some_questions/</loc>
   </url>
   
   <url>
