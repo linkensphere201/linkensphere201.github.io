@@ -17,5 +17,15 @@
  在bug中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  </description>
     </item>
     
+    <item>
+      <title>随想2</title>
+      <link>/posts/other_thinkings/</link>
+      <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/other_thinkings/</guid>
+      <description>  下面是一个hugo图像处理的示意 代码为    .Resize &#34;300x&#34;       .Resize &#34;300x&#34;      随想1
+  </description>
+    </item>
+    
   </channel>
 </rss>

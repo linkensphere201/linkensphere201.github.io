@@ -64,6 +64,13 @@
 			</a>
 		</li>
 		<li class="menu__item">
+			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
+				
+				<span class="menu__text">rocksdb探究 - 一些问题</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
 			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1/">
 				
 				<span class="menu__text">using systemtap to track your user-space program - 1</span>
@@ -172,18 +179,40 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/thoughts_aboout_life/" rel="bookmark">
-			test for img processing application
+			<a href="/posts/other_thinkings/" rel="bookmark">
+			随想2
 			</a>
 		</h2>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-01-25T00:00:00Z">2018-01-25</time></div></div>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-19T00:00:00Z">2020-01-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		   .Resize "300x"    
+		  下面是一个hugo图像处理的示意 代码为    .Resize "300x"       .Resize "300x"      随想1
+  
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/deep_dive_rocksdb/some_questions/" rel="bookmark">
+			rocksdb探究 - 一些问题
+			</a>
+		</h2>
+		<p class="list__lead post__lead">一些rocksdb相关问题记录</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-07T21:26:49&#43;08:00">2020-01-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rocksdb/" rel="category">rocksdb</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现  
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -220,33 +249,18 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Q&amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以直接采用多核系统的线性一致性定义。
+		Q&amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。
 fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm） 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.
 log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry
 commit和apply分别指什么？ a log entry is committed是指某条log已被确认到达大多数节点. a log is applied是指某条日志已被fsm执行.
 leader回应client的时间点？ 一个日志的生命周期主要有几个时间点：
  leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
  When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
- RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） follower的voteFor如何维护的？grant某个候选者之后，voteFor如何处理？（什么时候重置为null，否则） follower的currentTerm如何维护的？在选举阶段，grant某个候选者是否需要修改自己的currentTerm?如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？ 只需要放写操作进raft-log吗？ 直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上待验证，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致
-小论文[1]中似乎没有提及只读优化，而详细版论文中[2]中有专门一章讨论只读操作。
-raft算法描述 每个节点维护的上下文 Log { LogEntry ent[]; bool IsNewerThan(const Log &amp;other_log); } LogEntry { int term; Cmd command; } Ctx { Log log; int currentTerm; ServerId voteFor; ServerId selfId; ENUM {FOLLOWER, CANDIDATE, LEADER} state; uint commitIndex; uint lastApplied; ServerId clusterMap[]; uint nextIndex[]; uint matchIndex[]; } leader选举   触发： 在election-timeout时间内没收到leader的RPC-AppendEntries  election-timeout是某范围内的随机时间，用于防止多个follwer同时发起选举造成split vote(没人赢得选举).
+ RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论（可能只是个实现细节，没有讨论的必要）
+currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 只需要放写操作进raft-log吗？ 直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上待验证，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/deep_dive_rocksdb/some_questions/" rel="bookmark">
-			
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener  
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -287,8 +301,8 @@ raft算法描述 每个节点维护的上下文 Log { LogEntry ent[]; bool IsNew
 			<li class="widget__item"><a class="widget__link" href="/posts/other_thoughts_about_life/">杂谈</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_frequently-used-words/">cheatsheet for FUW</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_try-hugo/">启用一个新blog（Hugo试用）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/thoughts_aboout_life/">test for img processing application</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_ptr/">cpp_xptr_part1</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/other_thinkings/">随想2</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/deep_dive_rocksdb/some_questions/">rocksdb探究 - 一些问题</a></li>
 		</ul>
 	</div>
 </div>
@@ -301,6 +315,9 @@ raft算法描述 每个节点维护的上下文 Log { LogEntry ent[]; bool IsNew
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/debugging/">debugging</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
@@ -316,11 +333,12 @@ raft算法描述 每个节点维护的上下文 Log { LogEntry ent[]; bool IsNew
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
 	</div>
 </div>
 <div class="widget-social widget">

@@ -38,5 +38,15 @@
   a2xxx</description>
     </item>
     
+    <item>
+      <title>随想2</title>
+      <link>/posts/other_thinkings/</link>
+      <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/other_thinkings/</guid>
+      <description>  下面是一个hugo图像处理的示意 代码为    .Resize &#34;300x&#34;       .Resize &#34;300x&#34;      随想1
+  </description>
+    </item>
+    
   </channel>
 </rss>

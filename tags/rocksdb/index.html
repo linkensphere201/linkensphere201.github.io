@@ -4,16 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>分布式 - BadFd</title>
+	<title>rocksdb - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="分布式" />
+		<meta property="og:title" content="rocksdb" />
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" />
-<meta property="og:updated_time" content="2017-04-19T21:20:49+00:00" />
+<meta property="og:url" content="/tags/rocksdb/" />
+<meta property="og:updated_time" content="2020-01-07T21:26:49+08:00" />
 
-		<meta itemprop="name" content="分布式">
+		<meta itemprop="name" content="rocksdb">
 <meta itemprop="description" content="a place to find myself">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	
-	<link rel="alternate" type="application/rss+xml" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" title="BadFd">
+	<link rel="alternate" type="application/rss+xml" href="/tags/rocksdb/index.xml" title="BadFd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -108,35 +108,25 @@
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">分布式</h1>
+		<h1 class="main__title">rocksdb</h1>
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/storage_deep_dive_for_raft/" rel="bookmark">
-			分布式笔记 - Raft(入门)
+			<a href="/posts/deep_dive_rocksdb/some_questions/" rel="bookmark">
+			rocksdb探究 - 一些问题
 			</a>
 		</h2>
+		<p class="list__lead post__lead">一些rocksdb相关问题记录</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-04-19T21:20:49Z">2017-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-07T21:26:49&#43;08:00">2020-01-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rocksdb/" rel="category">rocksdb</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Q&amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。
-fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm） 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.
-log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry
-commit和apply分别指什么？ a log entry is committed是指某条log已被确认到达大多数节点. a log is applied是指某条日志已被fsm执行.
-leader回应client的时间点？ 一个日志的生命周期主要有几个时间点：
- leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
- When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
- RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论（可能只是个实现细节，没有讨论的必要）
-currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 只需要放写操作进raft-log吗？ 直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上待验证，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/">阅读全文…</a>
+		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现  
 	</div>
 </article>
 </main>

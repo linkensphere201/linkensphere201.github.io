@@ -18,7 +18,7 @@
 <meta itemprop="description" content="“raft算法深入&#34;">
 <meta itemprop="datePublished" content="2017-04-19T21:20:49+00:00" />
 <meta itemprop="dateModified" content="2017-04-19T21:20:49+00:00" />
-<meta itemprop="wordCount" content="392">
+<meta itemprop="wordCount" content="462">
 
 
 
@@ -67,6 +67,13 @@
 			<a class="menu__link" href="/posts/cpp_x_ptr/">
 				
 				<span class="menu__text">cpp_xptr_part1</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
+				
+				<span class="menu__text">rocksdb探究 - 一些问题</span>
 				
 			</a>
 		</li>
@@ -127,6 +134,8 @@
       <ul>
         <li><a href="#qa">Q&amp;A</a></li>
         <li><a href="#raft算法描述">raft算法描述</a></li>
+        <li><a href="#heading"></a></li>
+        <li><a href="#要点总结">要点总结</a></li>
         <li><a href="#引用">引用</a></li>
       </ul>
     </li>
@@ -137,7 +146,7 @@
 <div class="content post__content clearfix">
 			<h3 id="qa">Q&amp;A</h3>
 <h5 id="线性一致性">线性一致性？</h5>
-<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以直接采用多核系统的线性一致性定义。</p>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
 <h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
 <p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）
 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.</p>
@@ -159,11 +168,12 @@
 <p>When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.</p>
 </blockquote>
 <h5 id="span-idrequest_vote_param_mythrpc-requestvotespan里为什么带了最后一个日志项log-entry的下标和它的term而不是commitindex或applyindex对应的日志项"><!-- raw HTML omitted -->RPC-RequestVote<!-- raw HTML omitted -->里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项）</h5>
-<h5 id="follower的votefor如何维护的grant某个候选者之后votefor如何处理什么时候重置为null否则">follower的voteFor如何维护的？grant某个候选者之后，voteFor如何处理？（什么时候重置为null，否则）</h5>
-<h5 id="follower的currentterm如何维护的在选举阶段grant某个候选者是否需要修改自己的currentterm如果选举阶段不修改那么连续两次选举上一次splitvote如何处理">follower的currentTerm如何维护的？在选举阶段，grant某个候选者是否需要修改自己的currentTerm?如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？</h5>
+<h5 id="votefor如何维护的例如-什么时候重置为null-当followergrant了某个候选者之后votefor如何处理">voteFor如何维护的？（例如: 什么时候重置为null? 当<code>follower</code>grant了某个候选者之后，voteFor如何处理？）</h5>
+<p>这个问题论文里并没有具体进行讨论（可能只是个实现细节，没有讨论的必要）</p>
+<h5 id="currentterm如何维护的例如在选举阶段当followergrant某个候选者之后是否需要修改自己的currentterm-如果选举阶段不修改那么连续两次选举上一次splitvote如何处理">currentTerm如何维护的？（例如：在选举阶段，当<code>follower</code>grant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？）</h5>
 <h5 id="只需要放写操作进raft-log吗">只需要放写操作进raft-log吗？</h5>
 <p>直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上<!-- raw HTML omitted -->待验证<!-- raw HTML omitted -->，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致</p>
-<p>小论文<!-- raw HTML omitted -->[1]<!-- raw HTML omitted -->中似乎没有提及只读优化，而详细版论文中<!-- raw HTML omitted -->[2]<!-- raw HTML omitted -->中有专门一章讨论只读操作。</p>
+<p><!-- raw HTML omitted -->[2]<!-- raw HTML omitted -->中有专门一章讨论只读优化问题。</p>
 <h3 id="raft算法描述">raft算法描述</h3>
 <h4 id="每个节点维护的上下文">每个节点维护的上下文</h4>
 <pre><code>Log {
@@ -279,34 +289,79 @@ Ctx {
 </ul>
 <h4 id="log复制">log复制</h4>
 <ul>
-<li>RPC-AppendEntries 方向
+<li>
+<p>RPC-AppendEntries 方向
 leader      &ndash;&gt; follower
 leader      &ndash;&gt; candidate
-new leader  &ndash;&gt; old leader</li>
-<li>触发
-leader定期发起.(即使没有新的写入，也需要发送空包到follower，避免follower发起选举)</li>
-<li>怎么做
+new leader  &ndash;&gt; old leader</p>
+</li>
+<li>
+<p>触发
+leader定期发起.(即使没有新的写入，也需要发送空包到follower，避免follower发起选举)</p>
+</li>
+<li>
+<p>日志项匹配性质：</p>
+<ul>
+<li>两个日志项的term和index相同，就认为这两个日志项一致（或称之为“相同”<code>the same</code>）。</li>
+<li>若两份日志内某个日志项一致，那么在该日志项之前的所有日志项也一致。</li>
+</ul>
+</li>
+<li>
+<p>日志冲突的处理原则：</p>
+<ul>
+<li>日志冲突的定义：某个日志项的index相同，但term却不同。</li>
+<li>以leader的日志为准，最终达到的效果：follower找到自己日志里最后一个与leader相匹配的日志项（其index记为l1），清除掉在其之后的所有日志项，leader最后一个日志项index记为l2, follower将从leader拷贝[l1+1,l2]的日志项。</li>
+</ul>
+</li>
+<li>
+<p>怎么做</p>
+<ul>
+<li>leader:
+<pre><code>for each x in followers:
+    选取一定范围内的日志（nextIndex）： collect log-entries between (nextIndex[x],my last log-entry]
+
+    RPC-AppendEntries(
+        currentTerm,
+        leaderId,
+        prevLogIndex,  // log index of the log which is right before log-entries[0]
+        prevLogTerm,   // log term of the log which is right before log-entries[0]
+        log-entries[], // 
+        leaderCommit   // to tell the follower which log is ok-to-apply 
+    )
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>收到后的行为：</p>
 <ul>
 <li>
-<p>leader:</p>
-<pre><code>RPC-AppendEntries(
-    currentTerm,
-    leaderId,
-    prevLogIndex,  // log index of the log which is right before log-entries[0]
-    prevLogTerm,   // log term of the log which is right before log-entries[0]
-    log-entries[],
-    leaderCommit   // to tell the follower which log is ok-to-apply 
-)
-</code></pre></li>
-<li>
 <p>follower:</p>
+<ul>
+<li>
+<p>收到一个RPC-AppendEntries，找到自己日志中的prevLogIndex所在日志项，check下是否匹配，若不匹配或不存在，返回false,leader将回退nextIndex进行回溯。</p>
 </li>
 <li>
-<p>candidate:</p>
+<p>减少follower因日志项部匹配拒绝RPC的次数的优化：</p>
+</li>
+</ul>
 </li>
 <li>
-<p>old leader:</p>
+<p><code>candidate</code>/<code>old leader</code>在收到一个合法RPC-AppendEntries后，还涉及角色状态的转换。</p>
 </li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="heading"></h3>
+<h3 id="要点总结">要点总结</h3>
+<ul>
+<li>日志项匹配性质（Log Matching Property）
+<ul>
+<li>If two entries in different logs have the same index
+and term, then they store the same command.</li>
+<li>If two entries in different logs have the same index
+and term, then the logs are identical in all preceding
+entries.</li>
 </ul>
 </li>
 </ul>
@@ -343,9 +398,9 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/deep_dive_rocksdb/some_questions/" rel="prev">
+		<a class="pager__link" href="/posts/debugging_use-systemtap-to-debug-1/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title"></p>
+			<p class="pager__title">using systemtap to track your user-space program - 1</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
@@ -374,8 +429,8 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 			<li class="widget__item"><a class="widget__link" href="/posts/other_thoughts_about_life/">杂谈</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_frequently-used-words/">cheatsheet for FUW</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_try-hugo/">启用一个新blog（Hugo试用）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/thoughts_aboout_life/">test for img processing application</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_ptr/">cpp_xptr_part1</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/other_thinkings/">随想2</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/deep_dive_rocksdb/some_questions/">rocksdb探究 - 一些问题</a></li>
 		</ul>
 	</div>
 </div>
@@ -384,11 +439,12 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
 	</div>
 </div>
 </aside>

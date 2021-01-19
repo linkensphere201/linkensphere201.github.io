@@ -58,8 +58,23 @@
   </url>
   
   <url>
-    <loc>/posts/thoughts_aboout_life/</loc>
-    <lastmod>2018-01-25T00:00:00+00:00</lastmod>
+    <loc>/posts/other_thinkings/</loc>
+    <lastmod>2020-01-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rocksdb/</loc>
+    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/rocksdb/</loc>
+    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/deep_dive_rocksdb/some_questions/</loc>
+    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
   </url>
   
   <url>
@@ -90,10 +105,6 @@
   <url>
     <loc>/posts/storage_deep_dive_for_raft/</loc>
     <lastmod>2017-04-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/deep_dive_rocksdb/some_questions/</loc>
   </url>
   
   <url>
