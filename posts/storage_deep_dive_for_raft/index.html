@@ -18,7 +18,7 @@
 <meta itemprop="description" content="“raft算法深入&#34;">
 <meta itemprop="datePublished" content="2017-04-19T21:20:49+00:00" />
 <meta itemprop="dateModified" content="2017-04-19T21:20:49+00:00" />
-<meta itemprop="wordCount" content="462">
+<meta itemprop="wordCount" content="470">
 
 
 
@@ -314,9 +314,19 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 </ul>
 </li>
 <li>
-<p>怎么做</p>
+<p>leader上commitIndex的维护原则：</p>
 <ul>
-<li>leader:
+<li>更新commitIndex到一个新值（如Ln），必须满足的条件：1). Ln的term是以当前term，2) Ln到达了大多数follower.</li>
+<li>需要1）的原因（论文<!-- raw HTML omitted -->[1]<!-- raw HTML omitted -->内做了讨论）：在leader多次(E.G. 2次)变更后（A&ndash;&gt;X&ndash;&gt;A），可能出现继续复制上一个term的日志，最终上一个term日志将到达大多数节点，但这时不能更新commitIndex(原因是此时可能有其他节点包含相同index但term值更大的日志，也就是更新的日志，若此时更新并且出现切主，会导致数据不一致出现)，需要在本次term内的日志到达多数节点后，间接地把上一个term日志标为commit.</li>
+</ul>
+</li>
+<li>
+<p>行为</p>
+<ul>
+<li>
+<p>leader:</p>
+<ul>
+<li>对每个follower选取一定范围的日志项，发送RPC:
 <pre><code>for each x in followers:
     选取一定范围内的日志（nextIndex）： collect log-entries between (nextIndex[x],my last log-entry]
 
@@ -328,21 +338,18 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
         log-entries[], // 
         leaderCommit   // to tell the follower which log is ok-to-apply 
     )
-</code></pre></li>
+</code></pre><ul>
+<li>nextIndex维护</li>
+<li>commitIndex维护</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p>收到后的行为：</p>
-<ul>
-<li>
 <p>follower:</p>
 <ul>
-<li>
-<p>收到一个RPC-AppendEntries，找到自己日志中的prevLogIndex所在日志项，check下是否匹配，若不匹配或不存在，返回false,leader将回退nextIndex进行回溯。</p>
-</li>
-<li>
-<p>减少follower因日志项部匹配拒绝RPC的次数的优化：</p>
-</li>
+<li>收到一个RPC-AppendEntries，找到自己日志中的prevLogIndex所在日志项，check下是否匹配，若不匹配或不存在，返回false,leader将回退nextIndex进行回溯</li>
+<li>减少follower因日志项部匹配拒绝RPC的次数的优化：</li>
 </ul>
 </li>
 <li>
@@ -366,8 +373,8 @@ entries.</li>
 </li>
 </ul>
 <h3 id="引用">引用</h3>
-<p>[1] raft小论文: In Search of an Understandable Consensus Algorithm
-[2] CONSENSUS: BRIDGING THEORY AND PRACTICE</p>
+<p>[1] raft小论文: In Search of an Understandable Consensus Algorithm</p>
+<p>[2] CONSENSUS: BRIDGING THEORY AND PRACTICE</p>
 
 		</div>
 		<footer class="post__footer">
