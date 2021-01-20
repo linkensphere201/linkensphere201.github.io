@@ -18,7 +18,7 @@
 <meta itemprop="description" content="“raft算法深入&#34;">
 <meta itemprop="datePublished" content="2017-04-19T21:20:49+00:00" />
 <meta itemprop="dateModified" content="2017-04-19T21:20:49+00:00" />
-<meta itemprop="wordCount" content="470">
+<meta itemprop="wordCount" content="473">
 
 
 
@@ -351,6 +351,13 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 <li>收到一个RPC-AppendEntries，找到自己日志中的prevLogIndex所在日志项，check下是否匹配，若不匹配或不存在，返回false,leader将回退nextIndex进行回溯</li>
 <li>减少follower因日志项部匹配拒绝RPC的次数的优化：</li>
 </ul>
+<p>下图：</p>
+<figure>
+    <img src="../../resources/12.png"/> <figcaption>
+            <h4>s0-leader s4-follower</h4>
+        </figcaption>
+</figure>
+
 </li>
 <li>
 <p><code>candidate</code>/<code>old leader</code>在收到一个合法RPC-AppendEntries后，还涉及角色状态的转换。</p>
