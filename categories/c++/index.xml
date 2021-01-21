@@ -6,13 +6,40 @@
     <description>Recent content in c&#43;&#43; on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 07 Dec 2017 21:26:49 +0800</lastBuildDate><atom:link href="/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Dec 2017 01:16:49 +0800</lastBuildDate><atom:link href="/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>cpp_xptr_part1</title>
-      <link>/posts/cpp_x_ptr/</link>
+      <title>智能指针2 shared_ptr的线程安全性</title>
+      <link>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</link>
+      <pubDate>Fri, 08 Dec 2017 01:16:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针1 基本使用</title>
+      <link>/posts/cpp_x_ptr1_basic-copy/</link>
       <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
       
-      <guid>/posts/cpp_x_ptr/</guid>
+      <guid>/posts/cpp_x_ptr1_basic-copy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针1 基本使用</title>
+      <link>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</link>
+      <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针4 make_shared</title>
+      <link>/posts/cpp_x_ptr4_make_shared/</link>
+      <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr4_make_shared/</guid>
       <description></description>
     </item>
     

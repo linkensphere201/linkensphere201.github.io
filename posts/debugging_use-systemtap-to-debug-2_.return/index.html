@@ -4,17 +4,23 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>debug - BadFd</title>
+	<title>using systemtap to track your user-space program - 1 - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="">
-		<meta property="og:title" content="debug" />
-<meta property="og:description" content="a place to find myself" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/debug/" />
+	<meta name="description" content="how to use systemtap(post 1)">
+		<meta property="og:title" content="using systemtap to track your user-space program - 1" />
+<meta property="og:description" content="how to use systemtap(post 1)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/debugging_use-systemtap-to-debug-2_.return/" />
 
 
-		<meta itemprop="name" content="debug">
-<meta itemprop="description" content="a place to find myself">
+		<meta itemprop="name" content="using systemtap to track your user-space program - 1">
+<meta itemprop="description" content="how to use systemtap(post 1)">
+
+<meta itemprop="wordCount" content="0">
+
+
+
+<meta itemprop="keywords" content="systemtap,debug," />
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -23,7 +29,6 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	
-	<link rel="alternate" type="application/rss+xml" href="/tags/debug/index.xml" title="BadFd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -120,50 +125,72 @@
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main list" role="main">
-	<header class="main__header">
-		<h1 class="main__title">debug</h1>
-	</header><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/debugging_use-systemtap-to-debug-1_basic/" rel="bookmark">
-			using systemtap to track your user-space program - 1
-			</a>
-		</h2>
-		<p class="list__lead post__lead">how to use systemtap(post 1)</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">using systemtap to track your user-space program - 1</h1>
+			<p class="post__lead">how to use systemtap(post 1)</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
 </div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
 	</span>
 </div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		 
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#heading"></a></li>
+  </ul>
+</nav>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/debugging_use-systemtap-to-debug-2_.return/" rel="bookmark">
-			using systemtap to track your user-space program - 1
-			</a>
-		</h2>
-		<p class="list__lead post__lead">how to use systemtap(post 1)</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		 
-	</div>
-</article>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="heading"></h2>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/systemtap/" rel="tag">systemtap</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/debug/" rel="tag">debug</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
 </main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="fatiao3 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		x
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/debugging_use-systemtap-to-debug-1_basic/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">using systemtap to track your user-space program - 1</p>
+		</a>
+	</div>
+</nav>
 
 
 			</div>
-			
-<aside class="sidebar sidebar--left"><div class="widget-search widget">
+			<aside class="sidebar"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
@@ -251,5 +278,7 @@
 
 	</div>
 <script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
 </body>
 </html>

@@ -54,15 +54,42 @@
       <pubDate>Tue, 07 Jan 2020 21:26:49 +0800</pubDate>
       
       <guid>/posts/deep_dive_rocksdb/some_questions/</guid>
-      <description> 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现  </description>
+      <description> 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  </description>
     </item>
     
     <item>
-      <title>cpp_xptr_part1</title>
-      <link>/posts/cpp_x_ptr/</link>
+      <title>智能指针2 shared_ptr的线程安全性</title>
+      <link>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</link>
+      <pubDate>Fri, 08 Dec 2017 01:16:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针1 基本使用</title>
+      <link>/posts/cpp_x_ptr1_basic-copy/</link>
       <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
       
-      <guid>/posts/cpp_x_ptr/</guid>
+      <guid>/posts/cpp_x_ptr1_basic-copy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针1 基本使用</title>
+      <link>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</link>
+      <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>智能指针4 make_shared</title>
+      <link>/posts/cpp_x_ptr4_make_shared/</link>
+      <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/cpp_x_ptr4_make_shared/</guid>
       <description></description>
     </item>
     
@@ -84,11 +111,65 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
-      <title>using systemtap to track your user-space program - 1</title>
-      <link>/posts/debugging_use-systemtap-to-debug-1/</link>
+      <title></title>
+      <link>/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/debugging_use-systemtap-to-debug-1/</guid>
+      <guid>/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/pb_%E4%BD%BF%E7%94%A8pb%E7%9A%84zerocopy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/pb_%E4%BD%BF%E7%94%A8pb%E7%9A%84zerocopy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/sys_fd_leaks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/sys_fd_leaks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/sys_huge_page/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/sys_huge_page/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/posts/sys_mfence/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/sys_mfence/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>using systemtap to track your user-space program - 1</title>
+      <link>/posts/debugging_use-systemtap-to-debug-1_basic/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_use-systemtap-to-debug-1_basic/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>using systemtap to track your user-space program - 1</title>
+      <link>/posts/debugging_use-systemtap-to-debug-2_.return/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_use-systemtap-to-debug-2_.return/</guid>
       <description> </description>
     </item>
     

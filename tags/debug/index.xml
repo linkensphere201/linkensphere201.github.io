@@ -8,10 +8,19 @@
     <language>zh-cn</language><atom:link href="/tags/debug/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>using systemtap to track your user-space program - 1</title>
-      <link>/posts/debugging_use-systemtap-to-debug-1/</link>
+      <link>/posts/debugging_use-systemtap-to-debug-1_basic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/debugging_use-systemtap-to-debug-1/</guid>
+      <guid>/posts/debugging_use-systemtap-to-debug-1_basic/</guid>
+      <description> </description>
+    </item>
+    
+    <item>
+      <title>using systemtap to track your user-space program - 1</title>
+      <link>/posts/debugging_use-systemtap-to-debug-2_.return/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_use-systemtap-to-debug-2_.return/</guid>
       <description> </description>
     </item>
     

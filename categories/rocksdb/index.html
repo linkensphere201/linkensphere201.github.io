@@ -57,13 +57,6 @@
 			</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/posts/cpp_x_ptr/">
-				
-				<span class="menu__text">cpp_xptr_part1</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
 			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
 				
 				<span class="menu__text">rocksdb探究 - 一些问题</span>
@@ -71,7 +64,7 @@
 			</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1/">
+			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1_basic/">
 				
 				<span class="menu__text">using systemtap to track your user-space program - 1</span>
 				
@@ -88,6 +81,27 @@
 			<a class="menu__link" href="/posts/other_try-hugo/">
 				
 				<span class="menu__text">启用一个新blog（Hugo试用）</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr1_basic-copy/">
+				
+				<span class="menu__text">智能指针1 基本使用</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/">
+				
+				<span class="menu__text">智能指针2 shared_ptr的线程安全性</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr4_make_shared/">
+				
+				<span class="menu__text">智能指针4 make_shared</span>
 				
 			</a>
 		</li>
@@ -126,7 +140,7 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现  
+		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  
 	</div>
 </article>
 </main>
@@ -180,11 +194,11 @@
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>

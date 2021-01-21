@@ -4,25 +4,25 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>rocksdb探究 - 一些问题 - BadFd</title>
+	<title>智能指针2 shared_ptr的线程安全性 - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="usages">
-		<meta property="og:title" content="rocksdb探究 - 一些问题" />
-<meta property="og:description" content="usages" />
+	<meta name="description" content="">
+		<meta property="og:title" content="智能指针2 shared_ptr的线程安全性" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/deep_dive_rocksdb/some_questions/" />
-<meta property="article:published_time" content="2020-01-07T21:26:49+08:00" />
-<meta property="article:modified_time" content="2020-01-07T21:26:49+08:00" />
+<meta property="og:url" content="/posts/cpp_x_ptr2_shared_ptr_threadsafety/" />
+<meta property="article:published_time" content="2017-12-08T01:16:49+08:00" />
+<meta property="article:modified_time" content="2017-12-08T01:16:49+08:00" />
 
-		<meta itemprop="name" content="rocksdb探究 - 一些问题">
-<meta itemprop="description" content="usages">
-<meta itemprop="datePublished" content="2020-01-07T21:26:49+08:00" />
-<meta itemprop="dateModified" content="2020-01-07T21:26:49+08:00" />
-<meta itemprop="wordCount" content="8">
+		<meta itemprop="name" content="智能指针2 shared_ptr的线程安全性">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2017-12-08T01:16:49+08:00" />
+<meta itemprop="dateModified" content="2017-12-08T01:16:49+08:00" />
+<meta itemprop="wordCount" content="0">
 
 
 
-<meta itemprop="keywords" content="rocksdb," />
+<meta itemprop="keywords" content="shared_ptr," />
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -63,7 +63,7 @@
 				
 			</a>
 		</li>
-		<li class="menu__item menu__item--active">
+		<li class="menu__item">
 			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
 				
 				<span class="menu__text">rocksdb探究 - 一些问题</span>
@@ -98,7 +98,7 @@
 				
 			</a>
 		</li>
-		<li class="menu__item">
+		<li class="menu__item menu__item--active">
 			<a class="menu__link" href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/">
 				
 				<span class="menu__text">智能指针2 shared_ptr的线程安全性</span>
@@ -130,13 +130,13 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">rocksdb探究 - 一些问题</h1>
-			<p class="post__lead">一些rocksdb相关问题记录</p>
+			<h1 class="post__title">智能指针2 shared_ptr的线程安全性</h1>
+			<p class="post__lead">跨线程同步对象如何设计/实现</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-07T21:26:49&#43;08:00">2020-01-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rocksdb/" rel="category">rocksdb</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-08T01:16:49&#43;08:00">2017-12-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
 	</span>
 </div></div>
 		</header>
@@ -147,17 +147,7 @@
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<ol>
-<li>写请求batch内的多个操作是否会被拆开，为什么？</li>
-<li>block-cache里的缓存项是否会因为某个sst被compact而失效？</li>
-<li>event-listener的实现</li>
-<li>perf-context的实现</li>
-<li>ThreadLocalPtr的实现以及为什么</li>
-<li>ROCKSDB中的MVCC</li>
-<li>rocksdb读路径下的各种迭代器/各层cache分析</li>
-<li>env分析和使用</li>
-</ol>
-
+			
 		</div>
 		<footer class="post__footer">
 			
@@ -165,7 +155,7 @@
 	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
 	<ul class="tags__list">
 		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/rocksdb/" rel="tag">rocksdb</a>
+			<a class="tags__link btn" href="/tags/shared_ptr/" rel="tag">shared_ptr</a>
 		</li>
 	</ul>
 </div>
@@ -187,15 +177,15 @@
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/" rel="prev">
+		<a class="pager__link" href="/posts/cpp_x_ptr1_basic-copy/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">智能指针2 shared_ptr的线程安全性</p>
+			<p class="pager__title">智能指针1 基本使用</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/posts/other_thinkings/" rel="next">
+		<a class="pager__link" href="/posts/deep_dive_rocksdb/some_questions/" rel="next">
 			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">随想2</p>
+			<p class="pager__title">rocksdb探究 - 一些问题</p>
 		</a>
 	</div>
 </nav>

@@ -79,16 +79,31 @@
   
   <url>
     <loc>/categories/c&#43;&#43;/</loc>
-    <lastmod>2017-12-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/cpp_x_ptr/</loc>
-    <lastmod>2017-12-07T21:26:49+08:00</lastmod>
+    <lastmod>2017-12-08T01:16:49+08:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/shared_ptr/</loc>
+    <lastmod>2017-12-08T01:16:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</loc>
+    <lastmod>2017-12-08T01:16:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cpp_x_ptr1_basic-copy/</loc>
+    <lastmod>2017-12-07T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</loc>
+    <lastmod>2017-12-07T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cpp_x_ptr4_make_shared/</loc>
     <lastmod>2017-12-07T21:26:49+08:00</lastmod>
   </url>
   
@@ -108,6 +123,26 @@
   </url>
   
   <url>
+    <loc>/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/pb_%E4%BD%BF%E7%94%A8pb%E7%9A%84zerocopy/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/sys_fd_leaks/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/sys_huge_page/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/sys_mfence/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/debug/</loc>
   </url>
   
@@ -120,7 +155,11 @@
   </url>
   
   <url>
-    <loc>/posts/debugging_use-systemtap-to-debug-1/</loc>
+    <loc>/posts/debugging_use-systemtap-to-debug-1_basic/</loc>
+  </url>
+  
+  <url>
+    <loc>/posts/debugging_use-systemtap-to-debug-2_.return/</loc>
   </url>
   
 </urlset>

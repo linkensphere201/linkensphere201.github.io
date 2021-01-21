@@ -58,13 +58,6 @@
 			</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/posts/cpp_x_ptr/">
-				
-				<span class="menu__text">cpp_xptr_part1</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
 			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
 				
 				<span class="menu__text">rocksdb探究 - 一些问题</span>
@@ -72,7 +65,7 @@
 			</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1/">
+			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1_basic/">
 				
 				<span class="menu__text">using systemtap to track your user-space program - 1</span>
 				
@@ -89,6 +82,27 @@
 			<a class="menu__link" href="/posts/other_try-hugo/">
 				
 				<span class="menu__text">启用一个新blog（Hugo试用）</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr1_basic-copy/">
+				
+				<span class="menu__text">智能指针1 基本使用</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/">
+				
+				<span class="menu__text">智能指针2 shared_ptr的线程安全性</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/cpp_x_ptr4_make_shared/">
+				
+				<span class="menu__text">智能指针4 make_shared</span>
 				
 			</a>
 		</li>
@@ -211,16 +225,73 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现  
+		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cpp_x_ptr/" rel="bookmark">
-			cpp_xptr_part1
+			<a href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/" rel="bookmark">
+			智能指针2 shared_ptr的线程安全性
 			</a>
 		</h2>
 		<p class="list__lead post__lead">跨线程同步对象如何设计/实现</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-08T01:16:49&#43;08:00">2017-12-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/cpp_x_ptr1_basic-copy/" rel="bookmark">
+			智能指针1 基本使用
+			</a>
+		</h2>
+		<p class="list__lead post__lead">跨线程同步对象如何设计/实现</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-07T21:26:49&#43;08:00">2017-12-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/cpp_x_ptr3_shared_ptr_enable_from_this/" rel="bookmark">
+			智能指针1 基本使用
+			</a>
+		</h2>
+		<p class="list__lead post__lead">跨线程同步对象如何设计/实现</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-07T21:26:49&#43;08:00">2017-12-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/cpp_x_ptr4_make_shared/" rel="bookmark">
+			智能指针4 make_shared
+			</a>
+		</h2>
+		<p class="list__lead post__lead">智能指针</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
 </div>
@@ -261,26 +332,13 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/debugging_use-systemtap-to-debug-1/" rel="bookmark">
-			using systemtap to track your user-space program - 1
-			</a>
-		</h2>
-		<p class="list__lead post__lead">how to use systemtap(post 1)</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		 
-	</div>
 </article>
 </main>
 
+<div class="pagination">
+	<span class="pagination__item pagination__item--current">1/2</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/2/">»</a>
+</div>
 
 			</div>
 			<aside class="sidebar"><div class="widget-search widget">
@@ -329,11 +387,11 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
-		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
