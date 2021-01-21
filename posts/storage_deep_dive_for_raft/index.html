@@ -18,7 +18,7 @@
 <meta itemprop="description" content="“raft算法深入&#34;">
 <meta itemprop="datePublished" content="2017-04-19T21:20:49+00:00" />
 <meta itemprop="dateModified" content="2017-04-19T21:20:49+00:00" />
-<meta itemprop="wordCount" content="725">
+<meta itemprop="wordCount" content="726">
 
 
 
@@ -64,13 +64,6 @@
 			</a>
 		</li>
 		<li class="menu__item">
-			<a class="menu__link" href="/posts/other_frequently-used-words/">
-				
-				<span class="menu__text">cheatsheet for FUW</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
 			<a class="menu__link" href="/posts/deep_dive_rocksdb/some_questions/">
 				
 				<span class="menu__text">rocksdb探究 - 一些问题</span>
@@ -81,41 +74,6 @@
 			<a class="menu__link" href="/posts/debugging_use-systemtap-to-debug-1_basic/">
 				
 				<span class="menu__text">using systemtap to track your user-space program - 1</span>
-				
-			</a>
-		</li>
-		<li class="menu__item menu__item--active">
-			<a class="menu__link" href="/posts/storage_deep_dive_for_raft/">
-				
-				<span class="menu__text">分布式笔记 - Raft(入门论文)</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/posts/other_try-hugo/">
-				
-				<span class="menu__text">启用一个新blog（Hugo试用）</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/posts/cpp_x_ptr1_basic-copy/">
-				
-				<span class="menu__text">智能指针1 基本使用</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/posts/cpp_x_ptr4_make_shared/">
-				
-				<span class="menu__text">智能指针4 make_shared</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/posts/other_thoughts_about_life/">
-				
-				<span class="menu__text">杂谈</span>
 				
 			</a>
 		</li>
@@ -181,12 +139,13 @@
 <p>When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.</p>
 </blockquote>
 <h5 id="span-idrequest_vote_param_mythrpc-requestvotespan里为什么带了最后一个日志项log-entry的下标和它的term而不是commitindex或applyindex对应的日志项"><!-- raw HTML omitted -->RPC-RequestVote<!-- raw HTML omitted -->里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项）</h5>
+<p>xuya</p>
 <h5 id="votefor如何维护的例如-什么时候重置为null-当followergrant了某个候选者之后votefor如何处理">voteFor如何维护的？（例如: 什么时候重置为null? 当<code>follower</code>grant了某个候选者之后，voteFor如何处理？）</h5>
-<p>这个问题论文里并没有具体进行讨论（可能只是个实现细节，没有讨论的必要）</p>
+<p>这个问题论文里并没有具体进行讨论</p>
 <h5 id="currentterm如何维护的例如在选举阶段当followergrant某个候选者之后是否需要修改自己的currentterm-如果选举阶段不修改那么连续两次选举上一次splitvote如何处理">currentTerm如何维护的？（例如：在选举阶段，当<code>follower</code>grant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？）</h5>
+<p>这个问题论文里并没有具体进行讨论</p>
 <h5 id="只需要放写操作进raft-log吗">只需要放写操作进raft-log吗？</h5>
 <p>直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上<!-- raw HTML omitted -->待验证<!-- raw HTML omitted -->，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致</p>
-<p><!-- raw HTML omitted -->[2]<!-- raw HTML omitted -->中有专门一章讨论只读优化问题。</p>
 <h3 id="raft算法描述">raft算法描述</h3>
 <h4 id="每个节点维护的上下文">每个节点维护的上下文</h4>
 <pre><code>Log {
@@ -479,7 +438,7 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 	<h4 class="widget__title">最新动态</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/other_thoughts_about_life/">杂谈</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/other_thoughts_about_life/">随想</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_frequently-used-words/">cheatsheet for FUW</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_try-hugo/">启用一个新blog（Hugo试用）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_thinkings/">随想2</a></li>

@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <lastBuildDate>Sun, 20 Dec 2020 07:26:49 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>杂谈</title>
+      <title>随想</title>
       <link>/posts/other_thoughts_about_life/</link>
       <pubDate>Sun, 20 Dec 2020 07:26:49 +0800</pubDate>
       
@@ -106,8 +106,9 @@ commit和apply分别指什么？ a log entry is committed是指某条log已被�
 leader回应client的时间点？ 一个日志的生命周期主要有几个时间点：
  leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
  When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
- RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论（可能只是个实现细节，没有讨论的必要）
-currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 只需要放写操作进raft-log吗？ 直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上待验证，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致</description>
+ RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） xuya
+voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论
+currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 这个问题论文里并没有具体进行讨论</description>
     </item>
     
     <item>
@@ -170,7 +171,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/debugging_use-systemtap-to-debug-2_.return/</guid>
-      <description> </description>
+      <description>x </description>
     </item>
     
   </channel>
