@@ -58,6 +58,15 @@
     </item>
     
     <item>
+      <title>about</title>
+      <link>/menus/about/</link>
+      <pubDate>Mon, 07 Oct 2019 21:26:49 +0800</pubDate>
+      
+      <guid>/menus/about/</guid>
+      <description>about this is a place to meet myself.</description>
+    </item>
+    
+    <item>
       <title>智能指针2 shared_ptr的线程安全性</title>
       <link>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</link>
       <pubDate>Fri, 08 Dec 2017 01:16:49 +0800</pubDate>
@@ -76,7 +85,7 @@
     </item>
     
     <item>
-      <title>智能指针1 基本使用</title>
+      <title>智能指针3 enable_shared_from_this</title>
       <link>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</link>
       <pubDate>Thu, 07 Dec 2017 21:26:49 +0800</pubDate>
       
@@ -165,7 +174,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
-      <title>using systemtap to track your user-space program - 1</title>
+      <title>using systemtap to track your user-space program - 2_return</title>
       <link>/posts/debugging_use-systemtap-to-debug-2_.return/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
