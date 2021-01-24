@@ -6,11 +6,11 @@
     <description>Recent content in 分布式 on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Apr 2017 21:20:49 +0000</lastBuildDate><atom:link href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Apr 2018 21:20:49 +0000</lastBuildDate><atom:link href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>分布式笔记 - Raft(入门论文)</title>
+      <title>分布式笔记 - Raft（1）</title>
       <link>/posts/storage_deep_dive_for_raft/</link>
-      <pubDate>Wed, 19 Apr 2017 21:20:49 +0000</pubDate>
+      <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
       
       <guid>/posts/storage_deep_dive_for_raft/</guid>
       <description>Q&amp;amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。

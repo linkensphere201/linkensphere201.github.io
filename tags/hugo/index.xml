@@ -6,11 +6,11 @@
     <description>Recent content in hugo on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 07 Nov 2017 21:26:49 +0800</lastBuildDate><atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Nov 2011 21:26:49 +0800</lastBuildDate><atom:link href="/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>启用一个新blog（Hugo试用）</title>
       <link>/posts/other_try-hugo/</link>
-      <pubDate>Tue, 07 Nov 2017 21:26:49 +0800</pubDate>
+      <pubDate>Mon, 07 Nov 2011 21:26:49 +0800</pubDate>
       
       <guid>/posts/other_try-hugo/</guid>
       <description>Hugo 试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
