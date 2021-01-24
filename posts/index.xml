@@ -6,17 +6,7 @@
     <description>Recent content in Posts on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 20 Dec 2020 07:26:49 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>随想</title>
-      <link>/posts/other_thoughts_about_life/</link>
-      <pubDate>Sun, 20 Dec 2020 07:26:49 +0800</pubDate>
-      
-      <guid>/posts/other_thoughts_about_life/</guid>
-      <description>杂1 既然所有的生命都要死亡，那么生命的意义是什么？
- 在bug中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  </description>
-    </item>
-    
+    <lastBuildDate>Sat, 07 Nov 2020 21:20:49 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>
@@ -28,33 +18,22 @@
     </item>
     
     <item>
-      <title>启用一个新blog（Hugo试用）</title>
-      <link>/posts/other_try-hugo/</link>
-      <pubDate>Sat, 07 Nov 2020 21:26:49 +0800</pubDate>
-      
-      <guid>/posts/other_try-hugo/</guid>
-      <description>Hugo试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
-  DeviantArt   Test for markdown   a1
-  a2xxx</description>
-    </item>
-    
-    <item>
-      <title>随想2</title>
-      <link>/posts/other_thinkings/</link>
-      <pubDate>Sun, 19 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/other_thinkings/</guid>
-      <description>  下面是一个hugo图像处理的示意 代码为    .Resize &#34;300x&#34;       .Resize &#34;300x&#34;      随想1
-  </description>
-    </item>
-    
-    <item>
       <title>rocksdb探究 - 一些问题</title>
       <link>/posts/deep_dive_rocksdb/some_questions/</link>
       <pubDate>Tue, 07 Jan 2020 21:26:49 +0800</pubDate>
       
       <guid>/posts/deep_dive_rocksdb/some_questions/</guid>
       <description> 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  </description>
+    </item>
+    
+    <item>
+      <title>随想</title>
+      <link>/posts/other_thoughts_about_life/</link>
+      <pubDate>Wed, 20 Dec 2017 07:26:49 +0800</pubDate>
+      
+      <guid>/posts/other_thoughts_about_life/</guid>
+      <description>杂 1 既然所有的生命都要死亡，那么生命的意义是什么？
+ 在 bug 中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  </description>
     </item>
     
     <item>
@@ -94,6 +73,16 @@
     </item>
     
     <item>
+      <title>启用一个新blog（Hugo试用）</title>
+      <link>/posts/other_try-hugo/</link>
+      <pubDate>Tue, 07 Nov 2017 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/other_try-hugo/</guid>
+      <description>Hugo 试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
+  DeviantArt   Test for markdown   a1</description>
+    </item>
+    
+    <item>
       <title>分布式笔记 - Raft(入门论文)</title>
       <link>/posts/storage_deep_dive_for_raft/</link>
       <pubDate>Wed, 19 Apr 2017 21:20:49 +0000</pubDate>
@@ -109,6 +98,16 @@ leader回应client的时间点？ 一个日志的生命周期主要有几个时�
  RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） xuya
 voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论
 currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 这个问题论文里并没有具体进行讨论</description>
+    </item>
+    
+    <item>
+      <title>随想2</title>
+      <link>/posts/other_thinkings/</link>
+      <pubDate>Thu, 19 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/other_thinkings/</guid>
+      <description>  下面是一个hugo图像处理的示意 代码为    .Resize &#34;300x&#34;       .Resize &#34;300x&#34;      随想1
+  </description>
     </item>
     
     <item>
