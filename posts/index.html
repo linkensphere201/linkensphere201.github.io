@@ -89,7 +89,7 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cpp_x_ptr1_basic/" rel="bookmark">
+			<a href="/posts/cpp_x_thread/" rel="bookmark">
 			智能指针1 基本使用
 			</a>
 		</h2>
@@ -104,6 +104,55 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/rocksdb_threadlocalptr_vs_std_thread_local/" rel="bookmark">
+			智能指针1 基本使用
+			</a>
+		</h2>
+		<p class="list__lead post__lead">智能指针</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/cppnote-shared_ptr/" rel="bookmark">
+			智能指针1: shared_ptr梳理
+			</a>
+		</h2>
+		<p class="list__lead post__lead">智能指针</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		本文提及并讨论了：
+ shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
+ 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
+   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
+  https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c
+  https://isocpp.org/wiki/faq/freestore-mgmt
+    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
+template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D's copy constructor must not throw // // shared_ptr will release p by calling d(p) // template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/cppnote-shared_ptr/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">
@@ -138,63 +187,6 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cpp_x_ptr4_make_shared/" rel="bookmark">
-			智能指针4 make_shared
-			</a>
-		</h2>
-		<p class="list__lead post__lead">智能指针</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-04T00:00:00Z">2017-12-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/cpp_x_ptr3_shared_ptr_enable_from_this/" rel="bookmark">
-			智能指针3 enable_shared_from_this
-			</a>
-		</h2>
-		<p class="list__lead post__lead">跨线程同步对象如何设计/实现</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-03T00:00:00Z">2017-12-03</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/cpp_x_ptr2_shared_ptr_threadsafety/" rel="bookmark">
-			智能指针2 shared_ptr的线程安全性
-			</a>
-		</h2>
-		<p class="list__lead post__lead">跨线程同步对象如何设计/实现</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-12-02T00:00:00Z">2017-12-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
 			<a href="/posts/other_frequently-used-words/" rel="bookmark">
 			cheatsheet for FUW
 			</a>
@@ -208,7 +200,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement  cplusplus concepts:
+		some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement versatility  cplusplus concepts:
  pod types non-trivial types  
 	</div>
 </article><article class="list__item post">
@@ -277,6 +269,20 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/other_try-hugo/">阅读全文…</a>
 	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/" rel="bookmark">
+			
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
 </article>
 </main>
 
@@ -301,10 +307,10 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/posts/deep_dive_rocksdb/some_questions/">rocksdb探究 - 一些问题</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_ptr1_basic/">智能指针1 基本使用</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_thread/">智能指针1 基本使用</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/rocksdb_threadlocalptr_vs_std_thread_local/">智能指针1 基本使用</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr梳理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/storage_deep_dive_for_raft/">分布式笔记 - Raft（1）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_ptr4_make_shared/">智能指针4 make_shared</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cpp_x_ptr3_shared_ptr_enable_from_this/">智能指针3 enable_shared_from_this</a></li>
 		</ul>
 	</div>
 </div>
@@ -336,7 +342,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (4)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>

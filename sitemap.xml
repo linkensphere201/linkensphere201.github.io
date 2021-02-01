@@ -58,7 +58,17 @@
   </url>
   
   <url>
-    <loc>/posts/cpp_x_ptr1_basic/</loc>
+    <loc>/posts/cpp_x_thread/</loc>
+    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/rocksdb_threadlocalptr_vs_std_thread_local/</loc>
+    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/cppnote-shared_ptr/</loc>
     <lastmod>2018-12-01T21:26:49+08:00</lastmod>
   </url>
   
@@ -75,21 +85,6 @@
   <url>
     <loc>/posts/storage_deep_dive_for_raft/</loc>
     <lastmod>2018-04-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/cpp_x_ptr4_make_shared/</loc>
-    <lastmod>2017-12-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/cpp_x_ptr3_shared_ptr_enable_from_this/</loc>
-    <lastmod>2017-12-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/cpp_x_ptr2_shared_ptr_threadsafety/</loc>
-    <lastmod>2017-12-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
