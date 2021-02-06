@@ -26,7 +26,7 @@
     </item>
     
     <item>
-      <title>智能指针1: shared_ptr梳理</title>
+      <title>智能指针1: shared_ptr使用梳理</title>
       <link>/posts/cppnote-shared_ptr/</link>
       <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
       
@@ -35,9 +35,7 @@
  shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
  资源未释放，重复释放，free/delete不匹配 &amp;hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
    不配对的free&amp;amp;delete会有什么问题？ 是未定义行为.可以参考：
-  https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c
-  https://isocpp.org/wiki/faq/freestore-mgmt
-    基本原理 &amp;amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &amp;mdash; std::shared_ptr  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp;amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &amp;mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
 template&amp;lt;class T&amp;gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&amp;lt;T&amp;gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
 template&amp;lt;class Y&amp;gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // template&amp;lt;class Y, class D&amp;gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .</description>
     </item>

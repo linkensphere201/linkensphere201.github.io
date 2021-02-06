@@ -4,17 +4,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>智能指针1: shared_ptr梳理 - BadFd</title>
+	<title>智能指针1: shared_ptr使用梳理 - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="智能指针1: shared_ptr梳理" />
+		<meta property="og:title" content="智能指针1: shared_ptr使用梳理" />
 <meta property="og:description" content="本文提及并讨论了：
  shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
  资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
    不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
-  https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c
-  https://isocpp.org/wiki/faq/freestore-mgmt
-    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
 template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
 template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } ." />
 <meta property="og:type" content="article" />
@@ -22,19 +20,17 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 <meta property="article:published_time" content="2018-12-01T21:26:49+08:00" />
 <meta property="article:modified_time" content="2018-12-01T21:26:49+08:00" />
 
-		<meta itemprop="name" content="智能指针1: shared_ptr梳理">
+		<meta itemprop="name" content="智能指针1: shared_ptr使用梳理">
 <meta itemprop="description" content="本文提及并讨论了：
  shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
  资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
    不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
-  https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c
-  https://isocpp.org/wiki/faq/freestore-mgmt
-    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
 template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
 template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .">
 <meta itemprop="datePublished" content="2018-12-01T21:26:49+08:00" />
 <meta itemprop="dateModified" content="2018-12-01T21:26:49+08:00" />
-<meta itemprop="wordCount" content="426">
+<meta itemprop="wordCount" content="487">
 
 
 
@@ -73,9 +69,23 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 	</button>
 	<ul class="menu__list">
 		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
 			<a class="menu__link" href="/menus/about/">
 				
-				<span class="menu__text">about</span>
+				<span class="menu__text">关于</span>
 				
 			</a>
 		</li>
@@ -90,10 +100,10 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">智能指针1: shared_ptr梳理</h1>
+			<h1 class="post__title">智能指针1: shared_ptr使用梳理</h1>
 			<p class="post__lead">智能指针</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">fatiao3</span>
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
 </div>
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
@@ -109,9 +119,9 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
     <li><a href="#基本原理--使用">基本原理 &amp; 使用</a></li>
     <li><a href="#删除器">删除器</a></li>
     <li><a href="#线程安全">线程安全</a></li>
-    <li><a href="#stdref"><code>std::ref</code></a></li>
     <li><a href="#make_shared">make_shared</a></li>
     <li><a href="#enable_shared_from_this">enable_shared_from_this</a></li>
+    <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
 	</div>
@@ -143,18 +153,15 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 <p>不配对的free&amp;delete会有什么问题？
 是未定义行为.可以参考：</p>
 <ul>
-<li>
-<p><a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a></p>
-</li>
-<li>
-<p><a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a></p>
-</li>
+<li><a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a></li>
+<li><a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="基本原理--使用">基本原理 &amp; 使用</h2>
 <ul>
 <li>需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它.  &mdash; <code>std::shared_ptr</code></li>
+<li>使用略。</li>
 </ul>
 <h2 id="删除器">删除器</h2>
 <ul>
@@ -203,7 +210,7 @@ template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d )
 </blockquote>
 </li>
 <li>
-<p>利用删除器可以有一些trick，如实现类似golang的<code>defer</code></p>
+<p>利用删除器可以有一些trick，比如实现类似golang的<code>defer</code></p>
 <pre><code>// some trick
 // order of destruction of stack variable: https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order
 
@@ -306,10 +313,46 @@ TEST(sharedptr,threadsafety) {
 [thread 705062] info [shared_ptr.cc:141] &lt;&lt;&lt; leave critical
 [thread 705062] info [shared_ptr.cc:129] do #1 ...
 [thread 705061] info [shared_ptr.cc:116] #1 of App is destoried!
-</code></pre><h2 id="stdref"><code>std::ref</code></h2>
-<h2 id="make_shared">make_shared</h2>
-<p>&hellip;</p>
+</code></pre><h2 id="make_shared">make_shared</h2>
+<p>老生常谈了，再简要总结下：</p>
+<ul>
+<li>效率：
+使用<code>auto x = std::make_shared&lt;type&gt;(xx1,xx2,xx3);</code>会比使用<code>std::shared_ptr x(new type(xx1,xx2,xx3));</code>:
+减少1次堆内存的申请.
+后者需要申请1次type类型本身对象，和shared_ptr本身对象（控制块）2次.</li>
+<li>原理：
+两次new，第一次申请type+控制块大小的一片内存，第二次利用<code>placement new</code>，把type类型数据构造在指定的内存地址。</li>
+<li>缺陷：
+如果有<code>weak_ptr</code>引用了使用<code>make_shared</code>申请出来的智能指针对象，那么其生命周期会被<code>weak_ptr</code>延长，原因是&quot;控制块&quot;的生命周期等于<code>weak_ptr</code>的生命周期。</li>
+</ul>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/20895648/difference-in-make-shared-and-normal-shared-ptr-in-c">https://stackoverflow.com/questions/20895648/difference-in-make-shared-and-normal-shared-ptr-in-c</a>
+<a href="https://blog.csdn.net/SuWanWorld/article/details/103940013">https://blog.csdn.net/SuWanWorld/article/details/103940013</a>
+<a href="https://www.cnblogs.com/leijiangtao/p/12046333.html">https://www.cnblogs.com/leijiangtao/p/12046333.html</a></p>
+</blockquote>
 <h2 id="enable_shared_from_this">enable_shared_from_this</h2>
+<p>使用智能指针还有个问题：就是任何<code>this</code>指针不能交给<code>shared_ptr</code>管理，会导致double-free,如：</p>
+<pre><code>class App2 : public App {
+  public:
+    std::shared_ptr&lt;App2&gt; App2Fuck() {
+      std::shared_ptr&lt;App2&gt; x(this); // would cause this to be destoried twice!
+      return x;
+    }
+};
+</code></pre><p>那如果强行需要在类的内部返一个<code>shared_ptr</code>出来，c++提供了<code>enable_shared_from_this</code>来做这个事（最初是boost实现的，后来被合进c++11了）。</p>
+<p>上面这个例子毫无实用价值，具体是什么场景需要用到这个，我将在另一篇文里讨论。（或check：muduo 1.11节）</p>
+<ul>
+<li>HOWTO： <a href="https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this">https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this</a></li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a></li>
+<li><a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a></li>
+<li>order of destruction of stack variable: <a href="https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order">https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order</a></li>
+<li><a href="https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety">https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety</a></li>
+<li><a href="https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this">https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this</a></li>
+<li>muduo 1.11</li>
+</ul>
 
 		</div>
 		<footer class="post__footer">
@@ -328,21 +371,21 @@ TEST(sharedptr,threadsafety) {
 
 <div class="authorbox clearfix">
 	<figure class="authorbox__avatar">
-		<img alt="fatiao3 avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
 		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
-		x
+		c/c++ programmer
 	</div>
 </div>
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/storage_deep_dive_for_raft/" rel="prev">
+		<a class="pager__link" href="/posts/algmnotes-longestpalindrome/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">分布式笔记 - Raft（1）</p>
+			<p class="pager__title">算法笔记： 最长回文子串</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
