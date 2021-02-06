@@ -25,24 +25,6 @@
     </item>
     
     <item>
-      <title>智能指针1 基本使用</title>
-      <link>/posts/cpp_x_thread/</link>
-      <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
-      
-      <guid>/posts/cpp_x_thread/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>智能指针1 基本使用</title>
-      <link>/posts/rocksdb_threadlocalptr_vs_std_thread_local/</link>
-      <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
-      
-      <guid>/posts/rocksdb_threadlocalptr_vs_std_thread_local/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>智能指针1: shared_ptr使用梳理</title>
       <link>/posts/cppnote-shared_ptr/</link>
       <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>

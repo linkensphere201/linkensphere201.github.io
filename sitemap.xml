@@ -68,16 +68,6 @@
   </url>
   
   <url>
-    <loc>/posts/cpp_x_thread/</loc>
-    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/rocksdb_threadlocalptr_vs_std_thread_local/</loc>
-    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/cppnote-shared_ptr/</loc>
     <lastmod>2018-12-01T21:26:49+08:00</lastmod>
   </url>
