@@ -4,23 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>笔记：systemtap相关 - BadFd</title>
+	<title>数位枚举 - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="how to use systemtap">
-		<meta property="og:title" content="笔记：systemtap相关" />
-<meta property="og:description" content="how to use systemtap" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/debugging_use-systemtap-to-debug-1_basic/" />
+	<meta name="description" content="">
+		<meta property="og:title" content="数位枚举" />
+<meta property="og:description" content="a place to find myself" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" />
+<meta property="og:updated_time" content="2018-06-01T20:26:39+08:00" />
 
-
-		<meta itemprop="name" content="笔记：systemtap相关">
-<meta itemprop="description" content="how to use systemtap">
-
-<meta itemprop="wordCount" content="33">
-
-
-
-<meta itemprop="keywords" content="systemtap,debug," />
+		<meta itemprop="name" content="数位枚举">
+<meta itemprop="description" content="a place to find myself">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -29,6 +23,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	
+	<link rel="alternate" type="application/rss+xml" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/index.xml" title="BadFd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -83,86 +78,50 @@
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">笔记：systemtap相关</h1>
-			<p class="post__lead">how to use systemtap</p>
-			<div class="post__meta meta"><div class="meta__item-author meta__item">
+<main class="main list" role="main">
+	<header class="main__header">
+		<h1 class="main__title">数位枚举</h1>
+	</header><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
+			算法笔记：计算1到n中2出现的个数
+			</a>
+		</h2>
+		<p class="list__lead post__lead">枚举</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
 	</span>
 </div></div>
-		</header>
-<div class="post__toc toc">
-	<div class="toc__title">目录</div>
-	<div class="toc__menu">
-		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#topic1---quick-start">topic1 - quick start</a></li>
-    <li><a href="#topic2---how-to-track-a-var-at-probe-point-of-funccall--funcreturn">topic2 - how to track a var at probe point of func.call &amp; func.return</a></li>
-    <li><a href="#topic3---how-to-mock-a-syscall">topic3 - how to mock a syscall</a></li>
-  </ul>
-</nav>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		这是读书时一篇旧文搬运.几年后再次回顾下算法.
+问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
+思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
+给定数字n，其位数（10进制）为logn，具体的时间复杂度大致如下：
+$T(n) = log_{10}n + log_{10}{(n-1)} + &hellip; + log_{10}{1} = log_{10}{n!} = O(log_{10}{n!})$
+$\Rightarrow $
+$T(n) = O(log{n^n}) = O(nlogn)$
+所以，暴力法时间复杂度是nlogn的
+数位枚举 换一个枚举思路，正常的枚举是 i -&gt; i+1 -&gt; i+2 &hellip;这样,现采用数位遍历的方式，假设n是K位数,所有出现的2，出现的位置只能在这个范围内：[0,K-1]。（从0开始比较好算） 所以问题可以转变为：对于每个$d\in[0,K-1]$,求符合条件为$\in[1,n]$且第d位为2的数字的个数和$S_d$. 最后累加$\sum_{d=1}^KS_d$.
+对于第d位为2的数字个数如何求解？很容易我们可以归纳出数字个数与第d位数字与2的大小关系有关：
+PS: 以下的d是从0开始取的。
+给定n，假设第d位数字小于2,举个例子：
+n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d+1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$
 	</div>
-</div>
-<div class="content post__content clearfix">
-			<p>本文会提及systemtap的以下几点：</p>
-<ul>
-<li>如何列出某个可执行文件的所有probe位点</li>
-<li>如何取变量的值</li>
-<li>如何通过某个地址的解引用取得对应值</li>
-<li>如何在.return中拿到变量的最新值</li>
-<li>如何自定义用户态程序probe位点</li>
-<li>如何指定probe被调用的频率（命中次数/命中间隔时间）</li>
-<li>如何使用外部参数传入*.stp</li>
-</ul>
-<h2 id="topic1---quick-start">topic1 - quick start</h2>
-<h2 id="topic2---how-to-track-a-var-at-probe-point-of-funccall--funcreturn">topic2 - how to track a var at probe point of func.call &amp; func.return</h2>
-<h2 id="topic3---how-to-mock-a-syscall">topic3 - how to mock a syscall</h2>
-
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/systemtap/" rel="tag">systemtap</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/debug/" rel="tag">debug</a>
-		</li>
-	</ul>
-</div>
-		</footer>
-	</article>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/algmnotes-count_2_of_a_number/">阅读全文…</a>
+	</div>
+</article>
 </main>
-
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name"></span>
-	</div>
-	<div class="authorbox__description">
-		a c/c++ programmer
-	</div>
-</div>
-
-<nav class="pager flex">
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/posts/sys_mfence/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title"></p>
-		</a>
-	</div>
-</nav>
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
+			
+<aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
@@ -257,7 +216,5 @@
 
 	</div>
 <script async defer src="/js/menu.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
 </body>
 </html>

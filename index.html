@@ -185,6 +185,40 @@ Reference 更详细的可以check以前的旧文.
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
+			算法笔记：计算1到n中2出现的个数
+			</a>
+		</h2>
+		<p class="list__lead post__lead">枚举</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		这是读书时一篇旧文搬运.几年后再次回顾下算法.
+问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
+思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
+给定数字n，其位数（10进制）为logn，具体的时间复杂度大致如下：
+$T(n) = log_{10}n + log_{10}{(n-1)} + &hellip; + log_{10}{1} = log_{10}{n!} = O(log_{10}{n!})$
+$\Rightarrow $
+$T(n) = O(log{n^n}) = O(nlogn)$
+所以，暴力法时间复杂度是nlogn的
+数位枚举 换一个枚举思路，正常的枚举是 i -&gt; i+1 -&gt; i+2 &hellip;这样,现采用数位遍历的方式，假设n是K位数,所有出现的2，出现的位置只能在这个范围内：[0,K-1]。（从0开始比较好算） 所以问题可以转变为：对于每个$d\in[0,K-1]$,求符合条件为$\in[1,n]$且第d位为2的数字的个数和$S_d$. 最后累加$\sum_{d=1}^KS_d$.
+对于第d位为2的数字个数如何求解？很容易我们可以归纳出数字个数与第d位数字与2的大小关系有关：
+PS: 以下的d是从0开始取的。
+给定n，假设第d位数字小于2,举个例子：
+n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d+1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/algmnotes-count_2_of_a_number/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/posts/storage_deep_dive_for_raft/" rel="bookmark">
 			分布式笔记 - Raft（1）
 			</a>
@@ -297,20 +331,6 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/other_try-hugo/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/" rel="bookmark">
-			
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
 </article>
 </main>
 
@@ -337,7 +357,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-longestpalindrome/">算法笔记： 最长回文子串</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/storage_deep_dive_for_raft/">分布式笔记 - Raft（1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-count_2_of_a_number/">算法笔记：计算1到n中2出现的个数</a></li>
 		</ul>
 	</div>
 </div>
@@ -378,6 +398,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
 	</div>
