@@ -90,7 +90,7 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
       <pubDate>Mon, 07 Nov 2016 21:20:49 +0000</pubDate>
       
       <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement versatility  cplusplus concepts:
+      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement versatility pivot 支点  cplusplus concepts:
  pod types non-trivial types  </description>
     </item>
     
@@ -197,21 +197,13 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
-      <title>using systemtap to track your user-space program - 1</title>
+      <title>笔记：systemtap相关</title>
       <link>/posts/debugging_use-systemtap-to-debug-1_basic/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/debugging_use-systemtap-to-debug-1_basic/</guid>
-      <description> </description>
-    </item>
-    
-    <item>
-      <title>using systemtap to track your user-space program - 2_return</title>
-      <link>/posts/debugging_use-systemtap-to-debug-2_.return/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/debugging_use-systemtap-to-debug-2_.return/</guid>
-      <description>x </description>
+      <description>本文会提及systemtap的以下几点：
+ 如何列出某个可执行文件的所有probe位点 如何取变量的值 如何通过某个地址的解引用取得对应值 如何在.return中拿到变量的最新值 如何自定义用户态程序probe位点 如何指定probe被调用的频率（命中次数/命中间隔时间） 如何使用外部参数传入*.stp  topic1 - quick start topic2 - how to track a var at probe point of func.call &amp;amp; func.return topic3 - how to mock a syscall </description>
     </item>
     
   </channel>

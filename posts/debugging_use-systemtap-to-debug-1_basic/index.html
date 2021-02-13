@@ -4,19 +4,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>using systemtap to track your user-space program - 1 - BadFd</title>
+	<title>笔记：systemtap相关 - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
-	<meta name="description" content="how to use systemtap(post 1)">
-		<meta property="og:title" content="using systemtap to track your user-space program - 1" />
-<meta property="og:description" content="how to use systemtap(post 1)" />
+	<meta name="description" content="how to use systemtap">
+		<meta property="og:title" content="笔记：systemtap相关" />
+<meta property="og:description" content="how to use systemtap" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/debugging_use-systemtap-to-debug-1_basic/" />
 
 
-		<meta itemprop="name" content="using systemtap to track your user-space program - 1">
-<meta itemprop="description" content="how to use systemtap(post 1)">
+		<meta itemprop="name" content="笔记：systemtap相关">
+<meta itemprop="description" content="how to use systemtap">
 
-<meta itemprop="wordCount" content="0">
+<meta itemprop="wordCount" content="33">
 
 
 
@@ -86,8 +86,8 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">using systemtap to track your user-space program - 1</h1>
-			<p class="post__lead">how to use systemtap(post 1)</p>
+			<h1 class="post__title">笔记：systemtap相关</h1>
+			<p class="post__lead">how to use systemtap</p>
 			<div class="post__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
 </div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
@@ -99,13 +99,27 @@
 	<div class="toc__menu">
 		<nav id="TableOfContents">
   <ul>
-    <li><a href="#heading"></a></li>
+    <li><a href="#topic1---quick-start">topic1 - quick start</a></li>
+    <li><a href="#topic2---how-to-track-a-var-at-probe-point-of-funccall--funcreturn">topic2 - how to track a var at probe point of func.call &amp; func.return</a></li>
+    <li><a href="#topic3---how-to-mock-a-syscall">topic3 - how to mock a syscall</a></li>
   </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<h2 id="heading"></h2>
+			<p>本文会提及systemtap的以下几点：</p>
+<ul>
+<li>如何列出某个可执行文件的所有probe位点</li>
+<li>如何取变量的值</li>
+<li>如何通过某个地址的解引用取得对应值</li>
+<li>如何在.return中拿到变量的最新值</li>
+<li>如何自定义用户态程序probe位点</li>
+<li>如何指定probe被调用的频率（命中次数/命中间隔时间）</li>
+<li>如何使用外部参数传入*.stp</li>
+</ul>
+<h2 id="topic1---quick-start">topic1 - quick start</h2>
+<h2 id="topic2---how-to-track-a-var-at-probe-point-of-funccall--funcreturn">topic2 - how to track a var at probe point of func.call &amp; func.return</h2>
+<h2 id="topic3---how-to-mock-a-syscall">topic3 - how to mock a syscall</h2>
 
 		</div>
 		<footer class="post__footer">
@@ -133,17 +147,11 @@
 		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
-		c/c++ programmer
+		a c/c++ programmer
 	</div>
 </div>
 
 <nav class="pager flex">
-	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/debugging_use-systemtap-to-debug-2_.return/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">using systemtap to track your user-space program - 2_return</p>
-		</a>
-	</div>
 	<div class="pager__item pager__item--next">
 		<a class="pager__link" href="/posts/sys_mfence/" rel="next">
 			<span class="pager__subtitle">下一篇&thinsp;»</span>
@@ -209,7 +217,7 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
