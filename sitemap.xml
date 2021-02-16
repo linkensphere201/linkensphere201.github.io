@@ -103,7 +103,7 @@
   </url>
   
   <url>
-    <loc>/posts/storage_deep_dive_for_raft/</loc>
+    <loc>/posts/storage_deep_dive_for_raft/lec1/</loc>
     <lastmod>2018-04-19T21:20:49+00:00</lastmod>
   </url>
   
@@ -188,6 +188,14 @@
   </url>
   
   <url>
+    <loc>/posts/cppnotes-iterator-invalidation/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/container-iterator/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/debug/</loc>
   </url>
   
@@ -196,11 +204,15 @@
   </url>
   
   <url>
+    <loc>/tags/stl/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/systemtap/</loc>
   </url>
   
   <url>
-    <loc>/posts/debugging_use-systemtap-to-debug-1_basic/</loc>
+    <loc>/posts/debugging_use-systemtap-to-debug/</loc>
   </url>
   
 </urlset>

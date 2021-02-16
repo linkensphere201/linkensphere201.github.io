@@ -89,10 +89,10 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
     
     <item>
       <title>分布式笔记 - Raft（1）</title>
-      <link>/posts/storage_deep_dive_for_raft/</link>
+      <link>/posts/storage_deep_dive_for_raft/lec1/</link>
       <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
       
-      <guid>/posts/storage_deep_dive_for_raft/</guid>
+      <guid>/posts/storage_deep_dive_for_raft/lec1/</guid>
       <description>Q&amp;amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。
 fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm） 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.
 log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry
@@ -218,11 +218,24 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
-      <title>笔记：systemtap相关</title>
-      <link>/posts/debugging_use-systemtap-to-debug-1_basic/</link>
+      <title>c&#43;&#43;笔记：STL容器迭代器失效场景</title>
+      <link>/posts/cppnotes-iterator-invalidation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/debugging_use-systemtap-to-debug-1_basic/</guid>
+      <guid>/posts/cppnotes-iterator-invalidation/</guid>
+      <description>CheatSheet (完整版见下面 Ref1 or cppref) note:
+ 顺序型容器
+  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
+  迭代器和元素引用的有效性不受影响    unordered关联型容器
+  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&amp;gt; +---+ --&amp;gt; +---+ | a | | b | | c | a -&amp;gt; b -&amp;gt; c +---+ &amp;lt;-- +---+ &amp;lt;-- +---+ +------------------------+ | | +---+ +---+ &amp;lt;-- +---+ &amp;lt;--+ | a | | b | | c | a -&amp;gt; c -&amp;gt; b +---+ &amp;lt;-+ +---+ --&amp;gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:</description>
+    </item>
+    
+    <item>
+      <title>笔记：systemtap相关</title>
+      <link>/posts/debugging_use-systemtap-to-debug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_use-systemtap-to-debug/</guid>
       <description>本文会提及systemtap的以下几点：
  如何列出某个可执行文件的所有probe位点 如何取变量的值 如何通过某个地址的解引用取得对应值 如何在.return中拿到变量的最新值 如何自定义用户态程序probe位点 如何指定probe被调用的频率（命中次数/命中间隔时间） 如何使用外部参数传入*.stp  topic1 - quick start topic2 - how to track a var at probe point of func.call &amp;amp; func.return topic3 - how to mock a syscall </description>
     </item>

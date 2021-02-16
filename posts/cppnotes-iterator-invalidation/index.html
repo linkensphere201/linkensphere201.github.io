@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>c&#43;&#43;笔记：STL容器迭代器失效场景 - BadFd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="c&#43;&#43;笔记：STL容器迭代器失效场景" />
+<meta property="og:description" content="CheatSheet (完整版见下面 Ref1 or cppref) note:
+ 顺序型容器
+  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
+  迭代器和元素引用的有效性不受影响    unordered关联型容器
+  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c&#43;&#43;98的最坏时间复杂度为O(n)， c&#43;&#43;11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  &#43;---&#43; --&gt; &#43;---&#43; --&gt; &#43;---&#43; | a | | b | | c | a -&gt; b -&gt; c &#43;---&#43; &lt;-- &#43;---&#43; &lt;-- &#43;---&#43; &#43;------------------------&#43; | | &#43;---&#43; &#43;---&#43; &lt;-- &#43;---&#43; &lt;--&#43; | a | | b | | c | a -&gt; c -&gt; b &#43;---&#43; &lt;-&#43; &#43;---&#43; --&gt; &#43;---&#43; ---&#43; | | &#43;--------------------&#43; splice()应该可以达到这个目的:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/cppnotes-iterator-invalidation/" />
+
+
+		<meta itemprop="name" content="c&#43;&#43;笔记：STL容器迭代器失效场景">
+<meta itemprop="description" content="CheatSheet (完整版见下面 Ref1 or cppref) note:
+ 顺序型容器
+  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
+  迭代器和元素引用的有效性不受影响    unordered关联型容器
+  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c&#43;&#43;98的最坏时间复杂度为O(n)， c&#43;&#43;11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  &#43;---&#43; --&gt; &#43;---&#43; --&gt; &#43;---&#43; | a | | b | | c | a -&gt; b -&gt; c &#43;---&#43; &lt;-- &#43;---&#43; &lt;-- &#43;---&#43; &#43;------------------------&#43; | | &#43;---&#43; &#43;---&#43; &lt;-- &#43;---&#43; &lt;--&#43; | a | | b | | c | a -&gt; c -&gt; b &#43;---&#43; &lt;-&#43; &#43;---&#43; --&gt; &#43;---&#43; ---&#43; | | &#43;--------------------&#43; splice()应该可以达到这个目的:">
+
+<meta itemprop="wordCount" content="138">
+
+
+
+<meta itemprop="keywords" content="stl,container iterator," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+					<div class="logo__tagline">a place to meet myself</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">菜单</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/about/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">c&#43;&#43;笔记：STL容器迭代器失效场景</h1>
+			<p class="post__lead">stl迭代器失效场景</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cheatsheet">CheatSheet</a></li>
+    <li><a href="#stl的list">stl的list</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="cheatsheet">CheatSheet</h2>
+<p>(完整版见下面 Ref1 or cppref)
+note:</p>
+<blockquote>
+<p>顺序型容器</p>
+</blockquote>
+<ul>
+<li>deque插入or删除操作会导致迭代器失效.</li>
+<li><!-- raw HTML omitted -->list则不会<!-- raw HTML omitted -->（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.</li>
+</ul>
+<hr>
+<blockquote>
+<p>关联型容器</p>
+</blockquote>
+<ul>
+<li>迭代器和元素引用的有效性不受影响</li>
+</ul>
+<hr>
+<blockquote>
+<p>unordered关联型容器</p>
+</blockquote>
+<ul>
+<li>rehash时会失效迭代器</li>
+</ul>
+<hr>
+<h2 id="stl的list">stl的list</h2>
+<ul>
+<li>实现上是双向链表</li>
+<li>迭代器是<code>a bidirectional iterator to value_type</code></li>
+<li><code>size()</code>时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。</li>
+</ul>
+<hr>
+<ul>
+<li>另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）</li>
+</ul>
+<pre><code>+---+ --&gt; +---+ --&gt; +---+
+| a |     | b |     | c |            a -&gt; b -&gt; c
++---+ &lt;-- +---+ &lt;-- +---+
+
+    +------------------------+
+    |                        |
++---+     +---+ &lt;-- +---+ &lt;--+
+| a |     | b |     | c |            a -&gt; c -&gt; b
++---+ &lt;-+ +---+ --&gt; +---+ ---+
+        |                    |
+        +--------------------+
+</code></pre><p><code>splice()</code>应该可以达到这个目的:</p>
+<blockquote>
+<p>This effectively inserts those elements into the container and removes them from x, altering the sizes of both containers. The operation <!-- raw HTML omitted -->does not involve the construction or destruction<!-- raw HTML omitted --> of any element. They are transferred, no matter whether x is an lvalue or an rvalue, or whether the value_type supports move-construction or not.</p>
+</blockquote>
+<p>需要与<code>std::swap</code>区别一下： 做个比喻，有俩菜篮子，swap做的事情是交换菜篮子里的内容（涉及移动or拷贝），splice是交换俩菜篮子（不涉及移动or拷贝）</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/6438086/iterator-invalidation-rules">Invalidation Rule of STL Containers</a></li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/stl/" rel="tag">stl</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/container-iterator/" rel="tag">container iterator</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/debugging_use-systemtap-to-debug/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">笔记：systemtap相关</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/sys_mfence/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title"></p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 19 Apr 2018 21:20:49 +0000</lastBuildDate><atom:link href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>分布式笔记 - Raft（1）</title>
-      <link>/posts/storage_deep_dive_for_raft/</link>
+      <link>/posts/storage_deep_dive_for_raft/lec1/</link>
       <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
       
-      <guid>/posts/storage_deep_dive_for_raft/</guid>
+      <guid>/posts/storage_deep_dive_for_raft/lec1/</guid>
       <description>Q&amp;amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。
 fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm） 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.
 log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry

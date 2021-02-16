@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>分布式笔记 - Raft（1） - BadFd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="“raft算法深入&#34;">
+		<meta property="og:title" content="分布式笔记 - Raft（1）" />
+<meta property="og:description" content="“raft算法深入&#34;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/storage_deep_dive_for_raft/lec1/" />
+<meta property="article:published_time" content="2018-04-19T21:20:49+00:00" />
+<meta property="article:modified_time" content="2018-04-19T21:20:49+00:00" />
+
+		<meta itemprop="name" content="分布式笔记 - Raft（1）">
+<meta itemprop="description" content="“raft算法深入&#34;">
+<meta itemprop="datePublished" content="2018-04-19T21:20:49+00:00" />
+<meta itemprop="dateModified" content="2018-04-19T21:20:49+00:00" />
+<meta itemprop="wordCount" content="725">
+
+
+
+<meta itemprop="keywords" content="分布式," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+					<div class="logo__tagline">a place to meet myself</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">菜单</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/about/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">分布式笔记 - Raft（1）</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#qa">Q&amp;A</a></li>
+        <li><a href="#raft算法描述">raft算法描述</a></li>
+        <li><a href="#要点总结">要点总结</a></li>
+        <li><a href="#引用">引用</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h3 id="qa">Q&amp;A</h3>
+<h5 id="线性一致性">线性一致性？</h5>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
+<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）
+一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.</p>
+<h5 id="log-entry和log分别是"><code>log entry</code>和<code>log</code>分别是？</h5>
+<p>所有写入日志称为<code>log</code>
+某条写入日志称为<code>log entry</code></p>
+<h5 id="commit和apply分别指什么"><code>commit</code>和<code>apply</code>分别指什么？</h5>
+<p><code>a log entry is committed</code>是指某条log已被确认到达大多数节点.
+<code>a log is applied</code>是指某条日志已被<code>fsm</code>执行.</p>
+<h5 id="leader回应client的时间点">leader回应client的时间点？</h5>
+<p>一个日志的生命周期主要有几个时间点：</p>
+<ul>
+<li>leader本地写入log成功</li>
+<li>被leader标记为commited</li>
+<li>被leader标记为applied</li>
+</ul>
+<p>论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.</p>
+<blockquote>
+<p>When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.</p>
+</blockquote>
+<h5 id="span-idrequest_vote_param_mythrpc-requestvotespan里为什么带了最后一个日志项log-entry的下标和它的term而不是commitindex或applyindex对应的日志项"><!-- raw HTML omitted -->RPC-RequestVote<!-- raw HTML omitted -->里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项）</h5>
+<p>xuya</p>
+<h5 id="votefor如何维护的例如-什么时候重置为null-当followergrant了某个候选者之后votefor如何处理">voteFor如何维护的？（例如: 什么时候重置为null? 当<code>follower</code>grant了某个候选者之后，voteFor如何处理？）</h5>
+<p>这个问题论文里并没有具体进行讨论</p>
+<h5 id="currentterm如何维护的例如在选举阶段当followergrant某个候选者之后是否需要修改自己的currentterm-如果选举阶段不修改那么连续两次选举上一次splitvote如何处理">currentTerm如何维护的？（例如：在选举阶段，当<code>follower</code>grant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？）</h5>
+<p>这个问题论文里并没有具体进行讨论</p>
+<h5 id="只需要放写操作进raft-log吗">只需要放写操作进raft-log吗？</h5>
+<p>直觉上，读操作并不会改变fsm的状态，所以(在没check论文前)个人感觉上<!-- raw HTML omitted -->待验证<!-- raw HTML omitted -->，只需要保证读leader的即可保证强一致（线性一致性），从某个follower读则是最终一致</p>
+<h3 id="raft算法描述">raft算法描述</h3>
+<h4 id="每个节点维护的上下文">每个节点维护的上下文</h4>
+<pre><code>Log {
+    LogEntry ent[];
+    bool IsNewerThan(const Log &amp;other_log);
+}
+
+LogEntry {
+  int   term;
+  Cmd   command;
+}
+
+Ctx {
+  Log                                log;
+  int                                currentTerm;  
+  ServerId                           voteFor;
+  
+  ServerId                           selfId;
+  ENUM {FOLLOWER, CANDIDATE, LEADER} state;
+  
+  uint                               commitIndex;
+  uint                               lastApplied;
+
+  ServerId                           clusterMap[];
+
+  uint                               nextIndex[];
+  uint                               matchIndex[];
+}
+
+</code></pre><h4 id="满足原则">满足原则</h4>
+<blockquote>
+<ul>
+<li>Election Safety: at most one leader can be elected in a given term. §5.2</li>
+<li>Leader Append-Only: a leader never overwrites or deletes entries in its log; it only appends new entries. §5.3</li>
+<li>Log Matching: if two logs contain an entry with the same index and term, then the logs are identical in all entries up through the given index. §5.3</li>
+<li>Leader Completeness: if a log entry is committed in a given term, then that entry will be present in the logs of the leaders for all higher-numbered terms. §5.4</li>
+<li>State Machine Safety: if a server has applied a log entry at a given index to its state machine, no other server will ever apply a different log entry for the same index. §5.4.3</li>
+</ul>
+</blockquote>
+<h4 id="leader选举">leader选举</h4>
+<ul>
+<li>
+<p>触发：
+在<code>election-timeout</code>时间内没收到leader的<code>RPC-AppendEntries</code>
+<!-- raw HTML omitted --></p>
+<blockquote>
+<p><code>election-timeout</code>是某范围内的随机时间，用于防止多个follwer同时发起选举造成split vote(没人赢得选举).</p>
+</blockquote>
+</li>
+<li>
+<p>怎么做：</p>
+<ul>
+<li>
+<p>选举发起方：</p>
+<pre><code>1.   ctx.currentTerm += 1
+2.   ctx.state = CANDIDATE
+3.   ctx.voteFor = ctx.selfId
+    
+4.1. resVote = {}
+4.2. for i in ctx.clusterMap {
+        resVote[i] = RPC-RequestVote(
+            ctx.currentTerm, 
+            ctx.selfId, 
+            &quot;last log entry's index&quot;,   // [why？](#request_vote_param_myth)
+            &quot;last log entry's term&quot;     // [why？](#request_vote_param_myth)
+            ) --&gt; i
+    }
+4.3. reset `election-timeout` timer
+
+5. before `election-timeout` reached: 
+    5.1 if majority of resVote is True:  // I'm winning the election!
+            ctx.state = LEADER
+            re-initialize ctx.nextIndex[] and ctx.matchIndex[]: 
+                ctx.nextIndex[]  &lt;-- &quot;last log entry's index&quot; + 1
+                ctx.matchIndex[] &lt;-- 0
+            for i in ctx.clusterMap {
+            }
+    5.2 if RPC-RequestVote is recvieved:  // 论文里没单独讨论,以下为个人推断，需验证
+            reply False because ctx.state != FOLLOWER 
+
+    5.3 if RPC-AppendEntries is recvieved:
+            if RPC is valid:
+            else:
+    
+    5.4 if `election-timeout` is triggered:
+            goto `1` to restart election.
+</code></pre></li>
+<li>
+<p>Log的新旧程度（which log is more up-to-date）比较方式：</p>
+<pre><code>bool Log::IsNewerThanOrEqual(const Log &amp;otherlog) {
+    if this-&gt;last_log_entry.Term &gt; otherlog-&gt;last_log_entry.Term:
+        return True;
+    else if this-&gt;last_log_entry.Term == otherlog-&gt;last_log_entry.Term:
+        if this-&gt;last_log_entry.Index &gt; this-&gt;last_log_entry.Index:
+            return True;
+    return False; 
+}       
+</code></pre></li>
+<li>
+<p><code>RPC-RequestVote</code>接收方：</p>
+<pre><code>如果满足：
+  ctx.state == FOLLOWER                                                     &amp;&amp;
+  ctx.currentTerm &lt;= `term of &quot;RPC-RequestVote&quot;`                            &amp;&amp;
+  ctx.voteFor == NULL or ctx.voteFor == `candidateId of &quot;RPC-RequestVote&quot;`  &amp;&amp; 
+  `candidateId of &quot;RPC-RequestVote&quot;`'s log IsNewerThanOrEqual ctx.Log
+那么:
+  返回GrantVote
+  ==&gt; 接收方是否需要修改voteFor/currentTerm? //论文里没给出具体细节和讨论，需要查看实现
+</code></pre><!-- raw HTML omitted -->
+<ul>
+<li>voteFor和currentTerm在这里的维护方式并没有给出，可能不是特别重要，属于实现细节，仅需满足以下这个即可。个人倾向于currentTerm需在Grant Vote时也更新为candidateId的term，否则如果出现split-vote，下一次选举就没法进行了<!-- raw HTML omitted -->待验证<!-- raw HTML omitted -->。
+<blockquote>
+<p>Each server will vote for at most one candidate in a given term.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="log复制">log复制</h4>
+<ul>
+<li>
+<p>RPC-AppendEntries 方向
+leader      &ndash;&gt; follower
+leader      &ndash;&gt; candidate
+new leader  &ndash;&gt; old leader</p>
+</li>
+<li>
+<p>触发
+leader定期发起.(即使没有新的写入，也需要发送空包到follower，避免follower发起选举)</p>
+</li>
+<li>
+<p>日志项匹配性质：</p>
+<ul>
+<li>两个日志项的term和index相同，就认为这两个日志项一致（或称之为“相同”<code>the same</code>）。</li>
+<li>若两份日志内某个日志项一致，那么在该日志项之前的所有日志项也一致。</li>
+</ul>
+</li>
+<li>
+<p>日志冲突的处理原则：</p>
+<ul>
+<li>日志冲突的定义：某个日志项的index相同，但term却不同。</li>
+<li>以leader的日志为准，最终达到的效果：follower找到自己日志里最后一个与leader相匹配的日志项（其index记为l1），清除掉在其之后的所有日志项，leader最后一个日志项index记为l2, follower将从leader拷贝[l1+1,l2]的日志项。</li>
+</ul>
+</li>
+<li>
+<p>leader上commitIndex的维护原则：</p>
+<ul>
+<li>更新commitIndex到一个新值（如Ln），必须满足的条件：1). Ln的term是以当前term，2) Ln到达了大多数follower.</li>
+<li>需要1）的原因（论文<!-- raw HTML omitted -->[1]<!-- raw HTML omitted -->内做了讨论）：在leader多次(E.G. 2次)变更后（A&ndash;&gt;X&ndash;&gt;A），可能出现继续复制上一个term的日志，最终上一个term日志将到达大多数节点，但这时不能更新commitIndex(原因是此时可能有其他节点包含相同index但term值更大的日志，也就是更新的日志，若此时更新并且出现切主，会导致数据不一致出现)，需要在本次term内的日志到达多数节点后，间接地把上一个term日志标为commit.</li>
+</ul>
+</li>
+<li>
+<p>行为</p>
+<ul>
+<li>
+<p>leader:</p>
+<ul>
+<li>对每个follower选取一定范围的日志项，发送RPC:
+<pre><code>for each x in followers:
+    选取一定范围内的日志（nextIndex）： collect log-entries between (nextIndex[x],my last log-entry]
+
+    RPC-AppendEntries(
+        currentTerm,
+        leaderId,
+        prevLogIndex,  // log index of the log which is right before log-entries[0]
+        prevLogTerm,   // log term of the log which is right before log-entries[0]
+        log-entries[], // 
+        leaderCommit   // to tell the follower which log is ok-to-apply 
+    )
+</code></pre><ul>
+<li>nextIndex维护</li>
+<li>commitIndex维护</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>follower:</p>
+<ul>
+<li>
+<p>收到一个RPC-AppendEntries，找到自己日志中的prevLogIndex所在日志项，check下是否匹配，若不匹配或不存在，返回false,leader将回退nextIndex进行回溯</p>
+</li>
+<li>
+<p>减少follower因日志项部匹配拒绝RPC的次数的优化：</p>
+<p>下图：
+<figure>
+    <img src="../../resources/12.png"/> <figcaption>
+            <h4>s0-leader s4-follower</h4>
+        </figcaption>
+</figure>
+</p>
+<p>follower在出现冲突时回复内容除了false以外，增加返回冲突的日志项的term以及该term下的第一个日志项的下标.</p>
+<blockquote>
+<p>For example,when rejecting an AppendEntries request, the follower can include the term of the conflicting entry and the first index it stores for that term.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><code>candidate</code>/<code>old leader</code>在收到一个合法RPC-AppendEntries后，还涉及角色状态的转换。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="关于只读命令的讨论">关于只读命令的讨论</h4>
+<p>可以不进raft-log,但需要2个额外措施保证线性一致性：</p>
+<ol>
+<li>新leader当选之后，在本任期内至少commit一次（若没有，就commit一个空操作，需要落入raft-log的，不是心跳包）后才能读.（也就是所谓的readIndex，参考资料很多，这里列一个：https://zhuanlan.zhihu.com/p/143239437）</li>
+</ol>
+<blockquote>
+<p>The Leader Completeness Property guarantees that a leader has all committed entries, but at the start of its term, it may not know which those are. To find out, it needs to commit an entry from its term. Raft handles this by having each leader commit a blank no-op entry into the log at the start of its term.</p>
+</blockquote>
+<ol start="2">
+<li>为了防止读请求落到某个旧leader，还是需要一次半数以上心跳才能回应读请求.</li>
+</ol>
+<blockquote>
+<p>Second, a leader must check whether it has been deposed before processing a read-only request (its information may be stale if a more recent leader has been elected). Raft handles this by having the leader exchange heart-beat messages with a majority of the cluster before responding to read-only requests.</p>
+</blockquote>
+<p>关于lease read:</p>
+<blockquote>
+<p>Alternatively, the leader could rely on the heartbeat mechanism to provide a form of lease [9], but this would rely on timing for safety (it assumes bounded clock skew).</p>
+</blockquote>
+<h3 id="要点总结">要点总结</h3>
+<ul>
+<li>5个特性</li>
+</ul>
+<h3 id="引用">引用</h3>
+<p>[1] raft小论文: In Search of an Understandable Consensus Algorithm</p>
+<p>[2] CONSENSUS: BRIDGING THEORY AND PRACTICE</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/other_frequently-used-words/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">cheatsheet for FUW</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/algmnotes-count_2_of_a_number/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">算法笔记：计算1到n中2出现的个数</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">最新动态</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/deep_dive_rocksdb/some_questions/">rocksdb探究 - 一些问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-longestpalindrome/">算法笔记： 最长回文子串</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-count_2_of_a_number/">算法笔记：计算1到n中2出现的个数</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
