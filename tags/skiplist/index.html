@@ -4,16 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>c&#43;&#43; - BadFd</title>
+	<title>skiplist - BadFd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="c&#43;&#43;" />
+		<meta property="og:title" content="skiplist" />
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/categories/c&#43;&#43;/" />
-<meta property="og:updated_time" content="2018-12-01T21:26:49+08:00" />
+<meta property="og:url" content="/tags/skiplist/" />
+<meta property="og:updated_time" content="2020-03-01T00:00:00+00:00" />
 
-		<meta itemprop="name" content="c&#43;&#43;">
+		<meta itemprop="name" content="skiplist">
 <meta itemprop="description" content="a place to find myself">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +23,7 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	
-	<link rel="alternate" type="application/rss+xml" href="/categories/c++/index.xml" title="BadFd">
+	<link rel="alternate" type="application/rss+xml" href="/tags/skiplist/index.xml" title="BadFd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -80,85 +80,38 @@
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">c&#43;&#43;</h1>
+		<h1 class="main__title">skiplist</h1>
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cppnote-server_rpc_notes/" rel="bookmark">
-			c&#43;&#43;服务端rpc笔记：读muduo有感
+			<a href="/posts/algmnotes-skiplist/" rel="bookmark">
+			算法笔记： 跳表
 			</a>
 		</h2>
-		<p class="list__lead post__lead">rpc框架</p>
+		<p class="list__lead post__lead">skiplist</p>
 		<div class="list__meta meta"><div class="meta__item-author meta__item">
 	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
 </div>
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。
-连接处理模型   A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的： a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。
-  A的cli端的处理是同步的： a. 一条连接发完一个包，会等待对应的收包（如果需要的话）。
-  结合上述两点，整体上看这个系统的吞吐不会很高，起码网络rpc这块，由于基本上pipeline的长度只有1，我甚至怀疑后端被打满会比较吃力。
-锁  thrift内部随处可见都是锁：例如，worker线程池公用一条处理队列，这个队列是由一把大锁来保护的。  基本这块我没发现有太大的优化，可以预想的是，随着io线程和worker线程的增加，性能可能无法得到线性扩展。
-比较好的设计应该是什么样   善用各种异步pipeline模式
-  share-nothing思想
-一个线程池共用一个总的大队列 vs. 每个线程内部自己维护队列
-  
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/cppnote-shared_ptr/" rel="bookmark">
-			智能指针1: shared_ptr使用梳理
-			</a>
-		</h2>
-		<p class="list__lead post__lead">智能指针</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		本文提及并讨论了：
- shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
- 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
-   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
- https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
-template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
-template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D's copy constructor must not throw // // shared_ptr will release p by calling d(p) // template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
+		这是读书时一篇旧文搬运.几年后再次回顾下算法.
+ 跳表是一种著名数据结构。
+ 原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
+相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
+本文主要讨论：
+ skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist   Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？
+A：$a &gt; b &gt; c &gt; d &gt; x$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $(next[lvl],next[lvl+1])$
+key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
+  思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
+  给定一个key值，可以找到一个前驱数组prev[...]（所有level比key小的最后一个节点）。
+  任意前驱数组元素prev[i],满足性质： 对于 i $\in$ [0，currmax] prev[i].key &lt; key prev[i].next[i] &gt; key or prev[i].
 	</div>
 	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/cppnote-shared_ptr/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/cppnotes-iterator-invalidation/" rel="bookmark">
-			c&#43;&#43;笔记：STL容器迭代器失效场景
-			</a>
-		</h2>
-		<p class="list__lead post__lead">stl迭代器失效场景</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&gt; +---+ --&gt; +---+ | a | | b | | c | a -&gt; b -&gt; c +---+ &lt;-- +---+ &lt;-- +---+ +------------------------+ | | +---+ +---+ &lt;-- +---+ &lt;--+ | a | | b | | c | a -&gt; c -&gt; b +---+ &lt;-+ +---+ --&gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/cppnotes-iterator-invalidation/">阅读全文…</a>
+		<a class="list__footer-readmore btn" href="/posts/algmnotes-skiplist/">阅读全文…</a>
 	</div>
 </article>
 </main>

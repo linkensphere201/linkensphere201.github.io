@@ -3,18 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/categories/algorithm/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/</loc>
-    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/skiplist/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/algmnotes-skiplist/</loc>
+    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,37 +53,17 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-01-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/algorithm/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/dp/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/algmnotes-skiplist/</loc>
-    <lastmod>2019-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/c&#43;&#43;/</loc>
     <lastmod>2018-12-01T21:26:49+08:00</lastmod>
   </url>
   
   <url>
     <loc>/posts/cppnote-server_rpc_notes/</loc>
+    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dp/</loc>
     <lastmod>2018-12-01T21:26:49+08:00</lastmod>
   </url>
   
@@ -79,6 +79,11 @@
   
   <url>
     <loc>/posts/cppnote-shared_ptr/</loc>
+    <lastmod>2018-12-01T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/</loc>
     <lastmod>2018-12-01T21:26:49+08:00</lastmod>
   </url>
   

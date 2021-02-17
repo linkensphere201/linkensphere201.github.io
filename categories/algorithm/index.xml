@@ -6,11 +6,11 @@
     <description>Recent content in algorithm on BadFd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 01 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>算法笔记： 跳表</title>
       <link>/posts/algmnotes-skiplist/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/algmnotes-skiplist/</guid>
       <description>这是读书时一篇旧文搬运.几年后再次回顾下算法.
