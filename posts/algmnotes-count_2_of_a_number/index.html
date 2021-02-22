@@ -1,38 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>算法笔记：计算1到n中2出现的个数 | Bad Fd</title>
-
-    
-
-
-
-<meta name="author" content="" />
-<meta name="description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
-问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
-思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
-给定数字n，其位数（10进制）为logn，具体的时间复杂度大致如下：
-$T(n) = log_{10}n &#43; log_{10}{(n-1)} &#43; &amp;hellip; &#43; log_{10}{1} = log_{10}{n!} = O(log_{10}{n!})$
-$\Rightarrow $
-$T(n) = O(log{n^n}) = O(nlogn)$
-所以，暴力法时间复杂度是nlogn的
-数位枚举 换一个枚举思路，正常的枚举是 i -&amp;gt; i&#43;1 -&amp;gt; i&#43;2 &amp;hellip;这样,现采用数位遍历的方式，假设n是K位数,所有出现的2，出现的位置只能在这个范围内：[0,K-1]。（从0开始比较好算） 所以问题可以转变为：对于每个$d\in[0,K-1]$,求符合条件为$\in[1,n]$且第d位为2的数字的个数和$S_d$. 最后累加$\sum_{d=1}^KS_d$.
-对于第d位为2的数字个数如何求解？很容易我们可以归纳出数字个数与第d位数字与2的大小关系有关：
-PS: 以下的d是从0开始取的。
-给定n，假设第d位数字小于2,举个例子：
-n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &amp;hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d&#43;1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$" />
-
-
-
-<meta name="generator" content="Hugo 0.78.1" />
-
-<link rel="canonical" href="/posts/algmnotes-count_2_of_a_number/" />
-
-
-<meta property="og:title" content="算法笔记：计算1到n中2出现的个数" />
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>算法笔记：计算1到n中2出现的个数 - Bad Fd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="算法笔记：计算1到n中2出现的个数" />
 <meta property="og:description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
 问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
 思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
@@ -51,11 +26,8 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
 <meta property="article:published_time" content="2018-06-01T20:26:39+08:00" />
 <meta property="article:modified_time" content="2018-06-01T20:26:39+08:00" />
 
-
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="算法笔记：计算1到n中2出现的个数"/>
-<meta name="twitter:description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
+		<meta itemprop="name" content="算法笔记：计算1到n中2出现的个数">
+<meta itemprop="description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
 问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
 思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
 给定数字n，其位数（10进制）为logn，具体的时间复杂度大致如下：
@@ -67,66 +39,93 @@ $T(n) = O(log{n^n}) = O(nlogn)$
 对于第d位为2的数字个数如何求解？很容易我们可以归纳出数字个数与第d位数字与2的大小关系有关：
 PS: 以下的d是从0开始取的。
 给定n，假设第d位数字小于2,举个例子：
-n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d&#43;1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$"/>
-
-
-<link rel="stylesheet" href="/css/semantic.min.css" />
-<link rel="stylesheet" href="/css/icomoon.css" />
-<link rel="stylesheet" href="/css/OverlayScrollbars.min.css" />
-<link rel="stylesheet" href="/css/github-markdown.css" />
-<link rel="stylesheet" href="/css/site.css" />
-
-<style>
-  a:not(.ui.button):hover {
-    text-decoration: underline;
-  }
-
-  
-
-  
-
-  
-
-  
-</style>
-
-
-    
+n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d&#43;1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$">
+<meta itemprop="datePublished" content="2018-06-01T20:26:39+08:00" />
+<meta itemprop="dateModified" content="2018-06-01T20:26:39+08:00" />
+<meta itemprop="wordCount" content="160">
 
 
 
+<meta itemprop="keywords" content="数位枚举," />
 
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
 
+	<link rel="stylesheet" href="/css/style.css">
+	
 
-
-    
-  </head>
-
-  <body class="default">
-    
-<nav class="ui secondary menu dream-menu">
-
-  <div class="item">
-    <i class="large link bullseye icon dream-flip-toggle" title=""></i>
-  </div>
-  <div class="item">
-    <i class="large link home icon" title="" onclick="window.location.href = '\/'"></i>
-  </div>
-  
-  
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+					<div class="logo__tagline">a place to meet myself</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">菜单</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/about/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
 </nav>
 
-    <div class="flip-container">
-      <div class="flipper">
-        <section class="front">
-          <div class="dream-max-width">
-            
-<div class="ui relaxed grid dream-grid">
-  <aside class="sixteen wide mobile sixteen wide tablet four wide computer column dream-single-aside">
-    
-    
-    <div class="ui segment toc">
-      <nav id="TableOfContents">
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">算法笔记：计算1到n中2出现的个数</h1>
+			<p class="post__lead">枚举</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
   <ul>
     <li><a href="#问题">问题</a></li>
     <li><a href="#思路">思路</a>
@@ -138,50 +137,10 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
     <li><a href="#reference">Reference</a></li>
   </ul>
 </nav>
-    </div>
-    
-    <div class="ui segment actions">
-      <button
-        class="ui circular icon button save-as-image"
-        title=""
-        onclick="savePostAsImg()">
-        <i class="save icon"></i>
-      </button>
-
-      <a href="https://twitter.com/intent/tweet?text=%e7%ae%97%e6%b3%95%e7%ac%94%e8%ae%b0%ef%bc%9a%e8%ae%a1%e7%ae%971%e5%88%b0n%e4%b8%ad2%e5%87%ba%e7%8e%b0%e7%9a%84%e4%b8%aa%e6%95%b0&url=%2fposts%2falgmnotes-count_2_of_a_number%2f" class="ui circular twitter icon button">
-  <i class="twitter icon"></i>
-</a>
-<a href="https://facebook.com/sharer/sharer.php?u=%2fposts%2falgmnotes-count_2_of_a_number%2f" class="ui circular facebook icon button">
-  <i class="facebook icon"></i>
-</a>
-
-    </div>
-  </aside>
-  <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column markdown-body dream-single" id="dream-save-post-as-img">
-    
-    <section class="ui top attached segment">
-      <header>
-        <h1 class="ui large header">算法笔记：计算1到n中2出现的个数<div class="sub header">
-            @
-            
-              
-            
-
-            | 
-                Friday, Jun 1, 2018
-              
-
-            | 1
-
-            | 
-              
-                Friday, Jun 1, 2018
-              
-          </div>
-        </h1>
-      </header>
-
-      <article class="main"><p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
 <h2 id="问题">问题</h2>
 <p>给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。</p>
 <h2 id="思路">思路</h2>
@@ -226,216 +185,65 @@ $$</p>
 <li>Crack the Coding Interview 18.4</li>
 <li><a href="https://blog.csdn.net/hzh_0000/article/details/80955511">时间复杂度$O(logn!) \Rightarrow O(nlogn) $的等价分析</a></li>
 </ul>
-</article>
-    </section>
 
-    
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" rel="tag">数位枚举</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
 
-    
-
-    
-  </div>
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer
+	</div>
 </div>
 
-
-            <footer class="ui basic center aligned segment" style="background-color: transparent;">
-              
-              <p>© 2021 Bad Fd</p>
-              
-
-              <p>Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> with theme <a href="https://github.com/g1eny0ung/hugo-theme-dream" target="_blank">Dream</a>.</p>
-
-              
-            </footer>
-          </div>
-        </section>
-        <section class="back">
-          <div class="dream-max-width">
-            <header class="ui basic very padded segment dream-header">
-  <div class="ui small circular image">
-    
-  </div>
-
-  <div class="content">
-    <h1 class="ui medium header"><div class="sub header"></div>
-    </h1>
-
-    <article class="ui horizontal list">
-      
-      <a class="item" href="/posts">
-        <i class="archive icon" title=""></i>
-      </a>
-      
-      <a class="item" href="/categories">
-        <i class="th list icon" title=""></i>
-      </a>
-      <a class="item" href="/tags">
-        <i class="tags icon" title=""></i>
-      </a>
-    </article>
-
-    
-    <article class="dream-tags">
-    
-      
-      
-      <a class="ui label" href="/tags/container-iterator/" title="Container Iterator">Container Iterator</a>
-    
-      
-      
-      <a class="ui label" href="/tags/debug/" title="Debug">Debug</a>
-    
-      
-      
-      <a class="ui label" href="/tags/dp/" title="Dp">Dp</a>
-    
-      
-      
-      <a class="ui label" href="/tags/hugo/" title="Hugo">Hugo</a>
-    
-      
-      
-      <a class="ui label" href="/tags/rocksdb/" title="Rocksdb">Rocksdb</a>
-    
-      
-      
-      <a class="ui label" href="/tags/rpc-framework/" title="Rpc Framework">Rpc Framework</a>
-    
-      
-      
-      <a class="ui label" href="/tags/shared_ptr/" title="Shared Ptr">Shared Ptr</a>
-    
-      
-      
-      <a class="ui label" href="/tags/skiplist/" title="Skiplist">Skiplist</a>
-    
-      
-      
-      <a class="ui label" href="/tags/stl/" title="Stl">Stl</a>
-    
-      
-      
-      <a class="ui label" href="/tags/systemtap/" title="Systemtap">Systemtap</a>
-    
-      
-      
-      <a class="ui label" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他</a>
-    
-      
-      
-      <a class="ui label" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式</a>
-    
-      
-      
-      <a class="ui label" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举</a>
-    
-      
-      
-      <a class="ui label" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串</a>
-    
-      
-      
-      <a class="ui label" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈</a>
-    
-    </article>
-    
-  </div>
-</header>
-
-
-<div class="ui relaxed grid dream-grid dream-back">
-  
-  
-  
-
-  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
-    <article class="ui segment">
-      <h3 class="ui header"></h3>
-      <nav class="ui secondary menu dream-menu dream-socials">
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/storage_deep_dive_for_raft/lec1/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">分布式笔记 - Raft（1）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/algmnotes-longestpalindrome/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">算法笔记： 最长回文子串</p>
+		</a>
+	</div>
 </nav>
 
-    </article>
-  </div>
 
-  <div class="sixteen wide mobile eight wide tablet four wide computer column dream-column">
-    
-  </div>
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+		</div>
+	</div>
+</footer>
 
-  
-  
-</div>
+	</div>
+<script async defer src="/js/menu.js"></script>
 
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <script>
-  window.defaultDark =  null 
-  window.backgroundDark =  null 
-  window.backgroundImageDark =  null 
-  window.darkNav =  null 
-  window.hasTwitterEmbed =  null 
-
-  if (window.hasTwitterEmbed) {
-    
-    window.twttr = (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {}
-      if (d.getElementById(id)) return t
-      js = d.createElement(s)
-      js.id = id
-      js.src = 'https://platform.twitter.com/widgets.js'
-      fjs.parentNode.insertBefore(js, fjs)
-
-      t._e = []
-      t.ready = function (f) {
-        t._e.push(f)
-      }
-
-      return t
-    })(document, 'script', 'twitter-wjs')
-  }
-</script>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/semantic.min.js"></script>
-<script src="/js/jquery.overlayScrollbars.min.js"></script>
-<script src="/js/header.js"></script>
-<script src="/js/main.js"></script>
-<script src="/js/theme.js"></script>
-
-    
-<script src="/js/html2canvas.min.js"></script>
-<script src="/js/post.js"></script>
-
-
-
-
-
-    
-
-    
-
-    
-  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
 </html>
