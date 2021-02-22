@@ -104,12 +104,11 @@
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
 本文主要讨论：
  skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist   Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？
-A：$a &gt; b &gt; c &gt; d &gt; x$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$
+A： $ a &gt; b &gt; c &gt; d &gt; x $ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$
 key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
   思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
   给定一个key值，可以找到一个前驱数组prev[...]（所有level比key小的最后一个节点）。
   任意前驱数组元素prev[i],满足性质： $$ 对于 i \in [0，currmax], 有： \
-prev[i].key &lt; key \qquad 且 \
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-skiplist/">阅读全文…</a>
@@ -196,10 +195,10 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记： 跳表</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/deep_dive_rocksdb/some_questions/">rocksdb探究 - 一些问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_some_questions_about_rocksdb/">rocksdb探究 - 一些问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-oopnotes/">c&#43;&#43;笔记：oop相关</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-rvalue-reference/">c&#43;&#43;笔记：oop相关</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-longestpalindrome/">算法笔记： 最长回文子串</a></li>
 		</ul>
 	</div>
 </div>
@@ -212,6 +211,9 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/c&#43;&#43;/">c&#43;&#43;</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/db/">DB</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/debugging/">debugging</a>
@@ -232,15 +234,19 @@ n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数�
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-barrier/" title="memory barrier">memory barrier (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/oop/" title="oop">oop (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>

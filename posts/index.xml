@@ -19,21 +19,38 @@
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
 本文主要讨论：
  skiplist一些性质分析 skiplist核心思想&amp;amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist   Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？
-A：$a &amp;gt; b &amp;gt; c &amp;gt; d &amp;gt; x$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$
+A： $ a &amp;gt; b &amp;gt; c &amp;gt; d &amp;gt; x $ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$
 key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
   思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
   给定一个key值，可以找到一个前驱数组prev[...]（所有level比key小的最后一个节点）。
-  任意前驱数组元素prev[i],满足性质： $$ 对于 i \in [0，currmax], 有： \
-prev[i].key &amp;lt; key \qquad 且 \</description>
+  任意前驱数组元素prev[i],满足性质： $$ 对于 i \in [0，currmax], 有： \</description>
     </item>
     
     <item>
       <title>rocksdb探究 - 一些问题</title>
-      <link>/posts/deep_dive_rocksdb/some_questions/</link>
+      <link>/posts/db_some_questions_about_rocksdb/</link>
       <pubDate>Tue, 07 Jan 2020 21:26:49 +0800</pubDate>
       
-      <guid>/posts/deep_dive_rocksdb/some_questions/</guid>
+      <guid>/posts/db_some_questions_about_rocksdb/</guid>
       <description> 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  </description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;笔记：oop相关</title>
+      <link>/posts/cppnotes-oopnotes/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-oopnotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;笔记：oop相关</title>
+      <link>/posts/cppnotes-rvalue-reference/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-rvalue-reference/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -126,6 +143,15 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
+      <title>Todo list</title>
+      <link>/posts/other_todolist/</link>
+      <pubDate>Tue, 07 Nov 2017 02:26:41 +0800</pubDate>
+      
+      <guid>/posts/other_todolist/</guid>
+      <description> pb使用总结:动态类型反射/non-copy 运维总结:huge page 运维总结:tcpdump抓包 运维总结:tsar/sar/iotop/iostat/top/perf top db笔记：lsm和btree的读/写放大分析  </description>
+    </item>
+    
+    <item>
       <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>
       <pubDate>Mon, 07 Nov 2016 21:20:49 +0000</pubDate>
@@ -166,51 +192,6 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
-      <title></title>
-      <link>/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/pb_%E4%BD%BF%E7%94%A8pb%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E5%8F%8D%E5%B0%84/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/pb_%E4%BD%BF%E7%94%A8pb%E7%9A%84zerocopy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/pb_%E4%BD%BF%E7%94%A8pb%E7%9A%84zerocopy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/sys_fd_leaks/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/sys_fd_leaks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/sys_huge_page/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/sys_huge_page/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/posts/sys_mfence/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/sys_mfence/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>c&#43;&#43;笔记：STL容器迭代器失效场景</title>
       <link>/posts/cppnotes-iterator-invalidation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -221,6 +202,52 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
   deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
   迭代器和元素引用的有效性不受影响    unordered关联型容器
   rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&amp;gt; +---+ --&amp;gt; +---+ | a | | b | | c | a -&amp;gt; b -&amp;gt; c +---+ &amp;lt;-- +---+ &amp;lt;-- +---+ +------------------------+ | | +---+ +---+ &amp;lt;-- +---+ &amp;lt;--+ | a | | b | | c | a -&amp;gt; c -&amp;gt; b +---+ &amp;lt;-+ +---+ --&amp;gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;笔记：STL相关</title>
+      <link>/posts/cppnotes-stl-misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-stl-misc/</guid>
+      <description>this is a post of misc items of stl.
+  behavior of operator[] of vector and map:
+  auto in for-statement:
+   </description>
+    </item>
+    
+    <item>
+      <title>c/c&#43;&#43;笔记：内存序</title>
+      <link>/posts/cppnotes-memory-order-issues/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-memory-order-issues/</guid>
+      <description>References </description>
+    </item>
+    
+    <item>
+      <title>db笔记 - 事务1:隔离级别</title>
+      <link>/posts/db_txn_lec1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_txn_lec1/</guid>
+      <description>锁 an overview of isolation degree   P0(Dirty Write)
+  Read Uncommited
+  P1(Dirty Read)
+  Read Commited
+  P4C(Lost Update of Cursor)
+  Cursor Stability
+  P4(Lost Update)
+  References  A Critique of ANSI SQL Isolation Levels 阅读笔记 A Critique of ANSI SQL Isolation Levels DB2 隔离级别 再谈数据库事务隔离性  </description>
+    </item>
+    
+    <item>
+      <title>systemtap笔记</title>
+      <link>/posts/debugging_systemtap_cheatsheet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_systemtap_cheatsheet/</guid>
+      <description></description>
     </item>
     
     <item>

@@ -6,7 +6,16 @@
     <description>Recent content in 其他 on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 07 Nov 2016 21:20:49 +0000</lastBuildDate><atom:link href="/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Nov 2017 02:26:41 +0800</lastBuildDate><atom:link href="/categories/%E5%85%B6%E4%BB%96/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Todo list</title>
+      <link>/posts/other_todolist/</link>
+      <pubDate>Tue, 07 Nov 2017 02:26:41 +0800</pubDate>
+      
+      <guid>/posts/other_todolist/</guid>
+      <description> pb使用总结:动态类型反射/non-copy 运维总结:huge page 运维总结:tcpdump抓包 运维总结:tsar/sar/iotop/iostat/top/perf top db笔记：lsm和btree的读/写放大分析  </description>
+    </item>
+    
     <item>
       <title>cheatsheet for FUW</title>
       <link>/posts/other_frequently-used-words/</link>

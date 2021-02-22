@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>oop on Bad Fd</title>
+    <link>/tags/oop/</link>
+    <description>Recent content in oop on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/oop/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>c&#43;&#43;笔记：oop相关</title>
+      <link>/posts/cppnotes-oopnotes/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-oopnotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43;笔记：oop相关</title>
+      <link>/posts/cppnotes-rvalue-reference/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-rvalue-reference/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

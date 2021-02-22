@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>oop</title>
+      <link>/tags/oop/</link>
+      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/oop/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>DP</title>
       <link>/tags/dp/</link>
       <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
@@ -125,6 +134,24 @@
     </item>
     
     <item>
+      <title>memory barrier</title>
+      <link>/tags/memory-barrier/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/memory-barrier/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>memory order</title>
+      <link>/tags/memory-order/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/memory-order/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>stl</title>
       <link>/tags/stl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -139,6 +166,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/tags/systemtap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>txn</title>
+      <link>/tags/txn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/txn/</guid>
       <description></description>
     </item>
     

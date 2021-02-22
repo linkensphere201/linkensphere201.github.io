@@ -19,5 +19,17 @@
   rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&amp;gt; +---+ --&amp;gt; +---+ | a | | b | | c | a -&amp;gt; b -&amp;gt; c +---+ &amp;lt;-- +---+ &amp;lt;-- +---+ +------------------------+ | | +---+ +---+ &amp;lt;-- +---+ &amp;lt;--+ | a | | b | | c | a -&amp;gt; c -&amp;gt; b +---+ &amp;lt;-+ +---+ --&amp;gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:</description>
     </item>
     
+    <item>
+      <title>c&#43;&#43;笔记：STL相关</title>
+      <link>/posts/cppnotes-stl-misc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-stl-misc/</guid>
+      <description>this is a post of misc items of stl.
+  behavior of operator[] of vector and map:
+  auto in for-statement:
+   </description>
+    </item>
+    
   </channel>
 </rss>
