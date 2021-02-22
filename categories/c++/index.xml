@@ -6,25 +6,7 @@
     <description>Recent content in c&#43;&#43; on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 13 Sep 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/c++/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>c&#43;&#43;笔记：oop相关</title>
-      <link>/posts/cppnotes-oopnotes/</link>
-      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/cppnotes-oopnotes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>c&#43;&#43;笔记：oop相关</title>
-      <link>/posts/cppnotes-rvalue-reference/</link>
-      <pubDate>Fri, 13 Sep 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/cppnotes-rvalue-reference/</guid>
-      <description></description>
-    </item>
-    
+    <lastBuildDate>Sat, 01 Dec 2018 21:26:49 +0800</lastBuildDate><atom:link href="/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>c&#43;&#43;服务端rpc笔记：读muduo有感</title>
       <link>/posts/cppnote-server_rpc_notes/</link>
