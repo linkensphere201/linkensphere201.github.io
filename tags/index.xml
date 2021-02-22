@@ -125,24 +125,6 @@
     </item>
     
     <item>
-      <title>memory barrier</title>
-      <link>/tags/memory-barrier/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/memory-barrier/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>memory order</title>
-      <link>/tags/memory-order/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/memory-order/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>stl</title>
       <link>/tags/stl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -191,10 +191,6 @@
   </url>
   
   <url>
-    <loc>/posts/cppnotes-memory-order-issues/</loc>
-  </url>
-  
-  <url>
     <loc>/tags/container-iterator/</loc>
   </url>
   
@@ -212,14 +208,6 @@
   
   <url>
     <loc>/categories/debugging/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/memory-barrier/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/memory-order/</loc>
   </url>
   
   <url>
