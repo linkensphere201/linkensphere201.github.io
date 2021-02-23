@@ -184,14 +184,23 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		锁 an overview of isolation degree   P0(Dirty Write)
+		锁 read lock write lock long duration lock short duration lock predicate lock
+history SQL-92 &ndash;&gt; SQL-95:
+an overview of isolation degree   P0(Dirty Write)
   Read Uncommited
   P1(Dirty Read)
   Read Commited
   P4C(Lost Update of Cursor)
   Cursor Stability
   P4(Lost Update)
-  References  A Critique of ANSI SQL Isolation Levels 阅读笔记 A Critique of ANSI SQL Isolation Levels DB2 隔离级别 再谈数据库事务隔离性  
+  P2(Non-Repeatable Read)
+  Repeatable Read
+  P3(Phantom)
+  Serializable
+  Snapshot Isolation(Sql-95)
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_txn_lec1/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">

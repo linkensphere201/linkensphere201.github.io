@@ -204,14 +204,20 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/db_txn_lec1/</guid>
-      <description>锁 an overview of isolation degree   P0(Dirty Write)
+      <description>锁 read lock write lock long duration lock short duration lock predicate lock
+history SQL-92 &amp;ndash;&amp;gt; SQL-95:
+an overview of isolation degree   P0(Dirty Write)
   Read Uncommited
   P1(Dirty Read)
   Read Commited
   P4C(Lost Update of Cursor)
   Cursor Stability
   P4(Lost Update)
-  References  A Critique of ANSI SQL Isolation Levels 阅读笔记 A Critique of ANSI SQL Isolation Levels DB2 隔离级别 再谈数据库事务隔离性  </description>
+  P2(Non-Repeatable Read)
+  Repeatable Read
+  P3(Phantom)
+  Serializable
+  Snapshot Isolation(Sql-95)</description>
     </item>
     
     <item>
