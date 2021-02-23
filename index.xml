@@ -201,6 +201,18 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
     </item>
     
     <item>
+      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference</title>
+      <link>/posts/cppnotes-move-semantics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-move-semantics/</guid>
+      <description>Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;amp;&amp;amp;, T不含有任何的cv限定符, 且T需要被推导
+ If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.
+   examples:
+  using Widget = int; Widget&amp;amp;&amp;amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;amp;&amp;amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;amp;&amp;amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？  If you can take the address of an expression, the expression is an lvalue.</description>
+    </item>
+    
+    <item>
       <title>c&#43;&#43;笔记：STL容器迭代器失效场景</title>
       <link>/posts/cppnotes-iterator-invalidation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
