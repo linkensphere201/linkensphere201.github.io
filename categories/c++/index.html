@@ -150,10 +150,10 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导
+		Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
  If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
    examples:
-  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？  If you can take the address of an expression, the expression is an lvalue.
+  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics/">阅读全文…</a>

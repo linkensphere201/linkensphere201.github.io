@@ -8,21 +8,21 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="c&#43;&#43; notes：recall of move-semantics and rvalue-reference" />
-<meta property="og:description" content="Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导
+<meta property="og:description" content="Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
  If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
    examples:
-  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？  If you can take the address of an expression, the expression is an lvalue." />
+  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/cppnotes-move-semantics/" />
 
 
 		<meta itemprop="name" content="c&#43;&#43; notes：recall of move-semantics and rvalue-reference">
-<meta itemprop="description" content="Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导
+<meta itemprop="description" content="Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
  If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
    examples:
-  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？  If you can take the address of an expression, the expression is an lvalue.">
+  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.">
 
-<meta itemprop="wordCount" content="197">
+<meta itemprop="wordCount" content="342">
 
 
 
@@ -106,9 +106,8 @@
   <ul>
     <li><a href="#universal-reference"><code>Universal Reference</code></a></li>
     <li><a href="#rvalue-or-lvalue">rvalue or lvalue</a></li>
-    <li><a href="#universal-reference的推导值"><code>Universal Reference</code>的推导值</a></li>
+    <li><a href="#universal-reference的推导"><code>Universal Reference</code>的推导</a></li>
     <li><a href="#引用折叠reference-deduce">引用折叠(<code>reference deduce</code>)</a></li>
-    <li><a href="#references">References</a></li>
   </ul>
 </nav>
 	</div>
@@ -118,7 +117,8 @@
 <ul>
 <li>
 <p>Q: 什么是<code>Universal Reference</code>?
-A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导</p>
+A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导
+G1.</p>
 <blockquote>
 <p>If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
 </blockquote>
@@ -137,6 +137,7 @@ auto&amp;&amp; var2 = var1;
 </code></pre><h2 id="rvalue-or-lvalue">rvalue or lvalue</h2>
 <ul>
 <li>什么是左值/右值？
+G2.
 <blockquote>
 <p>If you can take the address of an expression, the expression is an lvalue.
 If the type of an expression is an lvalue reference (e.g., T&amp; or const T&amp;, etc.), that expression is an lvalue.
@@ -147,13 +148,16 @@ Otherwise, the expression is an rvalue.  Conceptually (and typically also in fac
 </ul>
 <pre><code>using Widget = int;
 Widget&amp;&amp; var1 = Widget();
-auto&amp;&amp; var2 = var1;
-// 变量`var1`的类型是右值引用
-// 表达式`var1`可以被取址
-</code></pre><h2 id="universal-reference的推导值"><code>Universal Reference</code>的推导值</h2>
+// 变量`var1`的类型是右值引用。
+// 表达式`var1`可以被取地址，因此`var1`是左值。
+</code></pre><blockquote>
+<p>(cpp-ref)Even if the variable&rsquo;s type is rvalue reference, the expression consisting of its name is an lvalue expression;</p>
+</blockquote>
+<h2 id="universal-reference的推导"><code>Universal Reference</code>的推导</h2>
 <ul>
 <li>
-<p>用于初始化<code>Universal Reference</code>的表达式是左值的话，<code>Universal Reference</code>是左值引用；反之如果用于初始化的本身是右值，那么<code>Universal Reference</code>是右值引用。</p>
+<p>用于初始化<code>Universal Reference</code>的表达式是左值的话，<code>Universal Reference</code>是左值引用；反之如果用于初始化的本身是右值，那么<code>Universal Reference</code>是右值引用。
+G3.</p>
 <blockquote>
 <ul>
 <li>If the expression initializing a universal reference is an lvalue, the universal reference becomes an lvalue reference.</li>
@@ -165,18 +169,58 @@ auto&amp;&amp; var2 = var1;
 <p>examples:</p>
 </li>
 </ul>
-<h2 id="引用折叠reference-deduce">引用折叠(<code>reference deduce</code>)</h2>
-<pre><code>T&amp;  &amp;&amp; 
-T&amp;&amp; &amp;
-T&amp;  &amp;
-T&amp;&amp; &amp;&amp;
-</code></pre><h2 id="references">References</h2>
+<pre><code>using Widget = int;
+Widget&amp;&amp; var1 = Widget();
+auto&amp;&amp; var2 = var1;
+// var2的类型是什么？
+// 初始化它的值是个左值，因此var2的类型是左值引用
+</code></pre><h2 id="引用折叠reference-deduce">引用折叠(<code>reference deduce</code>)</h2>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/111826434">https://zhuanlan.zhihu.com/p/111826434</a></li>
-<li><a href="https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers">https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers</a></li>
-<li><a href="https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves">https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves</a></li>
+<li>场景是某个函数具有形如<code>template&lt;class T&gt; void f(T&amp;&amp; a);</code>的形式，根据传入的a的类型，T是如何推导出来的？</li>
 </ul>
+<p>G4.</p>
+<pre><code>Deduce Rules:
+T&amp;  &amp;&amp;  =&gt; T&amp; 
+T&amp;&amp; &amp;   =&gt; T&amp;
+T&amp;  &amp;   =&gt; T&amp;
+T&amp;&amp; &amp;&amp;  =&gt; T&amp;&amp;
+</code></pre><p>template<!-- raw HTML omitted -->
+void f(T&amp;&amp; a);
+<code>T&amp;&amp;</code>整体类型由调用语句传入的表达式是左值还是右值决定(G3)。
+通过T&amp;&amp;整体类型结合上面的DeduceRule可以推出T的类型。</p>
+<pre><code>
+example 1:
+</code></pre><p>f(1); // 1 is rvalue, so T&amp;&amp; ==&gt; int&amp;&amp;, so T =&gt; int
+// f(1) ==&gt; f&lt;int&amp;&amp;&gt;(int&amp;&amp;);</p>
+<pre><code>
+example 2:
+</code></pre><p>int x = 10;
+f(x); // x is lvalue, so T&amp;&amp; ==&gt; int&amp;, saccording to the deducing rules shown.o T ==&gt; int&amp; (according to the deducing rules shown.)
+// f(x) ==&gt; (f&lt;int&amp;&gt;(int&amp; &amp;&amp;) &ndash;&gt;) f&lt;int&amp;&gt;(int&amp;)</p>
+<pre><code>
+## perfect forward
+- how `std::bind` is impl?
 
+
+
+## move semantics
+
+- what `std::move` do:
+  not change var's lifetime, but make it movable.
+
+
+
+
+## References
+- https://zhuanlan.zhihu.com/p/111826434
+- https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers
+- https://stackoverflow.com/questions/3582001/what-are-the-main-purposes-of-using-stdforward-and-which-problems-it-solves
+- https://stackoverflow.com/questions/28483250/rvalue-reference-is-treated-as-an-lvalue
+- http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2002/n1385.htm
+- https://stackoverflow.com/questions/18369128/how-can-i-see-the-type-deduced-for-a-template-type-parameter
+- https://stackoverflow.com/questions/15663539/why-isnt-object-returned-by-stdmove-destroyed-immediately
+
+</code></pre>
 		</div>
 		<footer class="post__footer">
 			
