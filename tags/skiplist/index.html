@@ -85,7 +85,7 @@
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/algmnotes-skiplist/" rel="bookmark">
-			算法笔记： 跳表
+			算法笔记： 跳表(r1)
 			</a>
 		</h2>
 		<p class="list__lead post__lead">skiplist</p>
@@ -103,15 +103,39 @@
  原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
 本文主要讨论：
- skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist   Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？
-A： $ a &gt; b &gt; c &gt; d &gt; x $ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$
-key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
+ skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
+ Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &gt; b &gt; c &gt; d &gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
+  key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
   思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
-  给定一个key值，可以找到一个前驱数组prev[...]（所有level比key小的最后一个节点）。
-  任意前驱数组元素prev[i],满足性质： $$ 对于 i \in [0，currmax], 有： \
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-skiplist/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/algmnotes-skiplist-impl/" rel="bookmark">
+			算法笔记：跳表（r2）
+			</a>
+		</h2>
+		<p class="list__lead post__lead">skiplist</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		实现一个skiplist 上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
+然后由于好奇，我自己写了一个skiplist，这里记录下。
+该skiplist的特性：
+ 不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
+如：
+./skiplist_test.out --gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&quot;&lt;l0&gt;HEAD&quot;] N1[label=&quot;&lt;l0&gt;10&quot;] N2[label=&quot;&lt;l0&gt;20&quot;] N4[label=&quot;&lt;l0&gt;30&quot;] N3[label=&quot;&lt;l0&gt;40&quot;] N5[label=&quot;&lt;l0&gt;50&quot;] N0:l0-&gt;N1:l0 N1:l0-&gt;N2:l0 N2:l0-&gt;N4:l0 N4:l0-&gt;N3:l0 N3:l0-&gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
+上面这个我们可以得到：   a skiplist of 5 nodes   当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考相关测试。
+以上。
 	</div>
 </article>
 </main>
@@ -132,11 +156,11 @@ key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状
 	<h4 class="widget__title">最新动态</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记： 跳表</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记： 跳表(r1)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist-impl/">算法笔记：跳表（r2）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_some_questions_about_rocksdb/">rocksdb探究 - 一些问题</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-longestpalindrome/">算法笔记： 最长回文子串</a></li>
 		</ul>
 	</div>
 </div>
@@ -180,7 +204,7 @@ key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>

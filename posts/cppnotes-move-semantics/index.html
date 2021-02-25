@@ -22,7 +22,7 @@
    examples:
   using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.">
 
-<meta itemprop="wordCount" content="342">
+<meta itemprop="wordCount" content="355">
 
 
 
@@ -148,8 +148,14 @@ Otherwise, the expression is an rvalue.  Conceptually (and typically also in fac
 </ul>
 <pre><code>using Widget = int;
 Widget&amp;&amp; var1 = Widget();
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+auto&amp;&amp; var2 = var1;
+// 变量`var1`的类型是右值引用
+// 表达式`var1`可以被取址，
+=======
 // 变量`var1`的类型是右值引用。
 // 表达式`var1`可以被取地址，因此`var1`是左值。
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 55808c00b77e34e6ee32488efd8ed6dcdad4fc68
 </code></pre><blockquote>
 <p>(cpp-ref)Even if the variable&rsquo;s type is rvalue reference, the expression consisting of its name is an lvalue expression;</p>
 </blockquote>
