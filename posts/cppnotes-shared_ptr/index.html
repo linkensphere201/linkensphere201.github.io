@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>智能指针1: shared_ptr使用梳理 - Bad Fd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="智能指针1: shared_ptr使用梳理" />
+<meta property="og:description" content="本文提及并讨论了：
+ shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
+ 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
+   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
+template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/cppnotes-shared_ptr/" />
+<meta property="article:published_time" content="2018-12-01T21:26:49+08:00" />
+<meta property="article:modified_time" content="2018-12-01T21:26:49+08:00" />
+
+		<meta itemprop="name" content="智能指针1: shared_ptr使用梳理">
+<meta itemprop="description" content="本文提及并讨论了：
+ shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
+ 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
+   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
+template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .">
+<meta itemprop="datePublished" content="2018-12-01T21:26:49+08:00" />
+<meta itemprop="dateModified" content="2018-12-01T21:26:49+08:00" />
+<meta itemprop="wordCount" content="506">
+
+
+
+<meta itemprop="keywords" content="shared_ptr," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+					<div class="logo__tagline">a place to meet myself</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">菜单</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/about/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">智能指针1: shared_ptr使用梳理</h1>
+			<p class="post__lead">智能指针</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#缘起">缘起</a></li>
+    <li><a href="#基本原理--使用">基本原理 &amp; 使用</a></li>
+    <li><a href="#删除器">删除器</a></li>
+    <li><a href="#线程安全">线程安全</a></li>
+    <li><a href="#make_shared">make_shared</a></li>
+    <li><a href="#enable_shared_from_this">enable_shared_from_this</a></li>
+    <li><a href="#reference">Reference</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>本文提及并讨论了：</p>
+<ul>
+<li><code>shared_ptr</code>引入背景</li>
+<li>删除器</li>
+<li>线程安全性</li>
+<li><code>std::ref</code></li>
+<li>优先使用<code>make_shared</code></li>
+<li><code>enable_shared_from_this</code></li>
+<li>观察者模式和event-listener</li>
+</ul>
+<h2 id="缘起">缘起</h2>
+<ul>
+<li>
+<p>裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：</p>
+<ul>
+<li>资源未释放，重复释放，free/delete不匹配 &hellip;</li>
+<li>越界/段错误</li>
+</ul>
+<blockquote>
+<p>moduo1.7节讨论了裸指针会有哪些问题.</p>
+</blockquote>
+</li>
+<li>
+<p>不配对的free&amp;delete会有什么问题？
+是未定义行为.可以参考：</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a></li>
+<li><a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="基本原理--使用">基本原理 &amp; 使用</h2>
+<ul>
+<li>需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它.  &mdash; <code>std::shared_ptr</code></li>
+<li>使用略。</li>
+</ul>
+<h2 id="删除器">删除器</h2>
+<ul>
+<li>
+<p>shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下：
+可以看出，shared_ptr的模板参数只有指针对象的类型T：</p>
+<pre><code>template&lt;class T&gt; class shared_ptr
+{
+private:
+
+    // Borland 5.5.1 specific workaround
+    typedef shared_ptr&lt;T&gt; this_type;
+
+public:
+....
+</code></pre><p>删除器类型是在构造函数定义中带进来的：</p>
+<pre><code>template&lt;class Y&gt;
+explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete
+{
+    boost::detail::sp_pointer_construct( this, p, pn );
+}
+
+//
+// Requirements: D's copy constructor must not throw
+//
+// shared_ptr will release p by calling d(p)
+//
+// 构造函数只需要提供Y作为模板类型参数，
+// D不需要提供，可由构造函数的第二个参数推导得到
+template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d )
+{
+    boost::detail::sp_deleter_construct( this, p );
+}
+....
+</code></pre><p>关于删除器的一些情报：</p>
+<ol>
+<li>其类型是一个可调用对象（callable），且接受参数只有一个为Y*(take a parameter of Y*, as shown before⬆️)</li>
+<li>必须是可拷贝的（构造<code>shared_ptr</code>时涉及一次删除器的拷贝，如果有的话）</li>
+<li>必须是no throw的</li>
+</ol>
+<blockquote>
+<p>关于可调用对象：</p>
+<ul>
+<li>可调用对象: 包括函数/函数指针/重载了调用运算符的类（Functor）/lambda表达式</li>
+<li>可调用对象统一可用<code>std::function</code>来表示其类型</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>利用删除器可以有一些trick，比如实现类似golang的<code>defer</code></p>
+<pre><code>// some trick
+
+std::shared_ptr&lt;void&gt; a1(nullptr, [](void*){
+      log_info(&quot;this is a defer...&quot;);
+    });
+
+std::shared_ptr&lt;void&gt; a2(nullptr, [](void*){
+      log_info(&quot;this is another defer...&quot;);
+    });
+</code></pre><p>运行顺序如下：</p>
+<pre><code>2016-02-02 06:14:56.255 [thread 704968] info [shared_ptr.cc:65] this is another defer...
+2016-02-02 06:14:56.255 [thread 704968] info [shared_ptr.cc:61] this is a defer...
+</code></pre><blockquote>
+<p>栈空间的元素释放顺序：同种类型元素是LIFO的.
+order of destruction of stack variable: <a href="https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order">https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="线程安全">线程安全</h2>
+<ul>
+<li>
+<p>只有控制块本身是线程安全.（It is only the control block itself which is thread-safe.）</p>
+</li>
+<li>
+<p>why accessing  std::shared_ptr should be protected by mutex?</p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/Solstice/article/details/8547547">https://blog.csdn.net/Solstice/article/details/8547547</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/14482830/stdshared-ptr-thread-safety">https://stackoverflow.com/questions/14482830/stdshared-ptr-thread-safety</a></p>
+</li>
+<li>
+<p>同一个<code>shared_ptr</code>可以被多个线程同时读取</p>
+</li>
+<li>
+<p>同一个<code>shared_ptr</code>被多个线程同时读写时，需要加锁</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<ul>
+<li>moduo1.9节</li>
+<li><a href="https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety">https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety</a></li>
+</ul>
+</blockquote>
+<ul>
+<li><code>shared_ptr</code>/<code>atomic</code>/<code>mutex</code>等传递给<code>thread</code>作为其构造函数的参数时，需要用<code>std::ref</code>包裹</li>
+<li>由于多线程同时读写同一个<code>shared_ptr</code>需要加锁，需要控制临界区的大小。（资源申请和释放都需要在临界区以外）</li>
+</ul>
+<pre><code>class App {                                                                       
+public:                                                                           
+  App() : id_(App::global_id_++) {                                                
+    log_info(&quot;#{} of App is created!&quot;, id_);                                      
+  }                                                                               
+  ~App() {                                                                        
+    log_info(&quot;#{} of App is destoried!&quot;, id_);                                    
+  }                                                                               
+  int getid() {                                                                   
+    return id_;                                                                   
+  }                                                                               
+private:                                                                          
+  int id_;                                                                        
+  static int global_id_;                                                          
+};                                                                                
+int App::global_id_ = 0;                                                          
+using AppPtr = std::shared_ptr&lt;App&gt;;                                              
+                                                                                  
+void do_something(App *a) {                                                       
+  log_info(&quot;do #{} ...&quot;, (a != nullptr ? a-&gt;getid() : -1));                       
+}                                                                                 
+std::default_random_engine generator;                                             
+std::uniform_int_distribution&lt;int&gt; distribution(1,6);                             
+void reader(AppPtr&amp; ap, std::mutex &amp;apmtx) {                                        
+  log_info(&quot;a and a_mtx: {},{}&quot;,(void*)(&amp;ap), (void*)(&amp;apmtx));                     
+  std::this_thread::sleep_for(std::chrono::milliseconds(distribution(generator)));  
+  AppPtr local;                                                                     
+  {                                                                                 
+    log_info(&quot;&gt;&gt;&gt; enter critical&quot;);                                                 
+    std::lock_guard&lt;std::mutex&gt; l(apmtx);                                           
+    local = ap;                                                                     
+    log_info(&quot;&lt;&lt;&lt; leave critical&quot;);                                                 
+  }                                                                                 
+  do_something(local.get());                                                        
+}                                                                                   
+void writer(AppPtr&amp; ap, std::mutex &amp;apmtx) {                                        
+  log_info(&quot;a and a_mtx: {},{}&quot;,(void*)(&amp;ap), (void*)(&amp;apmtx));                     
+  std::this_thread::sleep_for(std::chrono::milliseconds(distribution(generator)));  
+  AppPtr local_old,local_new(new App);                                              
+  {                                                                                 
+    log_info(&quot;&gt;&gt;&gt; enter critical&quot;);                                                 
+    std::lock_guard&lt;std::mutex&gt; l(apmtx);                                           
+    local_old = ap;                                                                 
+    ap = local_new;                                                                 
+    log_info(&quot;&lt;&lt;&lt; leave critical&quot;);                                                 
+  }                                                                                 
+}                                
+TEST(sharedptr,threadsafety) {                                                    
+  AppPtr a = std::make_shared&lt;App&gt;();                                             
+  std::mutex a_mtx;                                                               
+  std::thread t1(reader, std::ref(a), std::ref(a_mtx));                           
+  std::thread t2(writer, std::ref(a), std::ref(a_mtx));                           
+  t1.join();                                                                      
+  t2.join();                                                                      
+}                                                       
+</code></pre><p>运行结果：</p>
+<pre><code>[thread 705061] info [shared_ptr.cc:113] #0 of App is created!
+[thread 705062] info [shared_ptr.cc:134] a and a_mtx: 0x7ffe4fce86e0,0x7ffe4fce86b0
+[thread 705063] info [shared_ptr.cc:146] a and a_mtx: 0x7ffe4fce86e0,0x7ffe4fce86b0
+[thread 705063] info [shared_ptr.cc:113] #1 of App is created!
+[thread 705063] info [shared_ptr.cc:150] &gt;&gt;&gt; enter critical
+[thread 705063] info [shared_ptr.cc:154] &lt;&lt;&lt; leave critical
+[thread 705063] info [shared_ptr.cc:116] #0 of App is destoried!
+[thread 705062] info [shared_ptr.cc:138] &gt;&gt;&gt; enter critical
+[thread 705062] info [shared_ptr.cc:141] &lt;&lt;&lt; leave critical
+[thread 705062] info [shared_ptr.cc:129] do #1 ...
+[thread 705061] info [shared_ptr.cc:116] #1 of App is destoried!
+</code></pre><h2 id="make_shared">make_shared</h2>
+<p>老生常谈了，再简要总结下：</p>
+<ul>
+<li>效率：
+使用<code>auto x = std::make_shared&lt;type&gt;(xx1,xx2,xx3);</code>会比使用<code>std::shared_ptr x(new type(xx1,xx2,xx3));</code>:
+减少1次堆内存的申请.
+后者需要申请1次type类型本身对象，和shared_ptr本身对象（控制块）2次.</li>
+<li>原理：
+两次new，第一次申请type+控制块大小的一片内存，第二次利用<code>placement new</code>，把type类型数据构造在指定的内存地址。</li>
+<li>缺陷：
+如果有<code>weak_ptr</code>引用了使用<code>make_shared</code>申请出来的智能指针对象，那么其生命周期会被<code>weak_ptr</code>延长，原因是&quot;控制块&quot;的生命周期等于<code>weak_ptr</code>的生命周期。</li>
+</ul>
+<blockquote>
+<p><a href="https://stackoverflow.com/questions/20895648/difference-in-make-shared-and-normal-shared-ptr-in-c">https://stackoverflow.com/questions/20895648/difference-in-make-shared-and-normal-shared-ptr-in-c</a>
+<a href="https://blog.csdn.net/SuWanWorld/article/details/103940013">https://blog.csdn.net/SuWanWorld/article/details/103940013</a>
+<a href="https://www.cnblogs.com/leijiangtao/p/12046333.html">https://www.cnblogs.com/leijiangtao/p/12046333.html</a></p>
+</blockquote>
+<h2 id="enable_shared_from_this">enable_shared_from_this</h2>
+<p>使用智能指针还有个问题：就是任何<code>this</code>指针不能交给<code>shared_ptr</code>管理，会导致double-free,如：</p>
+<pre><code>class App2 : public App {
+  public:
+    std::shared_ptr&lt;App2&gt; App2Fuck() {
+      std::shared_ptr&lt;App2&gt; x(this); // would cause this to be destoried twice!
+      return x;
+    }
+};
+</code></pre><p>那如果强行需要在类的内部返一个<code>shared_ptr</code>出来，c++提供了<code>enable_shared_from_this</code>来做这个事（最初是boost实现的，后来被合进c++11了）。</p>
+<p>上面这个例子毫无实用价值，具体是什么场景需要用到这个，我将在另一篇文里讨论。（或check：muduo 1.11节）</p>
+<ul>
+<li>HOWTO： <a href="https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this">https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this</a></li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a></li>
+<li><a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a></li>
+<li>order of destruction of stack variable: <a href="https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order">https://stackoverflow.com/questions/14688285/c-local-variable-destruction-order</a></li>
+<li><a href="https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety">https://www.boost.org/doc/libs/1_75_0/libs/smart_ptr/doc/html/smart_ptr.html#shared_ptr_thread_safety</a></li>
+<li><a href="https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this">https://stackoverflow.com/questions/712279/what-is-the-usefulness-of-enable-shared-from-this</a></li>
+<li>muduo 1.11</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/shared_ptr/" rel="tag">shared_ptr</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="FatiaoX avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/algmnotes-longestpalindrome/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">算法笔记： 最长回文子串</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/cppnote-server_rpc_notes/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">c&#43;&#43;服务端rpc笔记：读muduo有感</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
