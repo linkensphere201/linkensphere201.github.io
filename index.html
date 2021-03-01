@@ -98,19 +98,20 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		这是读书时一篇旧文搬运.几年后再次回顾下算法.
- 跳表是一种著名数据结构。
- 原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
+跳表是一种著名数据结构。
+原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
 本文主要讨论：
- skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
- Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &gt; b &gt; c &gt; d &gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
-  key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
-  思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
+skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
+Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &gt; b &gt; c &gt; d &gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
+key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
+思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-skiplist/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/algmnotes-skiplist-impl/" rel="bookmark">
@@ -130,13 +131,14 @@
 		实现一个skiplist 上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
 然后由于好奇，我自己写了一个skiplist，这里记录下。
 该skiplist的特性：
- 不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
+不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
 如：
-./skiplist_test.out --gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&quot;&lt;l0&gt;HEAD&quot;] N1[label=&quot;&lt;l0&gt;10&quot;] N2[label=&quot;&lt;l0&gt;20&quot;] N4[label=&quot;&lt;l0&gt;30&quot;] N3[label=&quot;&lt;l0&gt;40&quot;] N5[label=&quot;&lt;l0&gt;50&quot;] N0:l0-&gt;N1:l0 N1:l0-&gt;N2:l0 N2:l0-&gt;N4:l0 N4:l0-&gt;N3:l0 N3:l0-&gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
+./skiplist_test.out &ndash;gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&quot;&lt;l0&gt;HEAD&quot;] N1[label=&quot;&lt;l0&gt;10&quot;] N2[label=&quot;&lt;l0&gt;20&quot;] N4[label=&quot;&lt;l0&gt;30&quot;] N3[label=&quot;&lt;l0&gt;40&quot;] N5[label=&quot;&lt;l0&gt;50&quot;] N0:l0-&gt;N1:l0 N1:l0-&gt;N2:l0 N2:l0-&gt;N4:l0 N4:l0-&gt;N3:l0 N3:l0-&gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
 上面这个我们可以得到：   a skiplist of 5 nodes   当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考相关测试。
 以上。
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/db_some_questions_about_rocksdb/" rel="bookmark">
@@ -153,9 +155,10 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		 写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用  
+		写请求batch内的多个操作是否会被拆开，为什么？ block-cache里的缓存项是否会因为某个sst被compact而失效？ event-listener的实现 perf-context的实现 ThreadLocalPtr的实现以及为什么 ROCKSDB中的MVCC rocksdb读路径下的各种迭代器/各层cache分析 env分析和使用
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/cppnote-server_rpc_notes/" rel="bookmark">
@@ -174,15 +177,15 @@
 	<div class="content list__excerpt post__content clearfix">
 		最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。
 连接处理模型   A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的： a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。
-  A的cli端的处理是同步的： a. 一条连接发完一个包，会等待对应的收包（如果需要的话）。
-  结合上述两点，整体上看这个系统的吞吐不会很高，起码网络rpc这块，由于基本上pipeline的长度只有1，我甚至怀疑后端被打满会比较吃力。
+A的cli端的处理是同步的： a. 一条连接发完一个包，会等待对应的收包（如果需要的话）。
+结合上述两点，整体上看这个系统的吞吐不会很高，起码网络rpc这块，由于基本上pipeline的长度只有1，我甚至怀疑后端被打满会比较吃力。
 锁  thrift内部随处可见都是锁：例如，worker线程池公用一条处理队列，这个队列是由一把大锁来保护的。  基本这块我没发现有太大的优化，可以预想的是，随着io线程和worker线程的增加，性能可能无法得到线性扩展。
 比较好的设计应该是什么样   善用各种异步pipeline模式
-  share-nothing思想
+share-nothing思想
 一个线程池共用一个总的大队列 vs. 每个线程内部自己维护队列
-  
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/cppnotes-shared_ptr/" rel="bookmark">
@@ -200,17 +203,18 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		本文提及并讨论了：
- shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
- 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
-   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
- https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
-template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
-template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D's copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
+shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
+资源未释放，重复释放，free/delete不匹配 … 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
+不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
+<a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a> <a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a>    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. — std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: &hellip;. 删除器类型是在构造函数定义中带进来的：
+template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&rsquo;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-shared_ptr/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/algmnotes-longestpalindrome/" rel="bookmark">
@@ -231,14 +235,15 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 描述 给定一个串，求它的最长回文子串。
 DP思路 DP的关键是梳理出问题与子问题的关系。
 F[i,j]表示i..j的最长回文串的长度，那么跟其子问题的关系如下：
- F[i,j] = max { F[i+1, j-1] + 2 ----- if str[i] == str[j] &amp;&amp; F[i+1, j-1] == j-1-(i+1)+1 ////如果i+1..j-1非回文但又有str[i] == str[j]怎么办？ F[i+1,j] ----- otherwise1 F[i,j-1] ----- otherwise2 } 如果问题是判断某个串是否为回文子串，那么问题与子问题的关系则变为：
- isP[i,j] = { isP[i+1,j-1] ----- if str[i] == str[j] false ----- otherwise } 具体编码 这个就不贴代码了.
+F[i,j] = max { F[i+1, j-1] + 2 &mdash;&ndash; if str[i] == str[j] &amp;&amp; F[i+1, j-1] == j-1-(i+1)+1 ////如果i+1..j-1非回文但又有str[i] == str[j]怎么办？ F[i+1,j] &mdash;&ndash; otherwise1 F[i,j-1] &mdash;&ndash; otherwise2 } 如果问题是判断某个串是否为回文子串，那么问题与子问题的关系则变为：
+isP[i,j] = { isP[i+1,j-1] &mdash;&ndash; if str[i] == str[j] false &mdash;&ndash; otherwise } 具体编码 这个就不贴代码了.
 Manacher算法 主要是利用到了回文串的特点(中心对称)，解题路径上可以优化掉一些分支. 已求解的部分子问题，如果是某个回文串的一半，那么其另一半可以直接得到答案。
 由于我们的目标不是优化到百分之百，这个算法具体我就不深究了反正以前也实现过。
 Reference 更详细的可以check以前的旧文.
- https://www.jianshu.com/p/eae9334772c2  
+<a href="https://www.jianshu.com/p/eae9334772c2">https://www.jianshu.com/p/eae9334772c2</a>
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
@@ -259,20 +264,21 @@ Reference 更详细的可以check以前的旧文.
 问题 给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。
 思路 暴力 依次求解1..n每个数含有多少个2，最后求和。
 给定数字n，其位数（10进制）为logn，具体的时间复杂度大致如下：
-$T(n) = log_{10}n + log_{10}{(n-1)} + &hellip; + log_{10}{1} = log_{10}{n!} = O(log_{10}{n!})$
+$T(n) = log_{10}n + log_{10}{(n-1)} + … + log_{10}{1} = log_{10}{n!} = O(log_{10}{n!})$
 $\Rightarrow $
 $T(n) = O(log{n^n}) = O(nlogn)$
 所以，暴力法时间复杂度是nlogn的
-数位枚举 换一个枚举思路，正常的枚举是 i -&gt; i+1 -&gt; i+2 &hellip;这样,现采用数位遍历的方式，假设n是K位数,所有出现的2，出现的位置只能在这个范围内：[0,K-1]。（从0开始比较好算） 所以问题可以转变为：对于每个$d\in[0,K-1]$,求符合条件为$\in[1,n]$且第d位为2的数字的个数和$S_d$. 最后累加$\sum_{d=1}^KS_d$.
+数位枚举 换一个枚举思路，正常的枚举是 i -&gt; i+1 -&gt; i+2 …这样,现采用数位遍历的方式，假设n是K位数,所有出现的2，出现的位置只能在这个范围内：[0,K-1]。（从0开始比较好算） 所以问题可以转变为：对于每个$d\in[0,K-1]$,求符合条件为$\in[1,n]$且第d位为2的数字的个数和$S_d$. 最后累加$\sum_{d=1}^KS_d$.
 对于第d位为2的数字个数如何求解？很容易我们可以归纳出数字个数与第d位数字与2的大小关系有关：
 PS: 以下的d是从0开始取的。
 给定n，假设第d位数字小于2,举个例子：
-n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， &hellip;, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d+1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$
+n = 716130, d = 2， 第d位数字为1，该位为2且满足小于等于n的数字是：200 - 299， 1200 - 1299， 2200 - 2299， …, 715200 - 715299，显然有716 * 100个，规约一下有: $$ S_d = n / 10^{d+1} * 10^d \qquad \text{if} \ digit(d,n) \lt2 $$
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-count_2_of_a_number/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
@@ -293,16 +299,17 @@ fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立
 log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry
 commit和apply分别指什么？ a log entry is committed是指某条log已被确认到达大多数节点. a log is applied是指某条日志已被fsm执行.
 leader回应client的时间点？ 一个日志的生命周期主要有几个时间点：
- leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
- When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
- RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） xuya
+leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
+When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
+RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） xuya
 voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论
 currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 这个问题论文里并没有具体进行讨论
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/lec1/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/other_todolist/" rel="bookmark">
@@ -318,9 +325,10 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		 pb使用总结:动态类型反射/non-copy 运维总结:huge page 运维总结:tcpdump抓包 运维总结:tsar/sar/iotop/iostat/top/perf top db笔记：lsm和btree的读/写放大分析 db笔记：事务 &ndash;&gt; doing db笔记：分布式事务 db笔记：2pc和percalator db笔记：paxos cpp笔记：一些常见的oop设计模式 cpp笔记：rvalue-reference cpp笔记：内存序和内存屏障v2  
+		pb使用总结:动态类型反射/non-copy 运维总结:huge page 运维总结:tcpdump抓包 运维总结:tsar/sar/iotop/iostat/top/perf top db笔记：lsm和btree的读/写放大分析 db笔记：事务 –&gt; doing db笔记：分布式事务 db笔记：2pc和percalator db笔记：paxos cpp笔记：一些常见的oop设计模式 cpp笔记：rvalue-reference cpp笔记：内存序和内存屏障v2
 	</div>
-</article><article class="list__item post">
+</article>
+<article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/other_frequently-used-words/" rel="bookmark">
@@ -337,9 +345,10 @@ currentTerm如何维护的？（例如：在选举阶段，当followergrant某�
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement versatility pivot 支点  cplusplus concepts:
- pod types non-trivial types  
+pod types non-trivial types
 	</div>
 </article>
+
 </main>
 
 <div class="pagination">
