@@ -100,12 +100,13 @@
 	<div class="content list__excerpt post__content clearfix">
 		最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。
 连接处理模型   A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的： a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。
-A的cli端的处理是同步的： a. 一条连接发完一个包，会等待对应的收包（如果需要的话）。
-结合上述两点，整体上看这个系统的吞吐不会很高，起码网络rpc这块，由于基本上pipeline的长度只有1，我甚至怀疑后端被打满会比较吃力。
+  A的cli端的处理是同步的： a. 一条连接发完一个包，会等待对应的收包（如果需要的话）。
+  结合上述两点，整体上看这个系统的吞吐不会很高，起码网络rpc这块，由于基本上pipeline的长度只有1，我甚至怀疑后端被打满会比较吃力。
 锁  thrift内部随处可见都是锁：例如，worker线程池公用一条处理队列，这个队列是由一把大锁来保护的。  基本这块我没发现有太大的优化，可以预想的是，随着io线程和worker线程的增加，性能可能无法得到线性扩展。
 比较好的设计应该是什么样   善用各种异步pipeline模式
-share-nothing思想
+  share-nothing思想
 一个线程池共用一个总的大队列 vs. 每个线程内部自己维护队列
+  
 	</div>
 </article>
 <article class="list__item post">
@@ -126,12 +127,12 @@ share-nothing思想
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		本文提及并讨论了：
-shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
-资源未释放，重复释放，free/delete不匹配 … 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
-不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
-<a href="https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c">https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c</a> <a href="https://isocpp.org/wiki/faq/freestore-mgmt">https://isocpp.org/wiki/faq/freestore-mgmt</a>    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. — std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
-template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: &hellip;. 删除器类型是在构造函数定义中带进来的：
-template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&rsquo;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
+ shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
+ 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
+   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
+ https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
+template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
+template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D's copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-shared_ptr/">阅读全文…</a>
@@ -152,9 +153,9 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
-If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
-examples:
-using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是<code>Universal Reference</code>，因为<code>T&amp;amp;&amp;amp;</code>不是个需要被推导的类型,<code>T</code>是<code>Widget</code>. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是<code>Universal Reference</code>，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.
+ If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
+   examples:
+  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics/">阅读全文…</a>
@@ -176,10 +177,10 @@ using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是<code>Universal Re
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		CheatSheet (完整版见下面 Ref1 or cppref) note:
-顺序型容器
-deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-迭代器和元素引用的有效性不受影响    unordered关联型容器
-rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +&mdash;+ &ndash;&gt; +&mdash;+ &ndash;&gt; +&mdash;+ | a | | b | | c | a -&gt; b -&gt; c +&mdash;+ &lt;&ndash; +&mdash;+ &lt;&ndash; +&mdash;+ +&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | | +&mdash;+ +&mdash;+ &lt;&ndash; +&mdash;+ &lt;&ndash;+ | a | | b | | c | a -&gt; c -&gt; b +&mdash;+ &lt;-+ +&mdash;+ &ndash;&gt; +&mdash;+ &mdash;+ | | +&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+ splice()应该可以达到这个目的:
+ 顺序型容器
+  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
+  迭代器和元素引用的有效性不受影响    unordered关联型容器
+  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&gt; +---+ --&gt; +---+ | a | | b | | c | a -&gt; b -&gt; c +---+ &lt;-- +---+ &lt;-- +---+ +------------------------+ | | +---+ +---+ &lt;-- +---+ &lt;--+ | a | | b | | c | a -&gt; c -&gt; b +---+ &lt;-+ +---+ --&gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-iterator-invalidation/">阅读全文…</a>
@@ -200,8 +201,9 @@ rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		this is a post of misc items of stl.
-behavior of operator[] of vector and map:
-auto in for-statement:
+  behavior of operator[] of vector and map:
+  auto in for-statement:
+   
 	</div>
 </article>
 
