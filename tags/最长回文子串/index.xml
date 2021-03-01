@@ -23,7 +23,7 @@
                  F[i+1,j]        ----- otherwise1
                  F[i,j-1]        ----- otherwise2
                 }
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果问题是判断某个串是否为回文子串，那么问题与子问题的关系则变为：&lt;/p&gt;</description>
     </item>
     
   </channel>
