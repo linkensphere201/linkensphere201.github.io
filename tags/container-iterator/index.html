@@ -96,11 +96,15 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&gt; +---+ --&gt; +---+ | a | | b | | c | a -&gt; b -&gt; c +---+ &lt;-- +---+ &lt;-- +---+ +------------------------+ | | +---+ +---+ &lt;-- +---+ &lt;--+ | a | | b | | c | a -&gt; c -&gt; b +---+ &lt;-+ +---+ --&gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:
+		<h2 id="cheatsheet">CheatSheet</h2>
+<p>(完整版见下面 Ref1 or cppref)
+note:</p>
+<blockquote>
+<p>顺序型容器</p>
+</blockquote>
+<ul>
+<li>deque插入or删除操作会导致迭代器失效.</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-iterator-invalidation/">阅读全文…</a>

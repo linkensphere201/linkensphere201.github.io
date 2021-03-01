@@ -13,15 +13,13 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/algmnotes-skiplist/</guid>
-      <description>这是读书时一篇旧文搬运.几年后再次回顾下算法.
- 跳表是一种著名数据结构。
- 原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
-相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
-本文主要讨论：
- skiplist一些性质分析 skiplist核心思想&amp;amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
- Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &amp;gt; b &amp;gt; c &amp;gt; d &amp;gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl+1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
-  key-idea  跳表 = 有序链表 + 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
-  思路就是每一层都是一个有序链表，lvl+1层是lvl层的索引。（索引本身也是数据）</description>
+      <description>&lt;p&gt;这是读书时一篇旧文搬运.几年后再次回顾下算法.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;跳表是一种著名数据结构。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。&lt;/p&gt;
+&lt;p&gt;相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。&lt;/p&gt;
+&lt;p&gt;本文主要讨论：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -30,14 +28,13 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/algmnotes-skiplist-impl/</guid>
-      <description>实现一个skiplist 上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
-然后由于好奇，我自己写了一个skiplist，这里记录下。
-该skiplist的特性：
- 不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
-如：
-./skiplist_test.out --gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&amp;quot;&amp;lt;l0&amp;gt;HEAD&amp;quot;] N1[label=&amp;quot;&amp;lt;l0&amp;gt;10&amp;quot;] N2[label=&amp;quot;&amp;lt;l0&amp;gt;20&amp;quot;] N4[label=&amp;quot;&amp;lt;l0&amp;gt;30&amp;quot;] N3[label=&amp;quot;&amp;lt;l0&amp;gt;40&amp;quot;] N5[label=&amp;quot;&amp;lt;l0&amp;gt;50&amp;quot;] N0:l0-&amp;gt;N1:l0 N1:l0-&amp;gt;N2:l0 N2:l0-&amp;gt;N4:l0 N4:l0-&amp;gt;N3:l0 N3:l0-&amp;gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
-上面这个我们可以得到：   a skiplist of 5 nodes   当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考相关测试。
-以上。</description>
+      <description>&lt;h2 id=&#34;实现一个skiplist&#34;&gt;实现一个skiplist&lt;/h2&gt;
+&lt;p&gt;上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。&lt;/p&gt;
+&lt;p&gt;然后由于好奇，我自己写了一个skiplist，这里记录下。&lt;/p&gt;
+&lt;p&gt;该skiplist的特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不支持concurrent&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

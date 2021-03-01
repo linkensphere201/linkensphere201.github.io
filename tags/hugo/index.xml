@@ -13,8 +13,13 @@
       <pubDate>Mon, 07 Nov 2011 21:26:49 +0800</pubDate>
       
       <guid>/posts/other_try-hugo/</guid>
-      <description>Hugo 试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
-  DeviantArt   Test for markdown   a1</description>
+      <description>&lt;h2 id=&#34;hugo-试用&#34;&gt;Hugo 试用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;基本流程走通：post &amp;ndash; publish&lt;/li&gt;
+&lt;li&gt;basic configs&lt;/li&gt;
+&lt;li&gt;basic markdown&lt;/li&gt;
+&lt;li&gt;config the markup(code pieces)&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

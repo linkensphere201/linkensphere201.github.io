@@ -8,28 +8,26 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="算法笔记：跳表（r2）" />
-<meta property="og:description" content="实现一个skiplist 上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
+<meta property="og:description" content="实现一个skiplist
+上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
 然后由于好奇，我自己写了一个skiplist，这里记录下。
 该skiplist的特性：
- 不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
-如：
-./skiplist_test.out --gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&quot;&lt;l0&gt;HEAD&quot;] N1[label=&quot;&lt;l0&gt;10&quot;] N2[label=&quot;&lt;l0&gt;20&quot;] N4[label=&quot;&lt;l0&gt;30&quot;] N3[label=&quot;&lt;l0&gt;40&quot;] N5[label=&quot;&lt;l0&gt;50&quot;] N0:l0-&gt;N1:l0 N1:l0-&gt;N2:l0 N2:l0-&gt;N4:l0 N4:l0-&gt;N3:l0 N3:l0-&gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
-上面这个我们可以得到：   a skiplist of 5 nodes   当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考相关测试。
-以上。" />
+
+不支持concurrent
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/algmnotes-skiplist-impl/" />
 <meta property="article:published_time" content="2020-03-01T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-03-01T00:00:00+00:00" />
 
 		<meta itemprop="name" content="算法笔记：跳表（r2）">
-<meta itemprop="description" content="实现一个skiplist 上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
+<meta itemprop="description" content="实现一个skiplist
+上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。
 然后由于好奇，我自己写了一个skiplist，这里记录下。
 该skiplist的特性：
- 不支持concurrent 没有struct hack 没有fast path 因为使用了template所以是header only的 格式化依赖了fmt，日志依赖了spdlog 支持graphviz脚本输出  基本上中规中矩的一个实现，亮点是该skiplist可以输出一个graphviz的脚本，可以让我们很方便地调试和理解。
-如：
-./skiplist_test.out --gtest_filter=skiplist.insert5 digraph { rankdir=LR node [shape=record] nodesep=0 N0[label=&quot;&lt;l0&gt;HEAD&quot;] N1[label=&quot;&lt;l0&gt;10&quot;] N2[label=&quot;&lt;l0&gt;20&quot;] N4[label=&quot;&lt;l0&gt;30&quot;] N3[label=&quot;&lt;l0&gt;40&quot;] N5[label=&quot;&lt;l0&gt;50&quot;] N0:l0-&gt;N1:l0 N1:l0-&gt;N2:l0 N2:l0-&gt;N4:l0 N4:l0-&gt;N3:l0 N3:l0-&gt;N5:l0 } 输出一个5节点的skiplist，可以随意找个graphviz在线画图的网站
-上面这个我们可以得到：   a skiplist of 5 nodes   当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考相关测试。
-以上。">
+
+不支持concurrent
+">
 <meta itemprop="datePublished" content="2020-03-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-03-01T00:00:00+00:00" />
 <meta itemprop="wordCount" content="44">
@@ -129,6 +127,8 @@
 <p>该skiplist的特性：</p>
 <ul>
 <li>不支持concurrent</li>
+</ul>
+<ul>
 <li>没有struct hack</li>
 <li>没有fast path</li>
 <li>因为使用了template所以是header only的</li>
@@ -164,7 +164,6 @@ N3:l0-&gt;N5:l0
 </p>
 <p>当然这个实现可以用于leetcode1206的答题。加个warpper就可以了，可参考<a href="https://github.com/Hazy2019/cppcraft/blob/master/src/educational/skiplist_test.cc">相关测试</a>。</p>
 <p>以上。</p>
-
 		</div>
 		<footer class="post__footer">
 			

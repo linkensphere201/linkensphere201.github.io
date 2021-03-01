@@ -119,8 +119,8 @@
 <h5 id="线性一致性">线性一致性？</h5>
 <p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
 <h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
-<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）
-一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.</p>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
+<p>一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.</p>
 <h5 id="log-entry和log分别是"><code>log entry</code>和<code>log</code>分别是？</h5>
 <p>所有写入日志称为<code>log</code>
 某条写入日志称为<code>log entry</code></p>
@@ -377,7 +377,6 @@ leader定期发起.(即使没有新的写入，也需要发送空包到follower�
 <h3 id="引用">引用</h3>
 <p>[1] raft小论文: In Search of an Understandable Consensus Algorithm</p>
 <p>[2] CONSENSUS: BRIDGING THEORY AND PRACTICE</p>
-
 		</div>
 		<footer class="post__footer">
 			

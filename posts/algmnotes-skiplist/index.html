@@ -9,14 +9,12 @@
 	<meta name="description" content="">
 		<meta property="og:title" content="算法笔记： 跳表(r1)" />
 <meta property="og:description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
- 跳表是一种著名数据结构。
- 原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
+
+跳表是一种著名数据结构。
+
+原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
-本文主要讨论：
- skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
- Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &gt; b &gt; c &gt; d &gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl&#43;1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
-  key-idea  跳表 = 有序链表 &#43; 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
-  思路就是每一层都是一个有序链表，lvl&#43;1层是lvl层的索引。（索引本身也是数据）" />
+本文主要讨论：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/algmnotes-skiplist/" />
 <meta property="article:published_time" content="2020-03-01T00:00:00+00:00" />
@@ -24,14 +22,12 @@
 
 		<meta itemprop="name" content="算法笔记： 跳表(r1)">
 <meta itemprop="description" content="这是读书时一篇旧文搬运.几年后再次回顾下算法.
- 跳表是一种著名数据结构。
- 原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
+
+跳表是一种著名数据结构。
+
+原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。
 相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。
-本文主要讨论：
- skiplist一些性质分析 skiplist核心思想&amp;核心问题 rocksdb中的跳表实现分析  skiplist原理 property of a node   a node of skiplist     性质1：
- Q：给定某个skiplist的节点$x$,其含有以下4个level的next值：a(lvl=3),b(lvl=2),c(lvl=1),d(lvl=0),问：x,a,b,c,d之间满足什么关系？ A： $$ a &gt; b &gt; c &gt; d &gt; x $$ (是否带等号看具体实现), 且lvl指向的子链表含有的元素的范围是 $$(next[lvl],next[lvl&#43;1])$$    性质2： L0层节点是整个跳表的所有数据，每上一层都是前一层的子集。
-  key-idea  跳表 = 有序链表 &#43; 索引节点 查找：利用索引，理想状态下可以达到logn级别复杂度。  给定key的查找过：需要从最高level开始，逐步下降，直到lvl=0，每下降一个level就缩小了查找区间的范围。   插入/删除：如果该节点涉及多个level，需要变更所有level的前驱和后继。  实现细节：
-  思路就是每一层都是一个有序链表，lvl&#43;1层是lvl层的索引。（索引本身也是数据）">
+本文主要讨论：">
 <meta itemprop="datePublished" content="2020-03-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2020-03-01T00:00:00+00:00" />
 <meta itemprop="wordCount" content="123">
@@ -255,7 +251,6 @@ $$
 <ul>
 <li>struct hack - flexible array. <a href="https://stackoverflow.com/questions/36577094/array-of-size-0-at-the-end-of-struct">https://stackoverflow.com/questions/36577094/array-of-size-0-at-the-end-of-struct</a></li>
 </ul>
-
 		</div>
 		<footer class="post__footer">
 			

@@ -116,8 +116,16 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		杂 1 既然所有的生命都要死亡，那么生命的意义是什么？
- 在 bug 中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  
+		<h3 id="杂-1">杂 1</h3>
+<p><a href="https://www.zhihu.com/question/288017836">既然所有的生命都要死亡，那么生命的意义是什么？</a></p>
+<ul>
+<li>在 bug 中寻找圆满</li>
+<li>冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。</li>
+<li>死亡带来意义，而非消解意义</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/other_thoughts_about_life/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<figure class="list__thumbnail">
@@ -141,8 +149,13 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Hugo 试用  基本流程走通：post &ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
-  DeviantArt   Test for markdown   a1
+		<h2 id="hugo-试用">Hugo 试用</h2>
+<ul>
+<li>基本流程走通：post &ndash; publish</li>
+<li>basic configs</li>
+<li>basic markdown</li>
+<li>config the markup(code pieces)</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/other_try-hugo/">阅读全文…</a>
@@ -164,7 +177,7 @@
   top
   tasr
   sar
-  iostat
+    iostat
   iotop
   iftop
   netstat
@@ -190,10 +203,16 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
- If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
-   examples:
-  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.
+		<h2 id="universal-reference"><code>Universal Reference</code></h2>
+<ul>
+<li>Q: 什么是<code>Universal Reference</code>?
+A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导
+G1.
+<blockquote>
+<p>If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
+</blockquote>
+</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics/">阅读全文…</a>
@@ -213,11 +232,15 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&gt; +---+ --&gt; +---+ | a | | b | | c | a -&gt; b -&gt; c +---+ &lt;-- +---+ &lt;-- +---+ +------------------------+ | | +---+ +---+ &lt;-- +---+ &lt;--+ | a | | b | | c | a -&gt; c -&gt; b +---+ &lt;-+ +---+ --&gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:
+		<h2 id="cheatsheet">CheatSheet</h2>
+<p>(完整版见下面 Ref1 or cppref)
+note:</p>
+<blockquote>
+<p>顺序型容器</p>
+</blockquote>
+<ul>
+<li>deque插入or删除操作会导致迭代器失效.</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-iterator-invalidation/">阅读全文…</a>
@@ -255,20 +278,11 @@
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		锁 read lock write lock long duration lock short duration lock predicate lock
-history SQL-92 &ndash;&gt; SQL-95:
-an overview of isolation degree   P0(Dirty Write)
-  Read Uncommited
-  P1(Dirty Read)
-  Read Commited
-  P4C(Lost Update of Cursor)
-  Cursor Stability
-  P4(Lost Update)
-  P2(Non-Repeatable Read)
-  Repeatable Read
-  P3(Phantom)
-  Serializable
-  Snapshot Isolation(Sql-95)
+		<h2 id="锁">锁</h2>
+<p>read lock
+write lock
+long duration lock
+short duration lock</p>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/db_txn_lec1/">阅读全文…</a>
@@ -304,8 +318,16 @@ an overview of isolation degree   P0(Dirty Write)
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		本文会提及systemtap的以下几点：
- 如何列出某个可执行文件的所有probe位点 如何取变量的值 如何通过某个地址的解引用取得对应值 如何在.return中拿到变量的最新值 如何自定义用户态程序probe位点 如何指定probe被调用的频率（命中次数/命中间隔时间） 如何使用外部参数传入*.stp  topic1 - quick start topic2 - how to track a var at probe point of func.call &amp; func.return topic3 - how to mock a syscall 
+		<p>本文会提及systemtap的以下几点：</p>
+<ul>
+<li>如何列出某个可执行文件的所有probe位点</li>
+<li>如何取变量的值</li>
+<li>如何通过某个地址的解引用取得对应值</li>
+<li>如何在.return中拿到变量的最新值</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/debugging_use-systemtap-to-debug/">阅读全文…</a>
 	</div>
 </article>
 </main>

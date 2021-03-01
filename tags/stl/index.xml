@@ -12,11 +12,15 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-iterator-invalidation/</guid>
-      <description>CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&amp;gt; +---+ --&amp;gt; +---+ | a | | b | | c | a -&amp;gt; b -&amp;gt; c +---+ &amp;lt;-- +---+ &amp;lt;-- +---+ +------------------------+ | | +---+ +---+ &amp;lt;-- +---+ &amp;lt;--+ | a | | b | | c | a -&amp;gt; c -&amp;gt; b +---+ &amp;lt;-+ +---+ --&amp;gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:</description>
+      <description>&lt;h2 id=&#34;cheatsheet&#34;&gt;CheatSheet&lt;/h2&gt;
+&lt;p&gt;(完整版见下面 Ref1 or cppref)
+note:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺序型容器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;deque插入or删除操作会导致迭代器失效.&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>

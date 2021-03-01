@@ -13,7 +13,13 @@
       <pubDate>Tue, 07 Nov 2017 02:26:41 +0800</pubDate>
       
       <guid>/posts/other_todolist/</guid>
-      <description> pb使用总结:动态类型反射/non-copy 运维总结:huge page 运维总结:tcpdump抓包 运维总结:tsar/sar/iotop/iostat/top/perf top db笔记：lsm和btree的读/写放大分析 db笔记：事务 &amp;ndash;&amp;gt; doing db笔记：分布式事务 db笔记：2pc和percalator db笔记：paxos cpp笔记：一些常见的oop设计模式 cpp笔记：rvalue-reference cpp笔记：内存序和内存屏障v2  </description>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; pb使用总结:动态类型反射/non-copy&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 运维总结:huge page&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 运维总结:tcpdump抓包&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 运维总结:tsar/sar/iotop/iostat/top/perf top&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; db笔记：lsm和btree的读/写放大分析&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -22,8 +28,13 @@
       <pubDate>Mon, 07 Nov 2016 21:20:49 +0000</pubDate>
       
       <guid>/posts/other_frequently-used-words/</guid>
-      <description>some words used in coding  toggle quote snippet typo delimiter bundle anchor dangle populate instrumentation increases monotonically 单调递增 dense 密集 subtle 巧妙 preceding 在..之前 increases monotonically 单调递增 intuitive decent preceding durable deterministic recall sufficient sketch contradiction idempotent inevitably incorporate provision complement versatility pivot 支点  cplusplus concepts:
- pod types non-trivial types  </description>
+      <description>&lt;h1 id=&#34;some-words-used-in-coding&#34;&gt;some words used in coding&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;toggle&lt;/li&gt;
+&lt;li&gt;quote&lt;/li&gt;
+&lt;li&gt;snippet&lt;/li&gt;
+&lt;li&gt;typo&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -42,8 +53,13 @@
       <pubDate>Tue, 20 Dec 2011 07:26:49 +0800</pubDate>
       
       <guid>/posts/other_thoughts_about_life/</guid>
-      <description>杂 1 既然所有的生命都要死亡，那么生命的意义是什么？
- 在 bug 中寻找圆满 冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。 死亡带来意义，而非消解意义 唯有自杀才是唯一值得探讨的问题——加缪 拒绝意义追问是怯懦的表现 幸福不过是欲望的暂时停止。我们就像田野上的羔羊，在屠夫的注视下恣意欢愉。  </description>
+      <description>&lt;h3 id=&#34;杂-1&#34;&gt;杂 1&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.zhihu.com/question/288017836&#34;&gt;既然所有的生命都要死亡，那么生命的意义是什么？&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 bug 中寻找圆满&lt;/li&gt;
+&lt;li&gt;冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。&lt;/li&gt;
+&lt;li&gt;死亡带来意义，而非消解意义&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -52,8 +68,13 @@
       <pubDate>Mon, 07 Nov 2011 21:26:49 +0800</pubDate>
       
       <guid>/posts/other_try-hugo/</guid>
-      <description>Hugo 试用  基本流程走通：post &amp;ndash; publish basic configs basic markdown config the markup(code pieces) insert an image by ref as in static or by a shortcode organizations (page resources/bundles, )  Shortcode A shortcode is a simple snippet inside a content file that Hugo will render using a predefined template. Note that shortcodes will not work in template files.
-  DeviantArt   Test for markdown   a1</description>
+      <description>&lt;h2 id=&#34;hugo-试用&#34;&gt;Hugo 试用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;基本流程走通：post &amp;ndash; publish&lt;/li&gt;
+&lt;li&gt;basic configs&lt;/li&gt;
+&lt;li&gt;basic markdown&lt;/li&gt;
+&lt;li&gt;config the markup(code pieces)&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

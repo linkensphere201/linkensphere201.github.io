@@ -130,13 +130,13 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		本文提及并讨论了：
- shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
- 资源未释放，重复释放，free/delete不匹配 &hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
-   不配对的free&amp;delete会有什么问题？ 是未定义行为.可以参考：
- https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
-template&lt;class T&gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&lt;T&gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
-template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D's copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&lt;class Y, class D&gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .
+		<p>本文提及并讨论了：</p>
+<ul>
+<li><code>shared_ptr</code>引入背景</li>
+<li>删除器</li>
+<li>线程安全性</li>
+<li><code>std::ref</code></li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-shared_ptr/">阅读全文…</a>
@@ -155,10 +155,16 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
- If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.
-   examples:
-  using Widget = int; Widget&amp;&amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;&amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;&amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.
+		<h2 id="universal-reference"><code>Universal Reference</code></h2>
+<ul>
+<li>Q: 什么是<code>Universal Reference</code>?
+A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导
+G1.
+<blockquote>
+<p>If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
+</blockquote>
+</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics/">阅读全文…</a>
@@ -178,11 +184,15 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&gt; +---+ --&gt; +---+ | a | | b | | c | a -&gt; b -&gt; c +---+ &lt;-- +---+ &lt;-- +---+ +------------------------+ | | +---+ +---+ &lt;-- +---+ &lt;--+ | a | | b | | c | a -&gt; c -&gt; b +---+ &lt;-+ +---+ --&gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:
+		<h2 id="cheatsheet">CheatSheet</h2>
+<p>(完整版见下面 Ref1 or cppref)
+note:</p>
+<blockquote>
+<p>顺序型容器</p>
+</blockquote>
+<ul>
+<li>deque插入or删除操作会导致迭代器失效.</li>
+</ul>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-iterator-invalidation/">阅读全文…</a>

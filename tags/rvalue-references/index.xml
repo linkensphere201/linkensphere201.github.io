@@ -12,10 +12,16 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-move-semantics/</guid>
-      <description>Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;amp;&amp;amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
- If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.
-   examples:
-  using Widget = int; Widget&amp;amp;&amp;amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;amp;&amp;amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;amp;&amp;amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.</description>
+      <description>&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
+A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导
+G1.
+&lt;blockquote&gt;
+&lt;p&gt;If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
   </channel>

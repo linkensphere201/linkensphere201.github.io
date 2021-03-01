@@ -32,13 +32,13 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
       <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
       
       <guid>/posts/cppnotes-shared_ptr/</guid>
-      <description>本文提及并讨论了：
- shared_ptr引入背景 删除器 线程安全性 std::ref 优先使用make_shared enable_shared_from_this 观察者模式和event-listener  缘起   裸指针资源管理内存,容易产生各种内存问题，具体有以下几种类型[1]：
- 资源未释放，重复释放，free/delete不匹配 &amp;hellip; 越界/段错误   moduo1.7节讨论了裸指针会有哪些问题.
-   不配对的free&amp;amp;delete会有什么问题？ 是未定义行为.可以参考：
- https://stackoverflow.com/questions/10854210/behaviour-of-malloc-with-delete-in-c https://isocpp.org/wiki/faq/freestore-mgmt    基本原理 &amp;amp; 使用  需要一个东西来管理裸指针（资源），当没有人引用资源时，自动地释放它. &amp;mdash; std::shared_ptr 使用略。  删除器   shared_ptr可以自定义删除器（deleter），用来定义释放行为. 学习到删除器时，有个疑问是其类型在哪里定义的，查看boost的实现如下： 可以看出，shared_ptr的模板参数只有指针对象的类型T：
-template&amp;lt;class T&amp;gt; class shared_ptr { private: // Borland 5.5.1 specific workaround typedef shared_ptr&amp;lt;T&amp;gt; this_type; public: .... 删除器类型是在构造函数定义中带进来的：
-template&amp;lt;class Y&amp;gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be complete { boost::detail::sp_pointer_construct( this, p, pn ); } // // Requirements: D&#39;s copy constructor must not throw // // shared_ptr will release p by calling d(p) // // 构造函数只需要提供Y作为模板类型参数， // D不需要提供，可由构造函数的第二个参数推导得到 template&amp;lt;class Y, class D&amp;gt; shared_ptr( Y * p, D d ): px( p ), pn( p, d ) { boost::detail::sp_deleter_construct( this, p ); } .</description>
+      <description>&lt;p&gt;本文提及并讨论了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;shared_ptr&lt;/code&gt;引入背景&lt;/li&gt;
+&lt;li&gt;删除器&lt;/li&gt;
+&lt;li&gt;线程安全性&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;std::ref&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -47,10 +47,16 @@ template&amp;lt;class Y&amp;gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-move-semantics/</guid>
-      <description>Universal Reference   Q: 什么是Universal Reference? A: 形如T&amp;amp;&amp;amp;, T不含有任何的cv限定符, 且T需要被推导 G1.
- If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.
-   examples:
-  using Widget = int; Widget&amp;amp;&amp;amp; var1 = Widget(); //不是`Universal Reference`，因为`T&amp;amp;&amp;amp;`不是个需要被推导的类型,`T`是`Widget`. //实际上var1的类型是个右值引用. auto&amp;amp;&amp;amp; var2 = var1; //是`Universal Reference`，那么var2的类型是什么？请看下文 rvalue or lvalue  什么是左值/右值？ G2.  If you can take the address of an expression, the expression is an lvalue.</description>
+      <description>&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
+A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导
+G1.
+&lt;blockquote&gt;
+&lt;p&gt;If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>
@@ -59,11 +65,15 @@ template&amp;lt;class Y&amp;gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-iterator-invalidation/</guid>
-      <description>CheatSheet (完整版见下面 Ref1 or cppref) note:
- 顺序型容器
-  deque插入or删除操作会导致迭代器失效. list则不会（参考其实现）（迭代器&amp;amp;元素的引用都不会随着插入/删除操作而失效）.    关联型容器
-  迭代器和元素引用的有效性不受影响    unordered关联型容器
-  rehash时会失效迭代器   stl的list  实现上是双向链表 迭代器是a bidirectional iterator to value_type size()时间复杂度：c++98的最坏时间复杂度为O(n)， c++11则是常数时间。    另外有什么办法可以移动链表节点呢？（像我们自己实现一个双向链表那样,挪动几个指针）  +---+ --&amp;gt; +---+ --&amp;gt; +---+ | a | | b | | c | a -&amp;gt; b -&amp;gt; c +---+ &amp;lt;-- +---+ &amp;lt;-- +---+ +------------------------+ | | +---+ +---+ &amp;lt;-- +---+ &amp;lt;--+ | a | | b | | c | a -&amp;gt; c -&amp;gt; b +---+ &amp;lt;-+ +---+ --&amp;gt; +---+ ---+ | | +--------------------+ splice()应该可以达到这个目的:</description>
+      <description>&lt;h2 id=&#34;cheatsheet&#34;&gt;CheatSheet&lt;/h2&gt;
+&lt;p&gt;(完整版见下面 Ref1 or cppref)
+note:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顺序型容器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;deque插入or删除操作会导致迭代器失效.&lt;/li&gt;
+&lt;/ul&gt;</description>
     </item>
     
     <item>

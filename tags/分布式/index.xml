@@ -13,16 +13,11 @@
       <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
       
       <guid>/posts/storage_deep_dive_for_raft/lec1/</guid>
-      <description>Q&amp;amp;A 线性一致性？ 个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。
-fsm: finite-state-machine 个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm） 一个存储服务往往采用分片方式来横向扩容，每个分片中采用多个实例来保证高可用，这些实例某种程度上是一致的，可以称为replicated fsm.
-log entry和log分别是？ 所有写入日志称为log 某条写入日志称为log entry
-commit和apply分别指什么？ a log entry is committed是指某条log已被确认到达大多数节点. a log is applied是指某条日志已被fsm执行.
-leader回应client的时间点？ 一个日志的生命周期主要有几个时间点：
- leader本地写入log成功 被leader标记为commited 被leader标记为applied  论文的$5.3节说明，在applied之后(fsm执行后才能拿到结果)才将结果返回至client.
- When the entry has been safely replicated (as described below), the leader applies the entry to its state machine and returns the result of that execution to the client.
- RPC-RequestVote里，为什么带了最后一个日志项（log entry）的下标和它的term（而不是commitIndex或applyIndex对应的日志项） xuya
-voteFor如何维护的？（例如: 什么时候重置为null? 当followergrant了某个候选者之后，voteFor如何处理？） 这个问题论文里并没有具体进行讨论
-currentTerm如何维护的？（例如：在选举阶段，当followergrant某个候选者之后，是否需要修改自己的currentTerm? 如果选举阶段不修改，那么连续两次选举（上一次SplitVote）如何处理？） 这个问题论文里并没有具体进行讨论</description>
+      <description>&lt;h3 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h3&gt;
+&lt;h5 id=&#34;线性一致性&#34;&gt;线性一致性？&lt;/h5&gt;
+&lt;p&gt;个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。&lt;/p&gt;
+&lt;h5 id=&#34;fsm-finite-state-machine&#34;&gt;&lt;code&gt;fsm: finite-state-machine&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）&lt;/p&gt;</description>
     </item>
     
   </channel>
