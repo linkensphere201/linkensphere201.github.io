@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>算法笔记： 跳表(r1)</title>
+      <title>算法笔记：跳表（r1）</title>
       <link>/posts/algmnotes-skiplist/</link>
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
@@ -28,7 +28,7 @@
       <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>/posts/algmnotes-skiplist-impl/</guid>
-      <description>&lt;h2 id=&#34;实现一个skiplist&#34;&gt;实现一个skiplist&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;实现一个简单skiplist&#34;&gt;实现一个简单skiplist&lt;/h2&gt;
 &lt;p&gt;上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。&lt;/p&gt;
 &lt;p&gt;然后由于好奇，我自己写了一个skiplist，这里记录下。&lt;/p&gt;
 &lt;p&gt;该skiplist的特性：&lt;/p&gt;
@@ -246,10 +246,9 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
   tcpdump
   Makefile
   systemtap
-  py scripts snippet
+  py scripts snippet #!/usr/bin/python3 # -*- coding: utf-8 -*- ... if __name__ == &amp;quot;__main__&amp;quot;: ... vim set list set nolist noh
   gcc
-  others
- system supervisor system crontab settings    </description>
+  others</description>
     </item>
     
     <item>
@@ -258,7 +257,8 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-move-semantics/</guid>
-      <description>&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
+      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，近期整理思绪时，发现某些问题还是没有弄清楚。&lt;/p&gt;
+&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
 A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导

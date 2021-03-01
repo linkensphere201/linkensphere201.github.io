@@ -47,7 +47,8 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes-move-semantics/</guid>
-      <description>&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
+      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，近期整理思绪时，发现某些问题还是没有弄清楚。&lt;/p&gt;
+&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
 A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导

@@ -8,7 +8,8 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="c&#43;&#43; notes：recall of move-semantics and rvalue-reference" />
-<meta property="og:description" content="Universal Reference
+<meta property="og:description" content="几年前，整理了一份rvalue相关笔记：以前的一份笔记，近期整理思绪时，发现某些问题还是没有弄清楚。
+Universal Reference
 
 Q: 什么是Universal Reference?
 A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导
@@ -23,7 +24,8 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 
 
 		<meta itemprop="name" content="c&#43;&#43; notes：recall of move-semantics and rvalue-reference">
-<meta itemprop="description" content="Universal Reference
+<meta itemprop="description" content="几年前，整理了一份rvalue相关笔记：以前的一份笔记，近期整理思绪时，发现某些问题还是没有弄清楚。
+Universal Reference
 
 Q: 什么是Universal Reference?
 A: 形如T&amp;&amp;, T不含有任何的cv限定符, 且T需要被推导
@@ -34,7 +36,7 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 
 ">
 
-<meta itemprop="wordCount" content="355">
+<meta itemprop="wordCount" content="343">
 
 
 
@@ -125,7 +127,8 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<h2 id="universal-reference"><code>Universal Reference</code></h2>
+			<p>几年前，整理了一份rvalue相关笔记：<a href="https://zhuanlan.zhihu.com/p/111826434">以前的一份笔记</a>，近期整理思绪时，发现某些问题还是没有弄清楚。</p>
+<h2 id="universal-reference"><code>Universal Reference</code></h2>
 <ul>
 <li>Q: 什么是<code>Universal Reference</code>?
 A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导
@@ -159,14 +162,8 @@ Otherwise, the expression is an rvalue.  Conceptually (and typically also in fac
 </ul>
 <pre><code>using Widget = int;
 Widget&amp;&amp; var1 = Widget();
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-auto&amp;&amp; var2 = var1;
-// 变量`var1`的类型是右值引用
-// 表达式`var1`可以被取址，
-=======
 // 变量`var1`的类型是右值引用。
 // 表达式`var1`可以被取地址，因此`var1`是左值。
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 55808c00b77e34e6ee32488efd8ed6dcdad4fc68
 </code></pre><blockquote>
 <p>(cpp-ref)Even if the variable&rsquo;s type is rvalue reference, the expression consisting of its name is an lvalue expression;</p>
 </blockquote>
