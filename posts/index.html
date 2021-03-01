@@ -234,11 +234,6 @@ template&lt;class Y&gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y must be
 <h3 id="dp思路">DP思路</h3>
 <p>DP的关键是梳理出问题与子问题的关系。</p>
 <p><code>F[i,j]</code>表示i..j的最长回文串的长度，那么跟其子问题的关系如下：</p>
-<pre><code>  F[i,j] = max { F[i+1, j-1] + 2 ----- if str[i] == str[j] &amp;&amp; F[i+1, j-1] == j-1-(i+1)+1 ////如果i+1..j-1非回文但又有str[i] == str[j]怎么办？
-                 F[i+1,j]        ----- otherwise1
-                 F[i,j-1]        ----- otherwise2
-                }
-</code></pre><p>如果问题是判断某个串是否为回文子串，那么问题与子问题的关系则变为：</p>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-longestpalindrome/">阅读全文…</a>

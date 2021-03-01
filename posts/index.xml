@@ -92,12 +92,7 @@ template&amp;lt;class Y&amp;gt; explicit shared_ptr( Y * p ): px( p ), pn() // Y
 &lt;p&gt;给定一个串，求它的最长回文子串。&lt;/p&gt;
 &lt;h3 id=&#34;dp思路&#34;&gt;DP思路&lt;/h3&gt;
 &lt;p&gt;DP的关键是梳理出问题与子问题的关系。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;F[i,j]&lt;/code&gt;表示i..j的最长回文串的长度，那么跟其子问题的关系如下：&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  F[i,j] = max { F[i+1, j-1] + 2 ----- if str[i] == str[j] &amp;amp;&amp;amp; F[i+1, j-1] == j-1-(i+1)+1 ////如果i+1..j-1非回文但又有str[i] == str[j]怎么办？
-                 F[i+1,j]        ----- otherwise1
-                 F[i,j-1]        ----- otherwise2
-                }
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果问题是判断某个串是否为回文子串，那么问题与子问题的关系则变为：&lt;/p&gt;</description>
+&lt;p&gt;&lt;code&gt;F[i,j]&lt;/code&gt;表示i..j的最长回文串的长度，那么跟其子问题的关系如下：&lt;/p&gt;</description>
     </item>
     
     <item>
