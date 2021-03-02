@@ -249,7 +249,16 @@ note:</p>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		wtf is sse? wtf is march=-native References why-march-native-used-rarely
+		<h2 id="background">background</h2>
+<blockquote>
+<p>we would set env var <code>USE_SSE=1</code> when compiling Rocksdb, OTHERWISE it would always failed
+at linking stage where encountering errors of lack of some instructions such as:
+<code>no such instruction: </code>shlx %rdx,%rax,%rax'`.
+but what the fuck is USE_SSE ?</p>
+</blockquote>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_talk_about_sse/">阅读全文…</a>
 	</div>
 </article><article class="list__item post">
 	<header class="list__header">

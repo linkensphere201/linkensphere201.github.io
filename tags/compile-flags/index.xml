@@ -12,7 +12,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/db_talk_about_sse/</guid>
-      <description>wtf is sse? wtf is march=-native References why-march-native-used-rarely</description>
+      <description>&lt;h2 id=&#34;background&#34;&gt;background&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we would set env var &lt;code&gt;USE_SSE=1&lt;/code&gt; when compiling Rocksdb, OTHERWISE it would always failed
+at linking stage where encountering errors of lack of some instructions such as:
+&lt;code&gt;no such instruction: &lt;/code&gt;shlx %rdx,%rax,%rax&#39;`.
+but what the fuck is USE_SSE ?&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
   </channel>
