@@ -229,29 +229,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
     </item>
     
     <item>
-      <title></title>
-      <link>/posts/db_dailywork_cheatsheet/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_dailywork_cheatsheet/</guid>
-      <description>cheatsheet my cheatsheet for daily work usages.
-  ps
-  top
-  tasr
-  sar
-    iostat
-  iotop
-  iftop
-  netstat
-  tcpdump
-  Makefile
-  systemtap
-  py scripts snippet #!/usr/bin/python3 # -*- coding: utf-8 -*- ... if __name__ == &amp;quot;__main__&amp;quot;: ... vim set list set nolist noh
-  gcc
-  others</description>
-    </item>
-    
-    <item>
       <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference</title>
       <link>/posts/cppnotes-move-semantics/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -300,6 +277,15 @@ note:&lt;/p&gt;
     </item>
     
     <item>
+      <title>db笔记 - sse</title>
+      <link>/posts/db_talk_about_sse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_talk_about_sse/</guid>
+      <description>wtf is sse? wtf is march=-native References why-march-native-used-rarely</description>
+    </item>
+    
+    <item>
       <title>db笔记 - 事务1:隔离级别</title>
       <link>/posts/db_txn_lec1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -333,6 +319,30 @@ short duration lock&lt;/p&gt;</description>
 &lt;li&gt;如何取变量的值&lt;/li&gt;
 &lt;li&gt;如何通过某个地址的解引用取得对应值&lt;/li&gt;
 &lt;li&gt;如何在.return中拿到变量的最新值&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>笔记：一些日常cheatsheet</title>
+      <link>/posts/db_dailywork_cheatsheet/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_dailywork_cheatsheet/</guid>
+      <description>&lt;h2 id=&#34;cheatsheet&#34;&gt;cheatsheet&lt;/h2&gt;
+&lt;p&gt;my cheatsheet for daily work usages.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ps&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;top&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tasr&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sar&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     

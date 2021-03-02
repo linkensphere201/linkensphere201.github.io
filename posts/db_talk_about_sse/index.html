@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>db笔记 - sse - Bad Fd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="db笔记 - sse" />
+<meta property="og:description" content="wtf is sse? wtf is march=-native References why-march-native-used-rarely" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/db_talk_about_sse/" />
+
+
+		<meta itemprop="name" content="db笔记 - sse">
+<meta itemprop="description" content="wtf is sse? wtf is march=-native References why-march-native-used-rarely">
+
+<meta itemprop="wordCount" content="8">
+
+
+
+<meta itemprop="keywords" content="sse,compile flags," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+					<div class="logo__tagline">a place to note things</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">菜单</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/life-notes/">
+				
+				<span class="menu__text">Life</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/work-notes/">
+				
+				<span class="menu__text">Work</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/menus/about/">
+				
+				<span class="menu__text">关于</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">db笔记 - sse</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#wtf-is-sse">wtf is <code>sse</code>?</a></li>
+    <li><a href="#wtf-is-march-native">wtf is <code>march=-native</code></a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="wtf-is-sse">wtf is <code>sse</code>?</h2>
+<h2 id="wtf-is-march-native">wtf is <code>march=-native</code></h2>
+<h2 id="references">References</h2>
+<p><a href="https://stackoverflow.com/questions/52653025/why-is-march-native-used-so-rarely">why-march-native-used-rarely</a></p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/sse/" rel="tag">sse</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/compile-flags/" rel="tag">compile flags</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="RadianK avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer
+2017 Intel; 2018 Didi
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/db_txn_lec1/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">db笔记 - 事务1:隔离级别</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/cppnotes-stl-misc/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">c&#43;&#43;笔记：STL相关</p>
+		</a>
+	</div>
+</nav>
+<script src="https://utteranc.es/client.js"
+        repo="Hazy2019/Hazy2019.github.io"
+        issue-term="pathname"
+        label="utteranc-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">最新动态</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist-impl/">算法笔记：跳表（r2）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_some_questions_about_rocksdb/">rocksdb探究 - 一些问题</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/algorithm/">algorithm</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/c&#43;&#43;/">c&#43;&#43;</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/db/">DB</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/debugging/">debugging</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (2)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">联系我</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/Hazy2019" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:me2019@aliyun.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>me2019@aliyun.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+		</div>
+	</div>
+</footer>
+
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
