@@ -6,7 +6,22 @@
     <description>Recent content on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Mar 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 01 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>db笔记 - sse</title>
+      <link>/posts/db_talk_about_sse/</link>
+      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_talk_about_sse/</guid>
+      <description>&lt;h2 id=&#34;background&#34;&gt;background&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;we would set env var &lt;code&gt;USE_SSE=1&lt;/code&gt; when compiling Rocksdb, OTHERWISE it would always failed
+at linking stage where encountering errors of lack of some instructions such as:
+&lt;code&gt;no such instruction: &lt;/code&gt;shlx %rdx,%rax,%rax&#39;`.
+but what the fuck is USE_SSE ?&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
     <item>
       <title>算法笔记：跳表（r1）</title>
       <link>/posts/algmnotes-skiplist/</link>
@@ -274,21 +289,6 @@ note:&lt;/p&gt;
   behavior of operator[] of vector and map:
   auto in for-statement:
    </description>
-    </item>
-    
-    <item>
-      <title>db笔记 - sse</title>
-      <link>/posts/db_talk_about_sse/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_talk_about_sse/</guid>
-      <description>&lt;h2 id=&#34;background&#34;&gt;background&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;we would set env var &lt;code&gt;USE_SSE=1&lt;/code&gt; when compiling Rocksdb, OTHERWISE it would always failed
-at linking stage where encountering errors of lack of some instructions such as:
-&lt;code&gt;no such instruction: &lt;/code&gt;shlx %rdx,%rax,%rax&#39;`.
-but what the fuck is USE_SSE ?&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
     <item>

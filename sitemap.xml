@@ -3,32 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/compile-flags/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/db/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/db_talk_about_sse/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sse/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-02-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/algorithm/</loc>
     <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/skiplist/</loc>
-    <lastmod>2020-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
   
@@ -204,19 +224,7 @@
   </url>
   
   <url>
-    <loc>/tags/compile-flags/</loc>
-  </url>
-  
-  <url>
     <loc>/tags/container-iterator/</loc>
-  </url>
-  
-  <url>
-    <loc>/categories/db/</loc>
-  </url>
-  
-  <url>
-    <loc>/posts/db_talk_about_sse/</loc>
   </url>
   
   <url>
@@ -237,10 +245,6 @@
   
   <url>
     <loc>/tags/rvalue-references/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/sse/</loc>
   </url>
   
   <url>
