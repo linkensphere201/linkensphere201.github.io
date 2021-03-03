@@ -5,21 +5,45 @@
     <link>/tags/rvalue-references/</link>
     <description>Recent content in rvalue-references on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language><atom:link href="/tags/rvalue-references/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/rvalue-references/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference</title>
-      <link>/posts/cppnotes-move-semantics/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</title>
+      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/cppnotes-move-semantics/</guid>
-      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，近期整理思绪时，发现某些问题还是没有弄清楚。&lt;/p&gt;
+      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</guid>
+      <description>&lt;p&gt;回顾：&lt;/p&gt;
+&lt;p&gt;G1-G4:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
+If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;G2&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</title>
+      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</link>
+      <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</guid>
+      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，梳理近况时，发现某些问题还是没有弄清楚。&lt;/p&gt;
 &lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
-A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导
-G1.
+&lt;li&gt;
+&lt;p&gt;Q: 什么场景下需要考虑这个问题？
+A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。&lt;/p&gt;
+&lt;p&gt;c++11引入右值引用之后，上述问题可以通过&lt;code&gt;universal reference&lt;/code&gt;来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
+A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
+If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>

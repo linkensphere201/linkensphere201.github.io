@@ -11,7 +11,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2021-02-01T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-02-03T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="a place to find myself">
@@ -82,6 +82,58 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
+			分布式笔记 - Raft（1）
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h3 id="qa">Q&amp;A</h3>
+<h5 id="线性一致性">线性一致性？</h5>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
+<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/lec1/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/other_todolist/" rel="bookmark">
+			Todo list
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-11-07T02:26:41&#43;08:00">2017-11-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<ul>
+<li><input disabled="" type="checkbox"> pb使用总结:动态类型反射/non-copy</li>
+<li><input disabled="" type="checkbox"> 运维总结:huge page</li>
+<li><input disabled="" type="checkbox"> 运维总结:tcpdump抓包</li>
+<li><input disabled="" type="checkbox"> 运维总结:tsar/sar/iotop/iostat/top/perf top</li>
+<li><input disabled="" type="checkbox"> db笔记：lsm和btree的读/写放大分析</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/other_todolist/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/other_frequently-used-words/" rel="bookmark">
@@ -190,35 +242,6 @@
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cppnotes-move-semantics/" rel="bookmark">
-			c&#43;&#43; notes：recall of move-semantics and rvalue-reference
-			</a>
-		</h2>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>几年前，整理了一份rvalue相关笔记：<a href="https://zhuanlan.zhihu.com/p/111826434">以前的一份笔记</a>，近期整理思绪时，发现某些问题还是没有弄清楚。</p>
-<h2 id="universal-reference"><code>Universal Reference</code></h2>
-<ul>
-<li>Q: 什么是<code>Universal Reference</code>?
-A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导
-G1.
-<blockquote>
-<p>If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
-</blockquote>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
 			<a href="/posts/cppnotes-iterator-invalidation/" rel="bookmark">
 			c&#43;&#43;笔记：STL容器迭代器失效场景
 			</a>
@@ -302,32 +325,6 @@ short duration lock</p>
 	<div class="content list__excerpt post__content clearfix">
 		
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/debugging_use-systemtap-to-debug/" rel="bookmark">
-			笔记：systemtap相关
-			</a>
-		</h2>
-		<p class="list__lead post__lead">how to use systemtap</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>本文会提及systemtap的以下几点：</p>
-<ul>
-<li>如何列出某个可执行文件的所有probe位点</li>
-<li>如何取变量的值</li>
-<li>如何通过某个地址的解引用取得对应值</li>
-<li>如何在.return中拿到变量的最新值</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/debugging_use-systemtap-to-debug/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -352,11 +349,11 @@ short duration lock</p>
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-2/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_talk_about_sse/">db笔记 - sse</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist-impl/">算法笔记：跳表（r2）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_some_questions_about_rocksdb/">rocksdb探究 - 一些问题</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
 		</ul>
 	</div>
 </div>
@@ -397,10 +394,10 @@ short duration lock</p>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
