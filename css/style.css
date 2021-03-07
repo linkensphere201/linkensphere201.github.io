@@ -383,6 +383,8 @@ select {
 
 .logo {
 	padding: 25px;
+  float: left;
+  width: 100%;
 }
 
 .logo__link {
