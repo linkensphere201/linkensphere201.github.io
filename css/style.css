@@ -392,6 +392,7 @@ select {
 .logo__item {
 	display: inline-block;
 	vertical-align: middle;
+  float: left;
 }
 
 .logo__item_r {
