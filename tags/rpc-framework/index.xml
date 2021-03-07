@@ -26,5 +26,24 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 &lt;/ul&gt;</description>
     </item>
     
+    <item>
+      <title>c&#43;&#43;服务端rpc笔记：读muduo有感</title>
+      <link>/posts/cppnotes-server_rpc_notes/</link>
+      <pubDate>Sat, 01 Dec 2018 21:26:49 +0800</pubDate>
+      
+      <guid>/posts/cppnotes-server_rpc_notes/</guid>
+      <description>&lt;p&gt;最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。&lt;/p&gt;
+&lt;h3 id=&#34;连接处理模型&#34;&gt;连接处理模型&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的：
+a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A的cli端的处理是同步的：&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
   </channel>
 </rss>

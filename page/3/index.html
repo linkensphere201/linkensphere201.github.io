@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-02-03T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-03-04T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -38,12 +38,9 @@
 		<a class="logo__link" href="/" title="Badfd" rel="home">
 			<div class="logo__item logo__imagebox">
 					<img class="logo__img" src="/img/logo.png">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Badfd</div>
-					<div class="logo__tagline">a place to note things</div>
-				</div>
-		</a>
+				</div></a>
 	</div>
+
 		
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
@@ -81,6 +78,45 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/db_txn_lec1/" rel="bookmark">
+			db笔记 - 事务1:隔离级别
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h2 id="锁">锁</h2>
+<p>read lock
+write lock
+long duration lock
+short duration lock</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_txn_lec1/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/debugging_systemtap_cheatsheet/" rel="bookmark">
+			systemtap笔记
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/debugging/" rel="category">debugging</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/debugging_use-systemtap-to-debug/" rel="bookmark">
@@ -162,11 +198,11 @@
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/db_dailywork_digest_ver3.4/">digest of 3.4</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-2/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_talk_about_sse/">db笔记 - sse</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist-impl/">算法笔记：跳表（r2）</a></li>
 		</ul>
 	</div>
 </div>
@@ -187,6 +223,9 @@
 				<a class="widget__link" href="/categories/debugging/">debugging</a>
 			</li>
 			<li class="widget__item">
+				<a class="widget__link" href="/categories/other/">other</a>
+			</li>
+			<li class="widget__item">
 				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
 			</li>
 			<li class="widget__item">
@@ -205,11 +244,12 @@
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>

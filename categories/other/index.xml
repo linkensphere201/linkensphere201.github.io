@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>other on Bad Fd</title>
+    <link>/categories/other/</link>
+    <description>Recent content in other on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/other/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>digest of 3.4</title>
+      <link>/posts/db_dailywork_digest_ver3.4/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_dailywork_digest_ver3.4/</guid>
+      <description>&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;rvalue references summary (50%)
+impl of std::forward, std::move
+0.1.1 acquire &amp;amp; release semantics
+&lt;a href=&#34;https://en.cppreference.com/w/cpp/atomic/memory_order&#34;&gt;https://en.cppreference.com/w/cpp/atomic/memory_order&lt;/a&gt;
+&lt;a href=&#34;https://www.modernescpp.com/index.php/acquire-release-semantic&#34;&gt;https://www.modernescpp.com/index.php/acquire-release-semantic&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

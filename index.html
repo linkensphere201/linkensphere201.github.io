@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-02-03T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-03-04T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -38,12 +38,9 @@
 		<a class="logo__link" href="/" title="Badfd" rel="home">
 			<div class="logo__item logo__imagebox">
 					<img class="logo__img" src="/img/logo.png">
-				</div><div class="logo__item logo__text">
-					<div class="logo__title">Badfd</div>
-					<div class="logo__tagline">a place to note things</div>
-				</div>
-		</a>
+				</div></a>
 	</div>
+
 		
 <nav class="menu">
 	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
@@ -81,6 +78,33 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/db_dailywork_digest_ver3.4/" rel="bookmark">
+			digest of 3.4
+			</a>
+		</h2>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-04T00:00:00Z">2021-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/other/" rel="category">other</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<ol start="0">
+<li>rvalue references summary (50%)
+impl of std::forward, std::move
+0.1.1 acquire &amp; release semantics
+<a href="https://en.cppreference.com/w/cpp/atomic/memory_order">https://en.cppreference.com/w/cpp/atomic/memory_order</a>
+<a href="https://www.modernescpp.com/index.php/acquire-release-semantic">https://www.modernescpp.com/index.php/acquire-release-semantic</a></li>
+</ol>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_dailywork_digest_ver3.4/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/cppnotes-move-semantics-n-rvalue-reference-2/" rel="bookmark">
@@ -292,6 +316,38 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 </article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
+			<a href="/posts/cppnotes-server_rpc_notes/" rel="bookmark">
+			c&#43;&#43;服务端rpc笔记：读muduo有感
+			</a>
+		</h2>
+		<p class="list__lead post__lead">rpc框架</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。</p>
+<h3 id="连接处理模型">连接处理模型</h3>
+<ul>
+<li>
+<p>A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的：
+a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。</p>
+</li>
+<li>
+<p>A的cli端的处理是同步的：</p>
+</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/cppnotes-server_rpc_notes/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
 			<a href="/posts/cppnotes-shared_ptr/" rel="bookmark">
 			智能指针1: shared_ptr使用梳理
 			</a>
@@ -317,58 +373,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnotes-shared_ptr/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/algmnotes-longestpalindrome/" rel="bookmark">
-			算法笔记： 最长回文子串
-			</a>
-		</h2>
-		<p class="list__lead post__lead">DP</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
-<h3 id="描述">描述</h3>
-<p>给定一个串，求它的最长回文子串。</p>
-<h3 id="dp思路">DP思路</h3>
-<p>DP的关键是梳理出问题与子问题的关系。</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/algmnotes-longestpalindrome/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
-			算法笔记：计算1到n中2出现的个数
-			</a>
-		</h2>
-		<p class="list__lead post__lead">枚举</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">RadianK</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
-<h2 id="问题">问题</h2>
-<p>给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。</p>
-<h2 id="思路">思路</h2>
-<h3 id="暴力">暴力</h3>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/algmnotes-count_2_of_a_number/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -391,11 +395,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/db_dailywork_digest_ver3.4/">digest of 3.4</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-2/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_talk_about_sse/">db笔记 - sse</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist-impl/">算法笔记：跳表（r2）</a></li>
 		</ul>
 	</div>
 </div>
@@ -416,6 +420,9 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 				<a class="widget__link" href="/categories/debugging/">debugging</a>
 			</li>
 			<li class="widget__item">
+				<a class="widget__link" href="/categories/other/">other</a>
+			</li>
+			<li class="widget__item">
 				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
 			</li>
 			<li class="widget__item">
@@ -434,11 +441,12 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
