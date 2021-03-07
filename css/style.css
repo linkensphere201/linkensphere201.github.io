@@ -395,8 +395,6 @@ select {
 }
 
 .logo__item_r {
-  display: inline-block;
-  vertical-align: middle;
   float: right;
 }
 
