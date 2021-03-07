@@ -1,3 +1,3 @@
 function onLoad() {
-  alert("loaded");
+  console.log('loaded!');
 }
