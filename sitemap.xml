@@ -203,6 +203,11 @@
   </url>
   
   <url>
+    <loc>/menus/about/</loc>
+    <lastmod>2016-10-07T21:26:49+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/menus/life-notes/</loc>
     <lastmod>2016-10-07T21:26:49+08:00</lastmod>
   </url>
@@ -214,11 +219,6 @@
   
   <url>
     <loc>/menus/work-notes/</loc>
-    <lastmod>2016-10-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/menus/about/</loc>
     <lastmod>2016-10-07T21:26:49+08:00</lastmod>
   </url>
   

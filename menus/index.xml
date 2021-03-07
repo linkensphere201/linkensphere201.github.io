@@ -8,6 +8,15 @@
     <language>zh-cn</language>
     <lastBuildDate>Fri, 07 Oct 2016 21:26:49 +0800</lastBuildDate><atom:link href="/menus/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>About</title>
+      <link>/menus/about/</link>
+      <pubDate>Fri, 07 Oct 2016 21:26:49 +0800</pubDate>
+      
+      <guid>/menus/about/</guid>
+      <description>about this is a place to meet myself.</description>
+    </item>
+    
+    <item>
       <title>Life</title>
       <link>/menus/life-notes/</link>
       <pubDate>Fri, 07 Oct 2016 21:26:49 +0800</pubDate>
@@ -29,15 +38,6 @@
 &lt;li&gt;database system&lt;/li&gt;
 &lt;li&gt;distribution system&lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>/menus/about/</link>
-      <pubDate>Fri, 07 Oct 2016 21:26:49 +0800</pubDate>
-      
-      <guid>/menus/about/</guid>
-      <description>about this is a place to meet myself.</description>
     </item>
     
   </channel>
