@@ -389,6 +389,7 @@ select {
 
 .logo__link {
 	display: inline-block;
+  float: left;
 }
 
 .logo__item {
