@@ -417,8 +417,9 @@ select {
 
 .logo__title {
 	font-size: 32px;
-	font-size: 2rem;
-	font-weight: 700;
+	font-size: 2.75rem;
+  font-family: 'DotGothic16','Open Sans', Helvetica, Arial, sans-serif;
+	font-weight: 500;
 	line-height: 1;
 	color: #000;
 }
