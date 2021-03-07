@@ -394,6 +394,12 @@ select {
 	vertical-align: middle;
 }
 
+.logo__item_r {
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+}
+
 .logo__img {
 	max-height: 256px;
 }
@@ -421,6 +427,11 @@ select {
 	font-weight: 500;
 	line-height: 1;
 	color: #000;
+}
+
+.logo__title_fr {
+  font-size: 1.75rem;
+  font-family: 'DotGothic16';
 }
 
 .logo__tagline {
@@ -934,6 +945,7 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 	font-size: 13px;
 	font-size: .8125rem;
 }
+
 
 .pager__item {
 	-webkit-flex: 1 1 50%;
