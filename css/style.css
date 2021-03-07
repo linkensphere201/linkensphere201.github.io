@@ -385,6 +385,7 @@ select {
 	padding: 25px;
   float: left;
   width: 100%;
+  border-bottom: 3px solid red;
 }
 
 .logo__link {
