@@ -34,7 +34,7 @@ G2.
 ">
 <meta itemprop="datePublished" content="2021-02-03T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-02-03T00:00:00+00:00" />
-<meta itemprop="wordCount" content="223">
+<meta itemprop="wordCount" content="229">
 
 
 
@@ -174,9 +174,11 @@ T&amp;&amp; &amp;&amp;  =&gt; T&amp;&amp;</p>
 </figure>
 
 与G2不冲突.</p>
-<p>lvalue - 左值，具名且不可移动。
-xvalue - 将亡值， 具名可移动，即将被销毁的值 <em>（其实感觉上右值引用就是xvalue）</em> 。如：std::move产生出来的值&hellip;</p>
+<p>lvalue - 左值，具名且不可移动</p>
+<p>xvalue - 将亡值， 具名可移动，即将被销毁的值 <em>（其实感觉上右值引用就是xvalue）</em> 。如：std::move产生出来的值&hellip;</p>
 <p>glvalue - 泛左值，具名.</p>
+<p>prvalue - 纯右值，可移动不具名.</p>
+<p>rvalue - 右值，可移动.</p>
 <h2 id="recall-of-last-article-implementation-of-stdbind">recall of last <a href="">article</a>: implementation of <code>std::bind</code></h2>
 <h2 id="reference">Reference</h2>
 <ul>

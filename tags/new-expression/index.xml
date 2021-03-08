@@ -13,7 +13,7 @@
       <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>/posts/db_some-details-about-rocksdblrucache/</guid>
-      <description>&lt;p&gt;最近有同事找我讨论俩问题，觉得挺有趣的记录一下。&lt;/p&gt;
+      <description>&lt;p&gt;最近有同事找我讨论问题，觉得挺有趣的记录一下。&lt;/p&gt;
 &lt;h3 id=&#34;rocksdblruhandlekey的历史&#34;&gt;&lt;code&gt;rocksdb::LRUHandle::key()&lt;/code&gt;的历史&lt;/h3&gt;
 &lt;p&gt;第一个问题是&lt;code&gt;rocksdb::LRUHandle::key()&lt;/code&gt;, 这个函数返回该handle内部存储的key，但为啥某些情况下却返回value呢？&lt;/p&gt;</description>
     </item>
