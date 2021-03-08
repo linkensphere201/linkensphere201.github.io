@@ -6,7 +6,16 @@
     <description>Recent content in Categories on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DB</title>
+      <link>/categories/db/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/db/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>other</title>
       <link>/categories/other/</link>
@@ -22,15 +31,6 @@
       <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
       
       <guid>/categories/c&#43;&#43;/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DB</title>
-      <link>/categories/db/</link>
-      <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/db/</guid>
       <description></description>
     </item>
     

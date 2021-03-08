@@ -6,7 +6,16 @@
     <description>Recent content on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>some details about rocksdb::LRUCache</title>
+      <link>/posts/db_some-details-about-rocksdblrucache/</link>
+      <pubDate>Mon, 08 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_some-details-about-rocksdblrucache/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>digest of 3.4</title>
       <link>/posts/db_dailywork_digest_ver3.4/</link>
@@ -391,9 +400,16 @@ short duration lock&lt;/p&gt;</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/posts/db_dailywork_cheatsheet/</guid>
-      <description>&lt;h2 id=&#34;cheatsheet&#34;&gt;cheatsheet&lt;/h2&gt;
-&lt;p&gt;my cheatsheet for daily work usages.&lt;/p&gt;
+      <description>&lt;p&gt;日常cheatsheet～&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;run valgrind for a program&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;valgrind --tool=memcheck --leak-check=full --log-file=leak.log --soname-synonyms=somalloc=NONE &amp;lt;some_exe&amp;gt; [&amp;lt;some_exe_args&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tee&lt;/code&gt; with a pipe output to screen and a file&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;hello&amp;quot; | tee abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;ps&lt;/p&gt;
 &lt;/li&gt;
