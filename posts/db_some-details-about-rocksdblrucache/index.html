@@ -22,7 +22,7 @@ rocksdb::LRUHandle::key()的历史
 第一个问题是rocksdb::LRUHandle::key(), 这个函数返回该handle内部存储的key，但为啥某些情况下却返回value呢？">
 <meta itemprop="datePublished" content="2021-03-08T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-03-08T00:00:00+00:00" />
-<meta itemprop="wordCount" content="266">
+<meta itemprop="wordCount" content="265">
 
 
 
@@ -195,18 +195,18 @@ int main() {
 }
 EOF
 </code></pre><p>最后，如果用template的话，就非常符合直观感受了：</p>
-<pre><code>#include &lt;iostream&gt;
-struct a{};
-template&lt;typename T&gt;
-void fucktype() {
-  T a;
-  std::cout &lt;&lt; sizeof(a) &lt;&lt; std::endl; 
-}
-int main() {
-  fucktype&lt;a*[10]&gt;();
-  return 0;
-}
-</code></pre><p>个人猜测，引发不适的估计是为了兼容以前c的语法。</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c++" data-lang="c++"><span style="color:#8f5902;font-style:italic">#include</span> <span style="color:#8f5902;font-style:italic">&lt;iostream&gt;</span><span style="color:#8f5902;font-style:italic">
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">a</span><span style="color:#000;font-weight:bold">{};</span>
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">T</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">fucktype</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#000">T</span> <span style="color:#000">a</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">cout</span> <span style="color:#ce5c00;font-weight:bold">&lt;&lt;</span> <span style="color:#204a87;font-weight:bold">sizeof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">a</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">&lt;&lt;</span> <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">endl</span><span style="color:#000;font-weight:bold">;</span> 
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#000">fucktype</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">a</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">]</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">();</span>
+  <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>个人猜测，引发不适的估计是为了兼容以前c的语法。</p>
 <h4 id="顺便recall一下lrucache">顺便recall一下LRUCache</h4>
 <ol start="0">
 <li>关于原理，基本上不用再多说了</li>
