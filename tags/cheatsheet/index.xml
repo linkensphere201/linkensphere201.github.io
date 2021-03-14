@@ -18,6 +18,10 @@
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;valgrind --tool=memcheck --leak-check=full --log-file=leak.log --soname-synonyms=somalloc=NONE &amp;lt;some_exe&amp;gt; [&amp;lt;some_exe_args&amp;gt;]
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;run tcpdump to capture mysql queries:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;tcpdump -r /tmp/a.cap -A -S -n -nn  | grep -i -E &amp;quot;select|insert|update|delete|replace&amp;quot; | sed &#39;s%\(.*\)\([.]\{4\}\)\(.*\)%\3%&#39; | less
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;tee&lt;/code&gt; with a pipe output to screen and a file&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;echo &amp;quot;hello&amp;quot; | tee abc.txt

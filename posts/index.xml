@@ -6,7 +6,39 @@
     <description>Recent content in Posts on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 08 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>recall of memory order model</title>
+      <link>/posts/c&#43;&#43;_recall-of-memory-order-model/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/c&#43;&#43;_recall-of-memory-order-model/</guid>
+      <description>&lt;h2 id=&#34;c内存序&#34;&gt;c++内存序&lt;/h2&gt;
+&lt;h2 id=&#34;题外话&#34;&gt;题外话&lt;/h2&gt;
+&lt;h4 id=&#34;cache-coherency-vs-memory-consistency&#34;&gt;Cache Coherency vs. Memory Consistency&lt;/h4&gt;
+&lt;p&gt;这两个概念容易混淆，重新捋一下。&lt;/p&gt;
+&lt;p&gt;关于Cache Coherency：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>wal recovery would cleanup at least the first WAL</title>
+      <link>/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/</guid>
+      <description>&lt;p&gt;这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;some-tips-for-rocksdb-case-fixing&#34;&gt;some tips for rocksdb case fixing&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;对于不支持&lt;code&gt;-march=native&lt;/code&gt;环境的，可以编译时&lt;code&gt;export USE_SSE=1&lt;/code&gt;.避免类似&lt;code&gt;no such instruction: &lt;/code&gt;shlx %r13,%rax,%rax&#39;`的问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于rocksdb的测试case，想保留测试db的，可以搞个&lt;code&gt;KEEP_DB&lt;/code&gt;环境变量。测试类会根据这个环境变量决定是否清理测试DB。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
     <item>
       <title>some details about rocksdb::LRUCache</title>
       <link>/posts/db_some-details-about-rocksdblrucache/</link>
@@ -31,6 +63,19 @@ impl of std::forward, std::move
 &lt;a href=&#34;https://en.cppreference.com/w/cpp/atomic/memory_order&#34;&gt;https://en.cppreference.com/w/cpp/atomic/memory_order&lt;/a&gt;
 &lt;a href=&#34;https://www.modernescpp.com/index.php/acquire-release-semantic&#34;&gt;https://www.modernescpp.com/index.php/acquire-release-semantic&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>db笔记 - 事务1:隔离级别</title>
+      <link>/posts/db_txn_lec1/</link>
+      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_txn_lec1/</guid>
+      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
+&lt;p&gt;read lock
+write lock
+long duration lock
+short duration lock&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -327,19 +372,6 @@ note:&lt;/p&gt;
     </item>
     
     <item>
-      <title>db笔记 - 事务1:隔离级别</title>
-      <link>/posts/db_txn_lec1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_txn_lec1/</guid>
-      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
-&lt;p&gt;read lock
-write lock
-long duration lock
-short duration lock&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>systemtap笔记</title>
       <link>/posts/debugging_systemtap_cheatsheet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -374,6 +406,10 @@ short duration lock&lt;/p&gt;</description>
 &lt;li&gt;run valgrind for a program&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;valgrind --tool=memcheck --leak-check=full --log-file=leak.log --soname-synonyms=somalloc=NONE &amp;lt;some_exe&amp;gt; [&amp;lt;some_exe_args&amp;gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;run tcpdump to capture mysql queries:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;tcpdump -r /tmp/a.cap -A -S -n -nn  | grep -i -E &amp;quot;select|insert|update|delete|replace&amp;quot; | sed &#39;s%\(.*\)\([.]\{4\}\)\(.*\)%\3%&#39; | less
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;tee&lt;/code&gt; with a pipe output to screen and a file&lt;/li&gt;
 &lt;/ul&gt;

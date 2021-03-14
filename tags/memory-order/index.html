@@ -11,7 +11,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/tags/memory-order/" />
-
+<meta property="og:updated_time" content="2021-03-09T00:00:00+00:00" />
 
 		<meta itemprop="name" content="memory order">
 <meta itemprop="description" content="a place to find myself">
@@ -19,7 +19,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -28,7 +29,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 		
 </head>
-<body class="body">
+<body class="body" onload="onLoad()">
 	<div class="container container--outer">
 		<header class="header">
 	<div class="container header__container">
@@ -39,42 +40,29 @@
 					<img class="logo__img" src="/img/logo.png">
 				</div><div class="logo__item logo__text">
 					<div class="logo__title">Badfd</div>
-					<div class="logo__tagline">a place to meet myself</div>
 				</div>
 		</a>
+    <ul class="logo__item logo__item_r logo__text">
+    <li>
+    <a href="/menus/about/">
+    <div>
+      <div class="logo__title_fr">About</div>
+    </div>
+    </a>
+    </li>
+    <li>
+    <a href="/menus/work-notes/">
+    <div>
+      <div class="logo__title_fr">Links</div>
+    </div>
+    </a>
+    </li>
+    </ul>
 	</div>
-		
-<nav class="menu">
-	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
-		<span class="menu__btn-title" tabindex="-1">菜单</span>
-	</button>
-	<ul class="menu__list">
-		<li class="menu__item">
-			<a class="menu__link" href="/menus/life-notes/">
-				
-				<span class="menu__text">Life</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/menus/work-notes/">
-				
-				<span class="menu__text">Work</span>
-				
-			</a>
-		</li>
-		<li class="menu__item">
-			<a class="menu__link" href="/menus/about/">
-				
-				<span class="menu__text">关于</span>
-				
-			</a>
-		</li>
-	</ul>
-</nav>
 
 	</div>
 </header>
+
 		<div class="wrapper flex">
 			<div class="primary">
 			
@@ -84,19 +72,25 @@
 	</header><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
-			<a href="/posts/cppnotes-memory-order-issues/" rel="bookmark">
-			c/c&#43;&#43;笔记：内存序
+			<a href="/posts/c&#43;&#43;_recall-of-memory-order-model/" rel="bookmark">
+			recall of memory order model
 			</a>
 		</h2>
-		<p class="list__lead post__lead">内存序</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">FatiaoX</span>
-</div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/" rel="category">Categories</a>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-09T00:00:00Z">2021-03-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
 	</span>
 </div></div>
 	</header>
 	<div class="content list__excerpt post__content clearfix">
-		References 
+		<h2 id="c内存序">c++内存序</h2>
+<h2 id="题外话">题外话</h2>
+<h4 id="cache-coherency-vs-memory-consistency">Cache Coherency vs. Memory Consistency</h4>
+<p>这两个概念容易混淆，重新捋一下。</p>
+<p>关于Cache Coherency：</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/c&#43;&#43;_recall-of-memory-order-model/">阅读全文…</a>
 	</div>
 </article>
 </main>
@@ -107,21 +101,21 @@
 <aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
-			<input class="widget-search__field" type="search" placeholder="搜索..." value="" name="q" aria-label="搜索...">
+			<input class="widget-search__field" type="search" placeholder="搜索…" value="" name="q" aria-label="搜索…">
 		</label>
 		<input class="widget-search__submit" type="submit" value="Search">
 		<input type="hidden" name="sitesearch" value="/" />
 	</form>
 </div>
 <div class="widget-recent widget">
-	<h4 class="widget__title">最新动态</h4>
+	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记： 跳表</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_some_questions_about_rocksdb/">rocksdb探究 - 一些问题</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-server_rpc_notes/">c&#43;&#43;服务端rpc笔记：读muduo有感</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/cppnote-shared_ptr/">智能指针1: shared_ptr使用梳理</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-longestpalindrome/">算法笔记： 最长回文子串</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/">recall of memory order model</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/">wal recovery would cleanup at least the first WAL</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_some-details-about-rocksdblrucache/">some details about rocksdb::LRUCache</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_dailywork_digest_ver3.4/">digest of 3.4</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_txn_lec1/">db笔记 - 事务1:隔离级别</a></li>
 		</ul>
 	</div>
 </div>
@@ -142,6 +136,9 @@
 				<a class="widget__link" href="/categories/debugging/">debugging</a>
 			</li>
 			<li class="widget__item">
+				<a class="widget__link" href="/categories/other/">other</a>
+			</li>
+			<li class="widget__item">
 				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
 			</li>
 			<li class="widget__item">
@@ -156,19 +153,29 @@
 <div class="widget-taglist widget">
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/memory-barrier/" title="memory barrier">memory barrier (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-fence/" title="memory fence">memory fence (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
@@ -177,7 +184,7 @@
 	</div>
 </div>
 <div class="widget-social widget">
-	<h4 class="widget-social__title widget__title">联系我</h4>
+	<h4 class="widget-social__title widget__title">社交</h4>
 	<div class="widget-social__content widget__content">
 		<div class="widget-social__item widget__item">
 			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/Hazy2019" target="_blank">
@@ -202,11 +209,11 @@
 		
 		<div class="footer__copyright">
 			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> 主题</span>
 		</div>
 	</div>
 </footer>
-
 	</div>
 <script async defer src="/js/menu.js"></script>
-</body>
+<script src="/js/onload.js"></script></body>
 </html>
