@@ -9,6 +9,7 @@ function GetRandomWall(){
                 var data = XMLHttpReq.responseText;
                 console.log(data);
                 document.getElementById('bannerback').style.backgroundImage = "url("+ data +")";
+            }
         }
     };
     xhr.send();
