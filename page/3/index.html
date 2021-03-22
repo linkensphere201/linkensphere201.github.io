@@ -227,6 +227,21 @@ note:</p>
 </ul>
 <pre><code>tcpdump -r /tmp/a.cap -A -S -n -nn  | grep -i -E &quot;select|insert|update|delete|replace&quot; | sed 's%\(.*\)\([.]\{4\}\)\(.*\)%\3%' | less
 </code></pre><ul>
+<li>python scripts:</li>
+</ul>
+<pre><code>python -m SimpleHTTPServer 8123
+wget -c -r -nH -m --limit-rate=400m &quot;http://ip:8123/xxxx&quot;
+</code></pre><pre><code>python -c 'from zlib import crc32; print crc32(&quot;1476777&quot;) % 1024'
+</code></pre><pre><code>#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import sys
+import json
+data = &quot;&quot;
+for line in sys.stdin:
+        data += line
+text = json.loads(data)
+print(text)
+</code></pre><ul>
 <li><code>tee</code> with a pipe output to screen and a file</li>
 </ul>
 <pre><code>echo &quot;hello&quot; | tee abc.txt

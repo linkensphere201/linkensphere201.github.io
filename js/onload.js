@@ -1,6 +1,6 @@
 function GetRandomWall(){
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://47.99.216.43:18080/bannerback", true);
+    xhr.open("GET", "47.99.216.43:18080/bannerback", true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function(){
         var XMLHttpReq = xhr;

@@ -444,6 +444,21 @@ note:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;tcpdump -r /tmp/a.cap -A -S -n -nn  | grep -i -E &amp;quot;select|insert|update|delete|replace&amp;quot; | sed &#39;s%\(.*\)\([.]\{4\}\)\(.*\)%\3%&#39; | less
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;python scripts:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer 8123
+wget -c -r -nH -m --limit-rate=400m &amp;quot;http://ip:8123/xxxx&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;python -c &#39;from zlib import crc32; print crc32(&amp;quot;1476777&amp;quot;) % 1024&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import sys
+import json
+data = &amp;quot;&amp;quot;
+for line in sys.stdin:
+        data += line
+text = json.loads(data)
+print(text)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;tee&lt;/code&gt; with a pipe output to screen and a file&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;echo &amp;quot;hello&amp;quot; | tee abc.txt
