@@ -143,6 +143,21 @@
   </url>
   
   <url>
+    <loc>/categories/algmnotes/</loc>
+    <lastmod>2021-01-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/%E6%9D%82%E8%B0%88/</loc>
+    <lastmod>2021-01-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/algmnotes_%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-01-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/algorithm/</loc>
     <lastmod>2020-03-01T00:00:00+00:00</lastmod>
   </url>
@@ -275,11 +290,6 @@
   <url>
     <loc>/menus/</loc>
     <lastmod>2016-10-07T21:26:49+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2015-01-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
