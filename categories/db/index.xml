@@ -6,7 +6,25 @@
     <description>Recent content in DB on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/db/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/db/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>lsm读写放大分析（r1）</title>
+      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lsm读写放大分析（r2）</title>
+      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>wal recovery would cleanup at least the first WAL</title>
       <link>/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/</link>

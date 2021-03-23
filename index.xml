@@ -6,7 +6,25 @@
     <description>Recent content on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 09 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>lsm读写放大分析（r1）</title>
+      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lsm读写放大分析（r2）</title>
+      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</link>
+      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>recall of memory order model</title>
       <link>/posts/c&#43;&#43;_recall-of-memory-order-model/</link>
@@ -137,10 +155,10 @@ but what the fuck is USE_SSE ?&lt;/p&gt;
     
     <item>
       <title>翻车笔记</title>
-      <link>/posts/algmnotes_%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</link>
+      <link>/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/algmnotes_%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/</guid>
+      <guid>/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h2 id=&#34;引子&#34;&gt;引子&lt;/h2&gt;
 &lt;p&gt;很煞笔的一天，最近两次面试的试水都挂了（但之前面的两个小公司都拿到offer，小公司没有现场编程题），根因都是现场编程题不太理想。这个也不能怪别人，自己长期以来排斥刷题，觉得刷题纯度太低了，加上到目前为止就没有一次现场编程挂过。&lt;/p&gt;
 &lt;p&gt;这波有种熟悉的感觉回来了：大二参加acm预选被血虐留下的心理阴影，在那之后再也没碰过OJ。&lt;/p&gt;
