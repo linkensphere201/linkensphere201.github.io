@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>parameter_pack on Bad Fd</title>
+    <link>/tags/parameter_pack/</link>
+    <description>Recent content in parameter_pack on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/parameter_pack/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>parameter pack和递归模板展开</title>
+      <link>/posts/c&#43;&#43;_template_parameter_pack/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/c&#43;&#43;_template_parameter_pack/</guid>
+      <description>&lt;h2 id=&#34;需求&#34;&gt;需求&lt;/h2&gt;
+&lt;p&gt;做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
+libevent的回调类似：&lt;code&gt;void LibeventCallback(int fd, short flag, void* arg);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;要求：
+1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

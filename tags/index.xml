@@ -6,7 +6,43 @@
     <description>Recent content in Tags on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CRTP</title>
+      <link>/tags/crtp/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/crtp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>enable_shared_from_this</title>
+      <link>/tags/enable_shared_from_this/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/enable_shared_from_this/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>parameter_pack</title>
+      <link>/tags/parameter_pack/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/parameter_pack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>template</title>
+      <link>/tags/template/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/template/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>lsm</title>
       <link>/tags/lsm/</link>

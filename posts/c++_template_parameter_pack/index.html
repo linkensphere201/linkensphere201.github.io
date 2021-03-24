@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>parameter pack和递归模板展开 - Bad Fd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="parameter pack和递归模板展开" />
+<meta property="og:description" content="需求
+做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
+libevent的回调类似：void LibeventCallback(int fd, short flag, void* arg);
+要求：
+1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/c&#43;&#43;_template_parameter_pack/" />
+<meta property="article:published_time" content="2021-03-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-24T00:00:00+00:00" />
+
+		<meta itemprop="name" content="parameter pack和递归模板展开">
+<meta itemprop="description" content="需求
+做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
+libevent的回调类似：void LibeventCallback(int fd, short flag, void* arg);
+要求：
+1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数">
+<meta itemprop="datePublished" content="2021-03-24T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-03-24T00:00:00+00:00" />
+<meta itemprop="wordCount" content="605">
+
+
+
+<meta itemprop="keywords" content="parameter_pack,template," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body" onload="onLoad()">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div id="bannerback" class="logo  logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Badfd</div>
+				</div>
+		</a>
+    <ul class="logo__item logo__item_r logo__text">
+    <li>
+    <a href="/menus/about/">
+    <div>
+      <div class="logo__title_fr">About</div>
+    </div>
+    </a>
+    </li>
+    <li>
+    <a href="/menus/work-notes/">
+    <div>
+      <div class="logo__title_fr">Links</div>
+    </div>
+    </a>
+    </li>
+    </ul>
+	</div>
+
+	</div>
+</header>
+
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">parameter pack和递归模板展开</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-24T00:00:00Z">2021-03-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">目录</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#需求">需求</a></li>
+    <li><a href="#实现">实现</a></li>
+    <li><a href="#实现-1">实现</a></li>
+    <li><a href="#附">附</a></li>
+  </ul>
+</nav>
+	</div>
+</div><div class="content post__content clearfix">
+			<h2 id="需求">需求</h2>
+<p>做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
+libevent的回调类似：<code>void LibeventCallback(int fd, short flag, void* arg);</code></p>
+<p>要求：
+1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数</p>
+<p>2、wrapper需要对fn做编译期检查，如果用户传进来参数不合法，编译期给出明确错误信息</p>
+<h2 id="实现">实现</h2>
+<ol>
+<li>
+<p>毫无疑问第一反映是需要用到template的<code>parameter pack</code>.</p>
+</li>
+<li>
+<p>需要用一些类型萃取和static_assert来做fn类型合法性检查.</p>
+</li>
+<li>
+<p>由于需要调用的东西是用户自定义参数，这里又需要用到完美转发，否则对于const、非const或某些右值类型又没法搞</p>
+</li>
+<li>
+<p>实现过程中发现，需要一个结构来存储这些可变的parameter pack，没错，就是tuple</p>
+</li>
+<li>
+<p>继续，发现如何把一个tuple给展开作为参数列表传给回调又是个大问题，这里需要参考附录里的第3个链接。</p>
+</li>
+<li>
+<p>c++11中没有std::apply,所以需要自己写一个..</p>
+</li>
+<li>
+<p>具体怎么展开一个tuple呢？这里又需要用到递归模板展开..傻了吧.(PS: c++14之后有<code>std::integer_sequence</code>可以用)</p>
+</li>
+<li>
+<p>获取一个parameter pack的参数个数：<a href="https://en.cppreference.com/w/cpp/language/sizeof...">sizeof&hellip;</a></p>
+</li>
+</ol>
+<h2 id="实现-1">实现</h2>
+<p>一个非最终版本的实现如下：</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">
+<span style="color:#204a87;font-weight:bold">namespace</span> <span style="color:#000">tuple_unpack_helper</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#8f5902;font-style:italic">// for c++11
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Is</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">index</span> <span style="color:#000;font-weight:bold">{};</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">N</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Is</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">gen_seq</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">gen_seq</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">N</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">N</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Is</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">{};</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Is</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">gen_seq</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Is</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#204a87;font-weight:bold">typedef</span> <span style="color:#000">index</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Is</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">type</span><span style="color:#000;font-weight:bold">;</span>
+<span style="color:#000;font-weight:bold">};</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">typename</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">callable</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#000">callable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Fn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000">f</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">a</span><span style="color:#000;font-weight:bold">)</span>
+      <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">f</span><span style="color:#000;font-weight:bold">)),</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">a</span><span style="color:#000;font-weight:bold">)...)</span> <span style="color:#000;font-weight:bold">{}</span>
+  <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">function</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...)</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">fn</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">tuple</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">call</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">callFunc</span><span style="color:#000;font-weight:bold">(</span>
+        <span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">gen_seq</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">sizeof</span><span style="color:#000;font-weight:bold">...(</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">&gt;::</span>
+            <span style="color:#000">type</span><span style="color:#000;font-weight:bold">{});</span> <span style="color:#8f5902;font-style:italic">// sizeof... to fetch parameter size of a parameter pack
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">S</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+  <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">callFunc</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">index</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">S</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">fn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">get</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">S</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">params</span><span style="color:#000;font-weight:bold">)...);</span> <span style="color:#8f5902;font-style:italic">// parameter unpack --&gt; fn(std::get&lt;0&gt;(params),
+</span><span style="color:#8f5902;font-style:italic"></span>                                <span style="color:#8f5902;font-style:italic">// std::get&lt;1&gt;(params), ...);
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">};</span>
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">typename</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#000">callable</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">make_callable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Fn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000">callback</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">params</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">callable</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">callback</span><span style="color:#000;font-weight:bold">),</span>
+                               <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">params</span><span style="color:#000;font-weight:bold">)...);</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#8f5902;font-style:italic">// for c++14, we can use std::integer_sequence instead
+</span><span style="color:#8f5902;font-style:italic">// for c++17, we can use std::apply or std::invoke instead
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span> <span style="color:#8f5902;font-style:italic">// namespace tuple_unpack_helper
+</span><span style="color:#8f5902;font-style:italic"></span>
+<span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">PersisReadableFlags</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">EV_PERSIST</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">EV_READ</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">EV_TIMEOUT</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">PersisWritableFlags</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">EV_PERSIST</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">EV_WRITE</span> <span style="color:#ce5c00;font-weight:bold">|</span> <span style="color:#000">EV_TIMEOUT</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">InternalEvent</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">public</span><span style="color:#ce5c00;font-weight:bold">:</span>
+  <span style="color:#000">InternalEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">event_base</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">)</span>
+      <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">ev_base_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">fd_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fd</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">flags_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">flags</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">nullptr</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_base_</span> <span style="color:#ce5c00;font-weight:bold">!=</span> <span style="color:#204a87;font-weight:bold">nullptr</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+      <span style="color:#000">ev_</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">event_new</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_base_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fd_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags_</span><span style="color:#000;font-weight:bold">,</span>
+                      <span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;::</span><span style="color:#000">LibeventCallback</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">this</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#ce5c00;font-weight:bold">~</span><span style="color:#000">InternalEvent</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+      <span style="color:#000">event_free</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">Enable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">const</span> <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">timeval</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">tv</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">nullptr</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">event_add</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">tv</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#000;font-weight:bold">}</span>
+
+  <span style="color:#204a87;font-weight:bold">bool</span> <span style="color:#000">Disable</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">event_del</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">);</span>
+    <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">rc</span> <span style="color:#ce5c00;font-weight:bold">==</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">private</span><span style="color:#ce5c00;font-weight:bold">:</span>
+  <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">event_base</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ev_base_</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd_</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags_</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">event</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">ev_</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">static</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">LibeventCallback</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flag</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">arg</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">};</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;::</span><span style="color:#000">LibeventCallback</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">arg</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">p</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">reinterpret_cast</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Callable</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">*&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">arg</span><span style="color:#000;font-weight:bold">);</span>
+  <span style="color:#204a87;font-weight:bold">static_cast</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Callable</span> <span style="color:#ce5c00;font-weight:bold">*&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">p</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">-&gt;</span><span style="color:#000">Trigger</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">);</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#8f5902;font-style:italic">// Fn must be like:
+</span><span style="color:#8f5902;font-style:italic">//   Fn (int, short, Args args...)
+</span><span style="color:#8f5902;font-style:italic">//
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">typename</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#204a87;font-weight:bold">class</span> <span style="color:#000">CallableEvent</span> <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#204a87;font-weight:bold">public</span> <span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#204a87;font-weight:bold">private</span><span style="color:#ce5c00;font-weight:bold">:</span>
+  <span style="color:#204a87;font-weight:bold">using</span> <span style="color:#000">internalevent</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">InternalEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#204a87;font-weight:bold">using</span> <span style="color:#000">signature</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">void</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...);</span>
+  <span style="color:#204a87;font-weight:bold">static_assert</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">is_convertible</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">function</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">signature</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;::</span><span style="color:#000">value</span><span style="color:#000;font-weight:bold">,</span>
+                <span style="color:#4e9a06">&#34;wrong signature&#34;</span><span style="color:#000;font-weight:bold">);</span>
+
+  <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">function</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">signature</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">ufn_</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#8f5902;font-style:italic">// user callback
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">tuple</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">uargs_</span><span style="color:#000;font-weight:bold">;</span>    <span style="color:#8f5902;font-style:italic">// user function
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">public</span><span style="color:#ce5c00;font-weight:bold">:</span>
+  <span style="color:#8f5902;font-style:italic">//
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// call this means I am interesting with @fd &#39;s @flags events, if that happens,
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">// tell me by calling `fn(fd, flags, args...)`
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#8f5902;font-style:italic">//
+</span><span style="color:#8f5902;font-style:italic"></span>
+  <span style="color:#000">CallableEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">event_base</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Fn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000">fn</span><span style="color:#000;font-weight:bold">,</span>
+                <span style="color:#000">Args</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">args</span><span style="color:#000;font-weight:bold">)</span>
+      <span style="color:#ce5c00;font-weight:bold">:</span> <span style="color:#000">internalevent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">ufn_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fn</span><span style="color:#000;font-weight:bold">)),</span>
+        <span style="color:#000">uargs_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">)...)</span> <span style="color:#8f5902;font-style:italic">/*parameters unpack*/</span> <span style="color:#000;font-weight:bold">{}</span>
+
+  <span style="color:#000">CallableEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">const</span> <span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">&amp;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">delete</span><span style="color:#000;font-weight:bold">;</span>
+  <span style="color:#000">CallableEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#204a87;font-weight:bold">delete</span><span style="color:#000;font-weight:bold">;</span>
+
+  <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">Trigger</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">call_user_callback</span><span style="color:#000;font-weight:bold">(</span>
+        <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">tuple_unpack_helper</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">gen_seq</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">sizeof</span><span style="color:#000;font-weight:bold">...(</span><span style="color:#000">Args</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">&gt;::</span><span style="color:#000">type</span><span style="color:#000;font-weight:bold">{});</span>
+  <span style="color:#000;font-weight:bold">}</span>
+
+<span style="color:#204a87;font-weight:bold">private</span><span style="color:#ce5c00;font-weight:bold">:</span>
+  <span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">int</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">S</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+  <span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">call_user_callback</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span>
+                          <span style="color:#000">tuple_unpack_helper</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">index</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">S</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#8f5902;font-style:italic">// before user callback is called...
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#8f5902;font-style:italic">//
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#000">ufn_</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">get</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">S</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">uargs_</span><span style="color:#000;font-weight:bold">)...);</span>
+    <span style="color:#8f5902;font-style:italic">// after user callback is called...
+</span><span style="color:#8f5902;font-style:italic"></span>    <span style="color:#8f5902;font-style:italic">//
+</span><span style="color:#8f5902;font-style:italic"></span>  <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">};</span>
+
+<span style="color:#204a87;font-weight:bold">template</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#204a87;font-weight:bold">typename</span> <span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">typename</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span>
+<span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">shared_ptr</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span> <span style="color:#000">make_CallableEvent</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">struct</span> <span style="color:#000">event_base</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span>
+                                              <span style="color:#204a87;font-weight:bold">short</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Fn</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000">f</span><span style="color:#000;font-weight:bold">,</span>
+                                              <span style="color:#000">Args</span> <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span><span style="color:#000;font-weight:bold">...</span> <span style="color:#000">args</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#204a87;font-weight:bold">return</span> <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">make_shared</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">CallableEvent</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">Args</span><span style="color:#000;font-weight:bold">...</span><span style="color:#ce5c00;font-weight:bold">&gt;&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">base</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">fd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">flags</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Fn</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">f</span><span style="color:#000;font-weight:bold">),</span>
+                                    <span style="color:#000">std</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">forward</span><span style="color:#ce5c00;font-weight:bold">&lt;</span><span style="color:#000">Args</span><span style="color:#ce5c00;font-weight:bold">&gt;</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">)...);</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>如何使用见以下，感觉还是很简易的。</p>
+<pre><code>TEST(template_check, tuple_unpack) {
+  auto f1 = [](int a, int b, int c, int d) {
+    log_info(&quot;called! {}-{}-{}-{}&quot;, a, b, c, d);
+  };
+  auto c = tuple_unpack_helper::make_callable(f1, 1, 2, 3, 4);
+  c.call();
+}
+
+ TEST(template_check, CallableEvent) {
+   auto c = make_CallableEvent(
+       nullptr, 0, 0,
+       [](int fd, short flags, int a, int b) {
+         log_info(&quot;it happened! {},{}&quot;, a, b);
+       },
+       10, 20);
+   c-&gt;Trigger(0, 0);
+ }
+
+ TEST(template_check, libevent) {
+   struct event_base *evbase = event_base_new();
+   int calltimes = 0;
+   auto e = make_CallableEvent(
+       evbase, 0 /*stdin*/, PersisReadableFlags(),
+       [](int fd, short flags, int &amp;calltimes) {
+         char letter;
+         int n = read(fd, &amp;letter, 1);
+         log_info(&quot;fd={}, caught event={}, calltime={}, letter={:#x}&quot;, fd, flags,
+                  calltimes, letter);
+         calltimes++;
+       },
+       calltimes);
+
+   e-&gt;Enable();
+   event_base_dispatch(evbase);
+ }
+</code></pre><h2 id="附">附</h2>
+<ul>
+<li>
+<p>附：<a href="https://en.cppreference.com/w/cpp/language/parameter_pack">parameter pack cppref</a></p>
+</li>
+<li>
+<p>附1：参考 definition of <code>std::thread</code> shown as below:</p>
+</li>
+</ul>
+<pre><code>template&lt; class Function, class... Args &gt;
+explicit thread( Function&amp;&amp; f, Args&amp;&amp;... args );
+</code></pre><ul>
+<li>
+<p>附2：参考几个StackOverflow的问题：</p>
+<ol>
+<li><a href="https://stackoverflow.com/questions/47698552/how-to-check-if-template-argument-is-a-callable-with-a-given-signature">check-template-argument</a></li>
+<li><a href="https://stackoverflow.com/questions/26792750/function-signatures-in-c-templates">function-signature</a></li>
+<li><a href="https://stackoverflow.com/questions/16868129/how-to-store-variadic-template-arguments">store-template-pack</a></li>
+<li><a href="https://stackoverflow.com/questions/7858817/unpacking-a-tuple-to-call-a-matching-function-pointer">unpack-a-tuple</a></li>
+</ol>
+</li>
+</ul>
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/parameter_pack/" rel="tag">parameter_pack</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/template/" rel="tag">template</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="RadianK avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 RadianK</span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">lsm读写放大分析（r1）</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">enable_shared_from_this的实现和CRTP Idiom</p>
+		</a>
+	</div>
+</nav>
+
+<script src="https://utteranc.es/client.js" repo="Hazy2019/Hazy2019.github.io" issue-term="pathname"  label="utteranc-comment"  theme="github-light" crossorigin="anonymous" async></script>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索…" value="" name="q" aria-label="搜索…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/">enable_shared_from_this的实现和CRTP Idiom</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/">lsm读写放大分析（r1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/">lsm读写放大分析（r2）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/">recall of memory order model</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/algmnotes/">algmnotes</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/algorithm/">algorithm</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/c&#43;&#43;/">c&#43;&#43;</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/db/">DB</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/debugging/">debugging</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/other/">other</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lsm/" title="lsm">lsm (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-fence/" title="memory fence">memory fence (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/template/" title="template">template (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E4%BC%98%E5%8C%96/" title="读写放大优化">读写放大优化 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90/" title="读写放大分析">读写放大分析 (1)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社交</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/Hazy2019" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="Email" href="mailto:me2019@aliyun.com">
+				<svg class="widget-social__link-icon icon icon-mail" width="24" height="24" viewBox="0 0 416 288"><path d="m0 16v256 16h16 384 16v-16-256-16h-16-384-16zm347 16-139 92.5-139-92.5zm-148 125.5 9 5.5 9-5.5 167-111.5v210h-352v-210z"/></svg>
+				<span>me2019@aliyun.com</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> 主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/onload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-03-23T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-03-24T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -69,6 +69,66 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/" rel="bookmark">
+			c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-02-02T00:00:00Z">2021-02-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>几年前，整理了一份rvalue相关笔记：<a href="https://zhuanlan.zhihu.com/p/111826434">以前的一份笔记</a>，梳理近况时，发现某些问题还是没有弄清楚。</p>
+<h2 id="universal-reference"><code>Universal Reference</code></h2>
+<ul>
+<li>
+<p>Q: 什么场景下需要考虑这个问题？
+A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。</p>
+<p>c++11引入右值引用之后，上述问题可以通过<code>universal reference</code>来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。</p>
+</li>
+<li>
+<p>Q: 什么是<code>Universal Reference</code>?
+A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导</p>
+<blockquote>
+<p><code>G1</code>.
+If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
+</blockquote>
+</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/db_talk_about_sse/" rel="bookmark">
+			db笔记 - sse
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-02-01T00:00:00Z">2021-02-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h2 id="background">background</h2>
+<blockquote>
+<p>we would set env var <code>USE_SSE=1</code> when compiling Rocksdb, OTHERWISE it would always failed
+at linking stage where encountering errors of lack of some instructions such as:
+<code>no such instruction: </code>shlx %rdx,%rax,%rax'`.
+but what the fuck is USE_SSE ?</p>
+</blockquote>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_talk_about_sse/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/" rel="bookmark">
@@ -278,59 +338,12 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/algmnotes-longestpalindrome/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
-			算法笔记：计算1到n中2出现的个数
-			</a>
-		</h2>
-		<p class="list__lead post__lead">枚举</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
-<h2 id="问题">问题</h2>
-<p>给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。</p>
-<h2 id="思路">思路</h2>
-<h3 id="暴力">暴力</h3>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/algmnotes-count_2_of_a_number/">阅读全文…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
-			分布式笔记 - Raft（1）
-			</a>
-		</h2>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h3 id="qa">Q&amp;A</h3>
-<h5 id="线性一致性">线性一致性？</h5>
-<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
-<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
-<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/storage_deep_dive_for_raft/lec1/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/">«</a>
-	<span class="pagination__item pagination__item--current">2/3</span>
+	<span class="pagination__item pagination__item--current">2/4</span>
 	<a class="pagination__item pagination__item--next btn" href="/page/3/">»</a>
 </div>
 
@@ -348,11 +361,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/">enable_shared_from_this的实现和CRTP Idiom</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/">lsm读写放大分析（r1）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/">lsm读写放大分析（r2）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/">recall of memory order model</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/">wal recovery would cleanup at least the first WAL</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_some-details-about-rocksdblrucache/">some details about rocksdb::LRUCache</a></li>
 		</ul>
 	</div>
 </div>
@@ -396,9 +409,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lsm/" title="lsm">lsm (2)</a>
@@ -406,6 +421,7 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
@@ -415,6 +431,7 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/template/" title="template">template (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
