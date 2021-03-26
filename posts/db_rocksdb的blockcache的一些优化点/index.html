@@ -4,45 +4,37 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>wal recovery would cleanup at least the first WAL - Bad Fd</title>
+	<title>rocksdb的blockcache的一些优化点 - Bad Fd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="wal recovery would cleanup at least the first WAL" />
-<meta property="og:description" content="这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。
+		<meta property="og:title" content="rocksdb的blockcache的一些优化点" />
+<meta property="og:description" content="引子
+记一些突然间的想法，防止后续忘了，以下是正文。
+blockcahe的问题
+rocksdb的blockcache目前遇到的，主要有：
 
-some tips for rocksdb case fixing
-
-
-对于不支持-march=native环境的，可以编译时export USE_SSE=1.避免类似no such instruction: shlx %r13,%rax,%rax&#39;`的问题。
-
-
-对于rocksdb的测试case，想保留测试db的，可以搞个KEEP_DB环境变量。测试类会根据这个环境变量决定是否清理测试DB。
-
+官方实现中没有回收机制.
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/" />
-<meta property="article:published_time" content="2021-03-09T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-03-09T00:00:00+00:00" />
+<meta property="og:url" content="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/" />
+<meta property="article:published_time" content="2021-03-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-03-26T00:00:00+00:00" />
 
-		<meta itemprop="name" content="wal recovery would cleanup at least the first WAL">
-<meta itemprop="description" content="这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。
+		<meta itemprop="name" content="rocksdb的blockcache的一些优化点">
+<meta itemprop="description" content="引子
+记一些突然间的想法，防止后续忘了，以下是正文。
+blockcahe的问题
+rocksdb的blockcache目前遇到的，主要有：
 
-some tips for rocksdb case fixing
-
-
-对于不支持-march=native环境的，可以编译时export USE_SSE=1.避免类似no such instruction: shlx %r13,%rax,%rax&#39;`的问题。
-
-
-对于rocksdb的测试case，想保留测试db的，可以搞个KEEP_DB环境变量。测试类会根据这个环境变量决定是否清理测试DB。
-
+官方实现中没有回收机制.
 ">
-<meta itemprop="datePublished" content="2021-03-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-03-09T00:00:00+00:00" />
-<meta itemprop="wordCount" content="24">
+<meta itemprop="datePublished" content="2021-03-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-03-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="123">
 
 
 
-<meta itemprop="keywords" content="rocksdb,write-ahead-log,rocksdb-recovery," />
+<meta itemprop="keywords" content="rocksdb,blockcache," />
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -96,40 +88,67 @@ some tips for rocksdb case fixing
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">wal recovery would cleanup at least the first WAL</h1>
+			<h1 class="post__title">rocksdb的blockcache的一些优化点</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-09T00:00:00Z">2021-03-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-26T00:00:00Z">2021-03-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
 	</span>
 </div></div>
-		</header>
-<div class="post__toc toc">
-	<div class="toc__title">目录</div>
-	<div class="toc__menu">
-		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#heading"></a></li>
-    <li><a href="#some-tips-for-rocksdb-case-fixing">some tips for rocksdb case fixing</a></li>
-  </ul>
-</nav>
-	</div>
-</div><div class="content post__content clearfix">
-			<p>这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。</p>
-<h2 id="heading"></h2>
-<h2 id="some-tips-for-rocksdb-case-fixing">some tips for rocksdb case fixing</h2>
+		</header><div class="content post__content clearfix">
+			<h1 id="引子">引子</h1>
+<p>记一些突然间的想法，防止后续忘了，以下是正文。</p>
+<h1 id="blockcahe的问题">blockcahe的问题</h1>
+<p>rocksdb的blockcache目前遇到的，主要有：</p>
 <ol>
-<li>
-<p>对于不支持<code>-march=native</code>环境的，可以编译时<code>export USE_SSE=1</code>.避免类似<code>no such instruction: </code>shlx %r13,%rax,%rax'`的问题。</p>
-</li>
-<li>
-<p>对于rocksdb的测试case，想保留测试db的，可以搞个<code>KEEP_DB</code>环境变量。测试类会根据这个环境变量决定是否清理测试DB。</p>
-</li>
+<li>官方实现中没有回收机制.</li>
 </ol>
+<p>因为线上存在一些slave实例，默认不对外提供服务（有些集群允许slave读），某些节点从主切为从之后，blockcache会一直占用。
+这就造成了线上机器的内存资源可能在被slave占用，但又不提供服务，造成内存浪费，亟需资源的master有时却没有足够的内存使用。
+据统计，在日常内存水位报警较多的机器上，slave持有了近20%-30%的内存用量。</p>
+<ol start="2">
+<li>官方实现在5.7之前blockcache的用量统计是不准确的，没有把handler计入。</li>
+</ol>
+<p>这个问题就造成了内存时常用超的问题，比如配置了10GBblockcache，但最终发现该进程的内存使用达到15GB甚至20GB。</p>
+<p>对于以上两点，我们做过一些尝试：1. 计算内存更准确一些。2.定期回收blockcache中lru链表表尾部分的一些元素。这也是很多其他厂的方案。</p>
 <ol start="3">
-<li>example测试命令如下:</li>
+<li>再进一步，blockcache在我们的使用场景下也会存index和filter，也就是开启所谓的<code>cache_index_and_filter_blocks</code>选项. 由于
+blockcache是sharding的，每个shard由一个锁来保护，为了降低锁竞争的概率，一种做法就是加大shard数。但在总大小确定的情况下，
+shard数越大，每个shard的可允许用量越小，对于block较大的场景下（较大的sstable的index块和filter块），每个shard可承载的block数很小。
+造成换入换出严重。极端场景下，blockcache将无法cache超大index块，导致的现象就是进程内存持续地没有吃上来，但端到端耗时达到百毫秒级别。</li>
 </ol>
-<pre><code>export USE_SSE=1 &amp;&amp; make db_wal_test &amp;&amp; KEEP_DB=1 ./db_wal_test --gtest_filter=DBWALTest.RecoveryWithLogDataForSomeCFs
-</code></pre>
+<p>对于上述这点，官方有个尝试，就是所谓的partition metadata方案，这个方案希望把sst内的大的index块和filter块拆分为小块。
+附：sstable的格式（默认）</p>
+<pre><code>&lt;beginning_of_file&gt;
+[data block 1]
+[data block 2]
+...
+[data block N]
+[meta block 1: filter block]                  (see section: &quot;filter&quot; Meta Block)
+[meta block 2: index block]
+[meta block 3: compression dictionary block]  (see section: &quot;compression dictionary&quot; Meta Block)
+[meta block 4: range deletion block]          (see section: &quot;range deletion&quot; Meta Block)
+[meta block 5: stats block]                   (see section: &quot;properties&quot; Meta Block)
+...
+[meta block K: future extended block]  (we may add more meta blocks in the future)
+[metaindex block]
+[Footer]                               (fixed size; starts at file_size - sizeof(Footer))
+&lt;end_of_file&gt;
+</code></pre><p>可以看到sst的index block和filter block只有1个，通过sst_dump可以查看sst的index和filterblock的大小，我们可以发现当sst大小为256MB或512MB时，这两个块大小可能达到30-50MB的级别,如果shard数
+设置太大，导致单shard小于这个大小，就会有问题。</p>
+<p>另外这个问题也可通过控制sst的大小来解决：target_file_size_base = xxx（如64MB），target_file_size_multiplier=xxx（如1）。</p>
+<ol start="4">
+<li>再再再进一步，因为lsm都是异地更新的，生成的sst都是只读的，一旦compact完成，compact的源sst就属于废弃版本了，但这些sst的block可能还留存在blockcahce里。可能造成一些资源浪费。</li>
+</ol>
+<p>这个问题可以通过compact后新生成的sst预取到blockcache中来解决，但又有个问题就是如果任意的sst都预取也不太好，因为你不知道新生成的sst哪些是可能在将来会被读到的。上层业务完全可能是只写（或大量写）业务，
+少量读，对于这种业务，用这个预取策略又可能造成blockcahe被填满，但其实业务并不需要读（解决办法比较粗暴的就是设置小一点的blockcache）。</p>
+<p>#总结</p>
+<p>blockcache存在的一些问题：</p>
+<ol>
+<li>blockcache没有回收</li>
+<li>blockcache用量统计不准确</li>
+<li>blockcache的sharding方案对于大block不友好</li>
+<li>compact的源SST的block可能还残留在blockcache中，会lazy地被替换走</li>
+</ol>
 		</div>
 		<footer class="post__footer">
 			
@@ -140,10 +159,7 @@ some tips for rocksdb case fixing
 			<a class="tags__link btn" href="/tags/rocksdb/" rel="tag">rocksdb</a>
 		</li>
 		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/write-ahead-log/" rel="tag">write-ahead-log</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/rocksdb-recovery/" rel="tag">rocksdb-recovery</a>
+			<a class="tags__link btn" href="/tags/blockcache/" rel="tag">blockcache</a>
 		</li>
 	</ul>
 </div>
@@ -165,15 +181,9 @@ some tips for rocksdb case fixing
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/db_some-details-about-rocksdblrucache/" rel="prev">
+		<a class="pager__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">some details about rocksdb::LRUCache</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">recall of memory order model</p>
+			<p class="pager__title">enable_shared_from_this的实现和CRTP Idiom</p>
 		</a>
 	</div>
 </nav>

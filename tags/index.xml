@@ -6,7 +6,25 @@
     <description>Recent content in Tags on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 24 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>blockcache</title>
+      <link>/tags/blockcache/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/blockcache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rocksdb</title>
+      <link>/tags/rocksdb/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rocksdb/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>CRTP</title>
       <link>/tags/crtp/</link>
@@ -85,15 +103,6 @@
       <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>/tags/memory-order/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rocksdb</title>
-      <link>/tags/rocksdb/</link>
-      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rocksdb/</guid>
       <description></description>
     </item>
     

@@ -6,7 +6,22 @@
     <description>Recent content in DB on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 23 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/db/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/db/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>rocksdb的blockcache的一些优化点</title>
+      <link>/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/</link>
+      <pubDate>Fri, 26 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/</guid>
+      <description>&lt;h1 id=&#34;引子&#34;&gt;引子&lt;/h1&gt;
+&lt;p&gt;记一些突然间的想法，防止后续忘了，以下是正文。&lt;/p&gt;
+&lt;h1 id=&#34;blockcahe的问题&#34;&gt;blockcahe的问题&lt;/h1&gt;
+&lt;p&gt;rocksdb的blockcache目前遇到的，主要有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;官方实现中没有回收机制.&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
     <item>
       <title>lsm读写放大分析（r1）</title>
       <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</link>

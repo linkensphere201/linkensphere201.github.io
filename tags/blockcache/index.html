@@ -4,45 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>wal recovery would cleanup at least the first WAL - Bad Fd</title>
+	<title>blockcache - Bad Fd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="wal recovery would cleanup at least the first WAL" />
-<meta property="og:description" content="这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。
+		<meta property="og:title" content="blockcache" />
+<meta property="og:description" content="a place to find myself" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="/tags/blockcache/" />
+<meta property="og:updated_time" content="2021-03-26T00:00:00+00:00" />
 
-some tips for rocksdb case fixing
-
-
-对于不支持-march=native环境的，可以编译时export USE_SSE=1.避免类似no such instruction: shlx %r13,%rax,%rax&#39;`的问题。
-
-
-对于rocksdb的测试case，想保留测试db的，可以搞个KEEP_DB环境变量。测试类会根据这个环境变量决定是否清理测试DB。
-
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/" />
-<meta property="article:published_time" content="2021-03-09T00:00:00+00:00" />
-<meta property="article:modified_time" content="2021-03-09T00:00:00+00:00" />
-
-		<meta itemprop="name" content="wal recovery would cleanup at least the first WAL">
-<meta itemprop="description" content="这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。
-
-some tips for rocksdb case fixing
-
-
-对于不支持-march=native环境的，可以编译时export USE_SSE=1.避免类似no such instruction: shlx %r13,%rax,%rax&#39;`的问题。
-
-
-对于rocksdb的测试case，想保留测试db的，可以搞个KEEP_DB环境变量。测试类会根据这个环境变量决定是否清理测试DB。
-
-">
-<meta itemprop="datePublished" content="2021-03-09T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2021-03-09T00:00:00+00:00" />
-<meta itemprop="wordCount" content="24">
-
-
-
-<meta itemprop="keywords" content="rocksdb,write-ahead-log,rocksdb-recovery," />
+		<meta itemprop="name" content="blockcache">
+<meta itemprop="description" content="a place to find myself">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -52,6 +24,7 @@ some tips for rocksdb case fixing
 
 	<link rel="stylesheet" href="/css/style.css">
 	
+	<link rel="alternate" type="application/rss+xml" href="/tags/blockcache/index.xml" title="Bad Fd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -93,96 +66,41 @@ some tips for rocksdb case fixing
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">wal recovery would cleanup at least the first WAL</h1>
-			<div class="post__meta meta">
+<main class="main list" role="main">
+	<header class="main__header">
+		<h1 class="main__title">blockcache</h1>
+	</header><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/" rel="bookmark">
+			rocksdb的blockcache的一些优化点
+			</a>
+		</h2>
+		<div class="list__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-09T00:00:00Z">2021-03-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-26T00:00:00Z">2021-03-26</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
 	</span>
 </div></div>
-		</header>
-<div class="post__toc toc">
-	<div class="toc__title">目录</div>
-	<div class="toc__menu">
-		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#heading"></a></li>
-    <li><a href="#some-tips-for-rocksdb-case-fixing">some tips for rocksdb case fixing</a></li>
-  </ul>
-</nav>
-	</div>
-</div><div class="content post__content clearfix">
-			<p>这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。</p>
-<h2 id="heading"></h2>
-<h2 id="some-tips-for-rocksdb-case-fixing">some tips for rocksdb case fixing</h2>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h1 id="引子">引子</h1>
+<p>记一些突然间的想法，防止后续忘了，以下是正文。</p>
+<h1 id="blockcahe的问题">blockcahe的问题</h1>
+<p>rocksdb的blockcache目前遇到的，主要有：</p>
 <ol>
-<li>
-<p>对于不支持<code>-march=native</code>环境的，可以编译时<code>export USE_SSE=1</code>.避免类似<code>no such instruction: </code>shlx %r13,%rax,%rax'`的问题。</p>
-</li>
-<li>
-<p>对于rocksdb的测试case，想保留测试db的，可以搞个<code>KEEP_DB</code>环境变量。测试类会根据这个环境变量决定是否清理测试DB。</p>
-</li>
+<li>官方实现中没有回收机制.</li>
 </ol>
-<ol start="3">
-<li>example测试命令如下:</li>
-</ol>
-<pre><code>export USE_SSE=1 &amp;&amp; make db_wal_test &amp;&amp; KEEP_DB=1 ./db_wal_test --gtest_filter=DBWALTest.RecoveryWithLogDataForSomeCFs
-</code></pre>
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/rocksdb/" rel="tag">rocksdb</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/write-ahead-log/" rel="tag">write-ahead-log</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/rocksdb-recovery/" rel="tag">rocksdb-recovery</a>
-		</li>
-	</ul>
-</div>
-		</footer>
-	</article>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">阅读全文…</a>
+	</div>
+</article>
 </main>
-
-<div class="authorbox clearfix">
-	<figure class="authorbox__avatar">
-		<img alt="RadianK avatar" src="/img/avatar.png" class="avatar" height="90" width="90">
-	</figure>
-	<div class="authorbox__header">
-		<span class="authorbox__name">关于 RadianK</span>
-	</div>
-	<div class="authorbox__description">
-		a c/c++ programmer.
-	</div>
-</div>
-
-<nav class="pager flex">
-	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/posts/db_some-details-about-rocksdblrucache/" rel="prev">
-			<span class="pager__subtitle">«&thinsp;上一篇</span>
-			<p class="pager__title">some details about rocksdb::LRUCache</p>
-		</a>
-	</div>
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/" rel="next">
-			<span class="pager__subtitle">下一篇&thinsp;»</span>
-			<p class="pager__title">recall of memory order model</p>
-		</a>
-	</div>
-</nav>
-
-<script src="https://utteranc.es/client.js" repo="Hazy2019/Hazy2019.github.io" issue-term="pathname"  label="utteranc-comment"  theme="github-light" crossorigin="anonymous" async></script>
 
 
 			</div>
-			<aside class="sidebar"><div class="widget-search widget">
+			
+<aside class="sidebar sidebar--left"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="搜索…" value="" name="q" aria-label="搜索…">
@@ -310,7 +228,5 @@ some tips for rocksdb case fixing
 </footer>
 	</div>
 <script async defer src="/js/menu.js"></script>
-<script src="/js/onload.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
-</body>
+<script src="/js/onload.js"></script></body>
 </html>
