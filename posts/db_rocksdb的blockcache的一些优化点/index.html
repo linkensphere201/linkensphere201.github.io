@@ -30,7 +30,7 @@ rocksdb的blockcache目前遇到的，主要有：
 ">
 <meta itemprop="datePublished" content="2021-03-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-03-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="123">
+<meta itemprop="wordCount" content="124">
 
 
 
@@ -116,8 +116,9 @@ blockcache是sharding的，每个shard由一个锁来保护，为了降低锁竞
 shard数越大，每个shard的可允许用量越小，对于block较大的场景下（较大的sstable的index块和filter块），每个shard可承载的block数很小。
 造成换入换出严重。极端场景下，blockcache将无法cache超大index块，导致的现象就是进程内存持续地没有吃上来，但端到端耗时达到百毫秒级别。</li>
 </ol>
-<p>对于上述这点，官方有个尝试，就是所谓的partition metadata方案，这个方案希望把sst内的大的index块和filter块拆分为小块。
-附：sstable的格式（默认）</p>
+<p>对于上述这点，官方有个尝试，就是所谓的partition metadata方案[1]，这个方案希望把sst内的大的index块和filter块拆分为小块。
+附1：<a href="https://github.com/facebook/rocksdb/blob/5.17.fb/include/rocksdb/table.h#L175-L180">partition-metadata</a>
+附2：sstable的格式（默认）</p>
 <pre><code>&lt;beginning_of_file&gt;
 [data block 1]
 [data block 2]
