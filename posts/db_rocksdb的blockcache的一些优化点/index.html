@@ -30,7 +30,7 @@ rocksdb的blockcache目前遇到的，主要有：
 ">
 <meta itemprop="datePublished" content="2021-03-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-03-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="124">
+<meta itemprop="wordCount" content="166">
 
 
 
@@ -142,13 +142,27 @@ shard数越大，每个shard的可允许用量越小，对于block较大的场�
 </ol>
 <p>这个问题可以通过compact后新生成的sst预取到blockcache中来解决，但又有个问题就是如果任意的sst都预取也不太好，因为你不知道新生成的sst哪些是可能在将来会被读到的。上层业务完全可能是只写（或大量写）业务，
 少量读，对于这种业务，用这个预取策略又可能造成blockcahe被填满，但其实业务并不需要读（解决办法比较粗暴的就是设置小一点的blockcache）。</p>
+<p>总结一下第4个问题，我们需要：1. compact后的stale block稍快速点地被逐出。 2.compact后的新block按需加载到blockcache中。这两点做起来其实不难，其中第2点在<a href="https://dl.acm.org/doi/pdf/10.1145/3299869.3314041">x-engine的paper</a>里似乎有提到。</p>
+<p>附3.1：Varint64编码</p>
+<pre><code>每个byte的第1个bit用于标识是否结束(1-还没结束， 0-结束)。后续7个bit为payload。
+对于小一点的数字，可以节省bytes数。但对于大的数字则需要更多bytes数存储，例如full 64bit的数据需要10Bytes。
+</code></pre><p>附3.2：cachekey长什么样子？</p>
+<pre><code>基于rocksdb-v6.15：*PosixHelper::GetUniqueIdFromFile*/*BlockBasedTable::GetCacheKey*
+1个block的cachekey分2部分，第一部分是prefix（长度为3*max-len-of-varint64+1）,第二部分是该block在sst内的偏移
+1. 在posix-env下，prefix编码如下：
+ rid = EncodeVarint64(rid, buf.st_dev); // 所在sst文件的st_dev
+ rid = EncodeVarint64(rid, buf.st_ino); // 所在sst文件的st_ino
+ rid = EncodeVarint64(rid, uversion);   // 所在sst文件的inode版本号，通过*ioctl FS_IOC_GETVERSION*获取
+2. 接着再追加添加一个varint64
+ EncodeVarint64(cache_key + cache_key_prefix_size, handle.offset())
+</code></pre><p>基于附3.2，我们可以有办法得知compact相关的stale block和generated block是否在blockcache中。当然这样直接去请求blockcahe会增加一些锁开销的。还可以进一步优化。后招天马行空，就先不讨论了。</p>
 <h1 id="总结">总结</h1>
 <p>blockcache存在的一些问题：</p>
 <ol>
 <li>blockcache没有回收</li>
 <li>blockcache用量统计不准确</li>
 <li>blockcache的sharding方案对于大block不友好</li>
-<li>compact的源SST的block可能还残留在blockcache中，会lazy地被替换走</li>
+<li>compact的源SST的block可能还残留在blockcache中（只会在blockcache满了之后lazy地被逐出），但同时新生成的sst的block又不会「智能地」预取到blockcache中，造成资源浪费.</li>
 </ol>
 		</div>
 		<footer class="post__footer">
@@ -187,6 +201,12 @@ shard数越大，每个shard的可允许用量越小，对于block较大的场�
 			<p class="pager__title">enable_shared_from_this的实现和CRTP Idiom</p>
 		</a>
 	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" rel="next">
+			<span class="pager__subtitle">下一篇&thinsp;»</span>
+			<p class="pager__title">类redis-list的持久化编码和复杂度分析</p>
+		</a>
+	</div>
 </nav>
 
 <script src="https://utteranc.es/client.js" repo="Hazy2019/Hazy2019.github.io" issue-term="pathname"  label="utteranc-comment"  theme="github-light" crossorigin="anonymous" async></script>
@@ -206,11 +226,11 @@ shard数越大，每个shard的可允许用量越小，对于block较大的场�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">类redis-list的持久化编码和复杂度分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/">enable_shared_from_this的实现和CRTP Idiom</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/">lsm读写放大分析（r1）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/">lsm读写放大分析（r2）</a></li>
 		</ul>
 	</div>
 </div>
@@ -268,6 +288,7 @@ shard数越大，每个shard的可允许用量越小，对于block较大的场�
 		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/redis-list/" title="redis list">redis list (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
@@ -282,6 +303,7 @@ shard数越大，每个shard的可允许用量越小，对于block较大的场�
 		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" title="复杂度分析">复杂度分析 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (3)</a>

@@ -16,5 +16,5 @@ function GetRandomWall(){
 }
 function onLoad() {
   console.log('loaded!');
-  GetRandomWall()
+  // GetRandomWall()
 }
