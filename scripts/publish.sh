@@ -10,5 +10,5 @@ filechanged=$(git status);
 echo "publish msg: $msg";
 echo "file changed: $filechanged";
 git commit -m "$msg";
-git push origin main
+proxychains4 git push origin main
 cd -
