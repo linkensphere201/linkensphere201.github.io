@@ -387,8 +387,8 @@ select {
   width: 100%;
   border-bottom: 3px solid red;
   background: url(https://w.wallhaven.cc/full/5d/wallhaven-5dm3y1.jpg) no-repeat;
-  background-size: 100% auto;
-  background-position: center;
+　background-size:cover;
+　background-position: center center;
 }
 
 .logo__link {
