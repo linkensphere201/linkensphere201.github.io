@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 29 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>旅游</title>
+      <link>/tags/%E6%97%85%E6%B8%B8/</link>
+      <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/%E6%97%85%E6%B8%B8/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>redis list</title>
       <link>/tags/redis-list/</link>
