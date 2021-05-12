@@ -4,37 +4,12 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/other/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/%E6%97%85%E6%B8%B8/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/other_%E8%B4%B4%E5%BF%83%E8%8A%B1%E4%BA%863%E5%B0%8F%E6%97%B6%E6%88%91%E7%BB%99%E8%80%81%E5%A9%86%E6%95%B4%E7%90%86%E5%87%BA%E7%9C%81%E5%86%85%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E9%A1%B9%E7%9B%AE/</loc>
-    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -43,7 +18,17 @@
   </url>
   
   <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/redis-list/</loc>
+    <lastmod>2021-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
     <lastmod>2021-03-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -184,6 +169,11 @@
   
   <url>
     <loc>/posts/db_dailywork_digest_ver3.4/</loc>
+    <lastmod>2021-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/other/</loc>
     <lastmod>2021-03-04T00:00:00+00:00</lastmod>
   </url>
   
