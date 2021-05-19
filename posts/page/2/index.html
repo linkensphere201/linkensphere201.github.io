@@ -11,7 +11,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2021-03-29T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-05-19T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="a place to find myself">
@@ -70,6 +70,31 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+		<h2 class="list__title post__title">
+			<a href="/posts/db_dailywork_digest_ver3.4/" rel="bookmark">
+			digest of 3.4
+			</a>
+		</h2>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-04T00:00:00Z">2021-03-04</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/other/" rel="category">other</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<ol start="0">
+<li>rvalue references summary (50%)
+impl of std::forward, std::move
+0.1.1 acquire &amp; release semantics
+<a href="https://en.cppreference.com/w/cpp/atomic/memory_order">https://en.cppreference.com/w/cpp/atomic/memory_order</a>
+<a href="https://www.modernescpp.com/index.php/acquire-release-semantic">https://www.modernescpp.com/index.php/acquire-release-semantic</a></li>
+</ol>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/db_dailywork_digest_ver3.4/">阅读全文…</a>
+	</div>
+</article><article class="list__item post">
 	<header class="list__header">
 		<h2 class="list__title post__title">
 			<a href="/posts/db_txn_lec1/" rel="bookmark">
@@ -309,36 +334,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/cppnote-server_rpc_notes/">阅读全文…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h2 class="list__title post__title">
-			<a href="/posts/cppnotes-server_rpc_notes/" rel="bookmark">
-			c&#43;&#43;服务端rpc笔记：读muduo有感
-			</a>
-		</h2>
-		<p class="list__lead post__lead">rpc框架</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。</p>
-<h3 id="连接处理模型">连接处理模型</h3>
-<ul>
-<li>
-<p>A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的：
-a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。</p>
-</li>
-<li>
-<p>A的cli端的处理是同步的：</p>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/cppnotes-server_rpc_notes/">阅读全文…</a>
-	</div>
 </article>
 </main>
 
@@ -363,11 +358,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/%E5%85%B6%E4%BB%96_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/">关于cmake找不到package</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">类redis-list的持久化编码和复杂度分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/">enable_shared_from_this的实现和CRTP Idiom</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/">lsm读写放大分析（r1）</a></li>
 		</ul>
 	</div>
 </div>
@@ -410,6 +405,7 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/blockcache/" title="blockcache">blockcache (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cmake/" title="cmake">cmake (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
