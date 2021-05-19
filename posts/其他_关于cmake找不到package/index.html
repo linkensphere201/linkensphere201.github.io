@@ -20,7 +20,7 @@
 可以设置cmake的搜索路径，显式编译，类似以下:">
 <meta itemprop="datePublished" content="2021-05-19T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-05-19T00:00:00+00:00" />
-<meta itemprop="wordCount" content="7">
+<meta itemprop="wordCount" content="12">
 
 
 
@@ -87,7 +87,8 @@
 		</header><div class="content post__content clearfix">
 			<p>经常苦于cmake的find_package无法找到某个包（包括libxxx.so和其include files）
 可以设置cmake的搜索路径，显式编译，类似以下:</p>
-e><p>注意这三个宏，分别代表：</p>
+<pre><code>cmake ../xxx -DCMAKE_INSTALL_PREFIX=${WKSPACEINSTALL} -DCMAKE_INCLUDE_PATH=${ME_INC} -DCMAKE_LIBRARY_PATH=${ME_LIB}&quot;
+</code></pre><p>注意这三个宏，分别代表：</p>
 <ul>
 <li><code>-DCMAKE_INSTALL_PREFIX</code>：安装路径</li>
 <li><code>-DCMAKE_INCLUDE_PATH</code>：头文件包含路径,多个路径用冒号<code>:</code>分隔</li>
