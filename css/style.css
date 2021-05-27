@@ -679,6 +679,9 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
   color: #404040;
   font-style:italic;
 }
+.post__inner {
+  font-style:normal;
+}
 
 .content a,
 .warning a,

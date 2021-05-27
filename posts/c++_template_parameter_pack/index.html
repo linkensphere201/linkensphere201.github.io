@@ -104,7 +104,7 @@ libevent的回调类似：void LibeventCallback(int fd, short flag, void* arg);
   </ul>
 </nav>
 	</div>
-</div><div class="content post__content clearfix">
+</div><div class="content post__content post__inner clearfix">
 			<h2 id="需求">需求</h2>
 <p>做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
 libevent的回调类似：<code>void LibeventCallback(int fd, short flag, void* arg);</code></p>
