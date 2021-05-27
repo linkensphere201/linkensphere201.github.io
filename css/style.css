@@ -1217,6 +1217,10 @@ textarea {
 	text-decoration: underline;
 }
 
+h2.list__title.post__title {
+  padding-left: 10px;
+}
+
 /* quote */
 blockquote {
 	font-weight: 100;
@@ -1225,12 +1229,13 @@ blockquote {
 	line-height: 1.4;
 	position: relative;
 	margin: 0;
-	padding: .5rem;
+  border-left: 0;
 }
 
 blockquote:before,
 blockquote:after {
-	position: absolute;
+	font-family: 'Source Sans Pro', sans-serif;
+  position: absolute;
 	color: #f1efe6;
 	font-size: 8rem;
 	width: 4rem;
