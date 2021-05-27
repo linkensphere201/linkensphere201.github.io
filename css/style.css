@@ -676,6 +676,10 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 	width: 100%;
 }
 
+.post__content {
+  color: #404040;
+}
+
 .content a,
 .warning a,
 .authorbox__description a {
@@ -892,7 +896,6 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
 .list__title {
 	font-size: 20px;
   font-size: 1.75rem;
-  text-transform: uppercase;
 }
 
 .list__meta {
