@@ -428,6 +428,7 @@ select {
 
 .logo--mixed .logo__text {
 	padding: 0rem;
+  color:#e6e6e6;
 }
 
 .logo__title {
@@ -441,6 +442,7 @@ select {
 
 .logo__title_fr {
   font-size: 0.875rem;
+  color:#e6e6e6;
   font-family: 'DotGothic16';
 }
 
