@@ -415,7 +415,6 @@ select {
 
 .logo__texttitle {
   margin-top: 6px;
-  font-family: 'Permanent Marker', cursive;
 }
 
 .logo--mixed .logo__item {
@@ -435,7 +434,7 @@ select {
 .logo__title {
 	font-size: 32px;
 	font-size: 2.75rem;
-  font-family: 'DotGothic16','Open Sans', Helvetica, Arial, sans-serif;
+  font-family: 'Permanent Marker', cursive;
 	font-weight: 500;
 	line-height: 1;
 	color: #e6e6e6;
