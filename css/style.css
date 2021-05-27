@@ -386,7 +386,7 @@ select {
   float: left;
   width: 100%;
   border-bottom: 3px solid red;
-  background: url('/resources/banner.jpg') no-repeat;
+  background: url('/resources/banner1.png') no-repeat;
   background-size: 100% auto;
   background-position: center;
 }
