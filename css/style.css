@@ -1222,7 +1222,7 @@ h2.list__title.post__title {
 }
 
 /* quote */
-blockquote {
+blockquote.headline {
 	font-weight: 100;
 	font-size: 2rem;
 	max-width: 600px;
@@ -1232,7 +1232,7 @@ blockquote {
   border-left: 0;
 }
 
-blockquote:before {
+blockquote.headline:before {
 	font-family: 'Source Sans Pro', sans-serif;
   position: absolute;
 	color: #f1efe6;
@@ -1241,7 +1241,7 @@ blockquote:before {
 	height: 4rem;
 }
 
-blockquote:before {
+blockquote.headline:before {
 	content: '「';
 	left: -3rem;
 	top: -1.5rem;
