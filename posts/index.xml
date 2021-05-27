@@ -8,12 +8,13 @@
     <language>zh-cn</language>
     <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>关于cmake找不到package</title>
-      <link>/posts/%E5%85%B6%E4%BB%96_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</link>
+      <title>cmake cheatsheet：找不到package; PUBLIC依赖和PRIVATE依赖; ...</title>
+      <link>/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</link>
       <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>/posts/%E5%85%B6%E4%BB%96_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</guid>
-      <description>&lt;p&gt;经常苦于cmake的find_package无法找到某个包（包括libxxx.so和其include files）
+      <guid>/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</guid>
+      <description>&lt;h3 id=&#34;cannot-find-a-package&#34;&gt;cannot find a package&lt;/h3&gt;
+&lt;p&gt;经常苦于cmake的find_package无法找到某个包（包括libxxx.so和其include files）
 可以设置cmake的搜索路径，显式编译，类似以下:&lt;/p&gt;</description>
     </item>
     

@@ -413,6 +413,10 @@ select {
 .logo__text {
 }
 
+.logo__texttitle {
+  margin-top: 15px;
+}
+
 .logo--mixed .logo__item {
 	margin: .5rem auto;
 }
