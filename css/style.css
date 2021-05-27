@@ -1243,8 +1243,8 @@ blockquote:before {
 
 blockquote:before {
 	content: '「';
-	left: -1.2rem;
-	top: -3rem;
+	left: -4rem;
+	top: -2rem;
 }
 
 /* quote */
