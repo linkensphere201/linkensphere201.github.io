@@ -415,6 +415,7 @@ select {
 
 .logo__texttitle {
   margin-top: 6px;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .logo--mixed .logo__item {
