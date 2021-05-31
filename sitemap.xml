@@ -4,16 +4,51 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/c&#43;&#43;/</loc>
-    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/debug-tools/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/debugging/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lsb-standard/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/</loc>
+    <lastmod>2021-05-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/c&#43;&#43;/</loc>
     <lastmod>2021-05-30T00:00:00+00:00</lastmod>
   </url>
   
@@ -39,16 +74,6 @@
   
   <url>
     <loc>/categories/other/</loc>
-    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-05-30T00:00:00+00:00</lastmod>
   </url>
   
@@ -444,10 +469,6 @@
   
   <url>
     <loc>/tags/debug/</loc>
-  </url>
-  
-  <url>
-    <loc>/categories/debugging/</loc>
   </url>
   
   <url>

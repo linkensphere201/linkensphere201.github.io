@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>debug-tools on Bad Fd</title>
+    <link>/tags/debug-tools/</link>
+    <description>Recent content in debug-tools on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 31 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/debug-tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>笔记：进程调试r1 - 工具</title>
+      <link>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

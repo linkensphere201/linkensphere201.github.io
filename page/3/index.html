@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-05-30T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-05-31T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -71,6 +71,64 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/algmnotes-skiplist/" rel="bookmark">
+			算法笔记：跳表（r1）
+			</a>
+		</h2>
+    </blockquote>
+		<p class="list__lead post__lead">skiplist</p>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
+<blockquote>
+<p>跳表是一种著名数据结构。</p>
+</blockquote>
+<p>原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。</p>
+<p>相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。</p>
+<p>本文主要讨论：</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/algmnotes-skiplist-impl/" rel="bookmark">
+			算法笔记：跳表（r2）
+			</a>
+		</h2>
+    </blockquote>
+		<p class="list__lead post__lead">skiplist</p>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h2 id="实现一个简单skiplist">实现一个简单skiplist</h2>
+<p>上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。</p>
+<p>然后由于好奇，我自己写了一个skiplist，这里记录下。</p>
+<p>该skiplist的特性：</p>
+<ul>
+<li>不支持concurrent</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist-impl/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -302,54 +360,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="list__footer-readmore" href="/posts/other_todolist/">阅读更多</a>
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/other_frequently-used-words/" rel="bookmark">
-			cheatsheet for FUW
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2016-11-07T21:20:49Z">2016-11-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h1 id="some-words-used-in-coding">some words used in coding</h1>
-<ul>
-<li>toggle</li>
-<li>quote</li>
-<li>snippet</li>
-<li>typo</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/other_frequently-used-words/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/other_thinkings/" rel="bookmark">
-			随想2
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2015-01-19T00:00:00Z">2015-01-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		  下面是一个hugo图像处理的示意 代码为    .Resize "300x"       .Resize "300x"      随想1
-  
-	</div>
-</article>
 
 </main>
 
@@ -373,11 +383,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/">笔记：进程调试r1 - 工具</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/">笔记：进程调试r2 - 理论&amp;标准</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/">cpp language questions that I&#39;ve encountered.</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_digest-of-5.25/">digest of 5.25</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/">cmake cheatsheet：找不到package; PUBLIC依赖和PRIVATE依赖; ...</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">类redis-list的持久化编码和复杂度分析</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
 		</ul>
 	</div>
 </div>
@@ -426,12 +436,14 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug-tools/" title="debug-tools">debug-tools (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/inl/" title="inl">inl (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lsb-standard/" title="LSB-Standard">LSB-Standard (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lsm/" title="lsm">lsm (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/memory-fence/" title="memory fence">memory fence (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
