@@ -6,7 +6,20 @@
     <description>Recent content in other on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/other/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/other/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>digest of 5.25</title>
+      <link>/posts/other_digest-of-5.25/</link>
+      <pubDate>Sun, 30 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/other_digest-of-5.25/</guid>
+      <description>&lt;p&gt;图数据库综述 RENZO ANGLES and CLAUDIO GUTIERREZ. Survey of graph database models[J]. ACM Computing Surveys, Vol. 40, No. 1, Article 1, Publication date: February 2008.
+about rocksdb&amp;rsquo;s BloomFilter: &lt;a href=&#34;https://github.com/facebook/rocksdb/wiki/RocksDB-Bloom-Filter&#34;&gt;https://github.com/facebook/rocksdb/wiki/RocksDB-Bloom-Filter&lt;/a&gt;
+whole_key_filtering &amp;ndash;&amp;gt; false的副作用
+check usage：std::enable_if_t .  std::decay_t
+check usage：folly::Future&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>cmake cheatsheet：找不到package; PUBLIC依赖和PRIVATE依赖; ...</title>
       <link>/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</link>

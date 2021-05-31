@@ -4,12 +4,57 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/c&#43;&#43;/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-05-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/digest/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/other_digest-of-5.25/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/inl/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/other/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/type_traits/</loc>
+    <lastmod>2021-05-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -19,21 +64,6 @@
   
   <url>
     <loc>/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/</loc>
-    <lastmod>2021-05-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/other/</loc>
-    <lastmod>2021-05-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2021-05-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-05-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -70,11 +100,6 @@
   <url>
     <loc>/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/</loc>
     <lastmod>2021-03-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/c&#43;&#43;/</loc>
-    <lastmod>2021-03-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -175,11 +200,6 @@
   <url>
     <loc>/posts/db_some-details-about-rocksdblrucache/</loc>
     <lastmod>2021-03-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/digest/</loc>
-    <lastmod>2021-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -408,6 +428,10 @@
   
   <url>
     <loc>/posts/cppnotes-stl-misc/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/c/c&#43;&#43;-idioms/</loc>
   </url>
   
   <url>

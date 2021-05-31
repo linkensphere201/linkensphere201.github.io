@@ -11,7 +11,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2021-05-19T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-05-30T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="a place to find myself">
@@ -72,6 +72,62 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/" rel="bookmark">
+			wal recovery would cleanup at least the first WAL
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-09T00:00:00Z">2021-03-09</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>这段时间跟同事尝试修复长期以来项目中遗留的Rocksdb的Case，遇到些有意思的Case，这里记录一下。</p>
+<h2 id="heading"></h2>
+<h2 id="some-tips-for-rocksdb-case-fixing">some tips for rocksdb case fixing</h2>
+<ol>
+<li>
+<p>对于不支持<code>-march=native</code>环境的，可以编译时<code>export USE_SSE=1</code>.避免类似<code>no such instruction: </code>shlx %r13,%rax,%rax'`的问题。</p>
+</li>
+<li>
+<p>对于rocksdb的测试case，想保留测试db的，可以搞个<code>KEEP_DB</code>环境变量。测试类会根据这个环境变量决定是否清理测试DB。</p>
+</li>
+</ol>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/db_wal-recovery-would-cleanup-at-least-the-first-wal/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/db_some-details-about-rocksdblrucache/" rel="bookmark">
+			some details about rocksdb::LRUCache
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-08T00:00:00Z">2021-03-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>最近有同事找我讨论问题，觉得挺有趣的记录一下。</p>
+<h3 id="rocksdblruhandlekey的历史"><code>rocksdb::LRUHandle::key()</code>的历史</h3>
+<p>第一个问题是<code>rocksdb::LRUHandle::key()</code>, 这个函数返回该handle内部存储的key，但为啥某些情况下却返回value呢？</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/db_some-details-about-rocksdblrucache/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -304,68 +360,6 @@ but what the fuck is USE_SSE ?</p>
 		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist-impl/">阅读更多</a>
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/db_some_questions_about_rocksdb/" rel="bookmark">
-			rocksdb探究 - 一些问题
-			</a>
-		</h2>
-    </blockquote>
-		<p class="list__lead post__lead">一些rocksdb相关问题记录</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-07T21:26:49&#43;08:00">2020-01-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rocksdb/" rel="category">rocksdb</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<ol>
-<li>写请求batch内的多个操作是否会被拆开，为什么？</li>
-<li>block-cache里的缓存项是否会因为某个sst被compact而失效？</li>
-<li>event-listener的实现</li>
-<li>perf-context的实现</li>
-<li>ThreadLocalPtr的实现以及为什么</li>
-</ol>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/db_some_questions_about_rocksdb/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/cppnote-server_rpc_notes/" rel="bookmark">
-			c&#43;&#43;服务端rpc笔记：读muduo有感
-			</a>
-		</h2>
-    </blockquote>
-		<p class="list__lead post__lead">rpc框架</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-12-01T21:26:49&#43;08:00">2018-12-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>最近比较详细地缕了一遍公司内部另一个团队的存储产品（基于apache thrift），后简称为A。到目前为止，本团队存储产品自研的rpc框架，加上自己写过一个简单rpc框架用于rdb实例分裂，已经接触了3个rpc框架。准备在这篇文章总结下一些个人感想。</p>
-<h3 id="连接处理模型">连接处理模型</h3>
-<ul>
-<li>
-<p>A的服务端：使用thrift-rpc的nonblock-server，连接处理模型是同步的：
-a. io线程在收到一个包后，会先把自己设为idle（具体点就是摘掉本线程上的可读写事件），扔给worker线程处理完成后再加回来。</p>
-</li>
-<li>
-<p>A的cli端的处理是同步的：</p>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/cppnote-server_rpc_notes/">阅读更多</a>
-	</div>
-</article>
 
 </main>
 
@@ -390,11 +384,11 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/">cpp language questions that I&#39;ve encountered.</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/other_digest-of-5.25/">digest of 5.25</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/">cmake cheatsheet：找不到package; PUBLIC依赖和PRIVATE依赖; ...</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/">类redis-list的持久化编码和复杂度分析</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/">enable_shared_from_this的实现和CRTP Idiom</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
 		</ul>
 	</div>
 </div>
@@ -436,16 +430,18 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 	<h4 class="widget__title">标签</h4>
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/blockcache/" title="blockcache">blockcache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/c/c&#43;&#43;-idioms/" title="c/c&#43;&#43;-idioms">c/c&#43;&#43;-idioms (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cmake/" title="cmake">cmake (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/inl/" title="inl">inl (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lsm/" title="lsm">lsm (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/memory-fence/" title="memory fence">memory fence (1)</a>
@@ -465,6 +461,7 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/template/" title="template">template (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/type_traits/" title="type_traits">type_traits (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
