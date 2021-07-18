@@ -42,24 +42,6 @@
     </item>
     
     <item>
-      <title>笔记：进程调试r1 - 工具</title>
-      <link>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</link>
-      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>笔记：进程调试r2 - 理论&amp;标准</title>
-      <link>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/</link>
-      <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>cpp language questions that I&#39;ve encountered.</title>
       <link>/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/</link>
       <pubDate>Sun, 30 May 2021 00:00:00 +0000</pubDate>
@@ -90,15 +72,6 @@ check usage：folly::Future&lt;/p&gt;</description>
       <description>&lt;h3 id=&#34;cannot-find-a-package&#34;&gt;cannot find a package&lt;/h3&gt;
 &lt;p&gt;经常苦于cmake的find_package无法找到某个包（包括libxxx.so和其include files）
 可以设置cmake的搜索路径，显式编译，类似以下:&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>类redis-list的持久化编码和复杂度分析</title>
-      <link>/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</link>
-      <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -136,24 +109,6 @@ check usage：folly::Future&lt;/p&gt;</description>
 libevent的回调类似：&lt;code&gt;void LibeventCallback(int fd, short flag, void* arg);&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;要求：
 1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>lsm读写放大分析（r1）</title>
-      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</link>
-      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>lsm读写放大分析（r2）</title>
-      <link>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</link>
-      <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</guid>
-      <description></description>
     </item>
     
     <item>
@@ -282,18 +237,6 @@ at linking stage where encountering errors of lack of some instructions such as:
 &lt;code&gt;no such instruction: &lt;/code&gt;shlx %rdx,%rax,%rax&#39;`.
 but what the fuck is USE_SSE ?&lt;/p&gt;
 &lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>翻车笔记</title>
-      <link>/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/</link>
-      <pubDate>Fri, 22 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/</guid>
-      <description>&lt;h2 id=&#34;引子&#34;&gt;引子&lt;/h2&gt;
-&lt;p&gt;很煞笔的一天，最近两次面试的试水都挂了（但之前面的两个小公司都拿到offer，小公司没有现场编程题），根因都是现场编程题不太理想。这个也不能怪别人，自己长期以来排斥刷题，觉得刷题纯度太低了，加上到目前为止就没有一次现场编程挂过。&lt;/p&gt;
-&lt;p&gt;这波有种熟悉的感觉回来了：大二参加acm预选被血虐留下的心理阴影，在那之后再也没碰过OJ。&lt;/p&gt;
-&lt;p&gt;另外，问到的一个关于LSM读写放大的优化也答得不是特别理想，因为工作上对这块的优化确实没有做，我看了下都是使用了默认的参数，更别说对compact等进行深度定制（引擎这块上不太深入，这也与工作中至今为止主要负责的模块不是这块有关）。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -530,30 +473,6 @@ note:&lt;/p&gt;
   behavior of operator[] of vector and map:
   auto in for-statement:
    </description>
-    </item>
-    
-    <item>
-      <title>systemtap笔记</title>
-      <link>/posts/debugging_systemtap_cheatsheet/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/debugging_systemtap_cheatsheet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>笔记：systemtap相关</title>
-      <link>/posts/debugging_use-systemtap-to-debug/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/debugging_use-systemtap-to-debug/</guid>
-      <description>&lt;p&gt;本文会提及systemtap的以下几点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如何列出某个可执行文件的所有probe位点&lt;/li&gt;
-&lt;li&gt;如何取变量的值&lt;/li&gt;
-&lt;li&gt;如何通过某个地址的解引用取得对应值&lt;/li&gt;
-&lt;li&gt;如何在.return中拿到变量的最新值&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
     <item>

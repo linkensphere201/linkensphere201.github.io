@@ -70,186 +70,8 @@
 			
 <main class="main list" role="main">
 	<header class="main__header">
-		<h1 class="main__title">Posts</h1>
+		<h2 class="main__title">Posts</h2>
 	</header><article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/" rel="bookmark">
-			c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-02-02T00:00:00Z">2021-02-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>几年前，整理了一份rvalue相关笔记：<a href="https://zhuanlan.zhihu.com/p/111826434">以前的一份笔记</a>，梳理近况时，发现某些问题还是没有弄清楚。</p>
-<h2 id="universal-reference"><code>Universal Reference</code></h2>
-<ul>
-<li>
-<p>Q: 什么场景下需要考虑这个问题？
-A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。</p>
-<p>c++11引入右值引用之后，上述问题可以通过<code>universal reference</code>来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。</p>
-</li>
-<li>
-<p>Q: 什么是<code>Universal Reference</code>?
-A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导</p>
-<blockquote>
-<p><code>G1</code>.
-If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
-</blockquote>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/db_talk_about_sse/" rel="bookmark">
-			db笔记 - sse
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-02-01T00:00:00Z">2021-02-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h2 id="background">background</h2>
-<blockquote>
-<p>we would set env var <code>USE_SSE=1</code> when compiling Rocksdb, OTHERWISE it would always failed
-at linking stage where encountering errors of lack of some instructions such as:
-<code>no such instruction: </code>shlx %rdx,%rax,%rax'`.
-but what the fuck is USE_SSE ?</p>
-</blockquote>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/db_talk_about_sse/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/" rel="bookmark">
-			翻车笔记
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-01-22T00:00:00Z">2021-01-22</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algmnotes/" rel="category">algmnotes</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h2 id="引子">引子</h2>
-<p>很煞笔的一天，最近两次面试的试水都挂了（但之前面的两个小公司都拿到offer，小公司没有现场编程题），根因都是现场编程题不太理想。这个也不能怪别人，自己长期以来排斥刷题，觉得刷题纯度太低了，加上到目前为止就没有一次现场编程挂过。</p>
-<p>这波有种熟悉的感觉回来了：大二参加acm预选被血虐留下的心理阴影，在那之后再也没碰过OJ。</p>
-<p>另外，问到的一个关于LSM读写放大的优化也答得不是特别理想，因为工作上对这块的优化确实没有做，我看了下都是使用了默认的参数，更别说对compact等进行深度定制（引擎这块上不太深入，这也与工作中至今为止主要负责的模块不是这块有关）。</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/algmnotes_%E7%BF%BB%E8%BD%A6%E7%AC%94%E8%AE%B0/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/algmnotes-skiplist/" rel="bookmark">
-			算法笔记：跳表（r1）
-			</a>
-		</h2>
-    </blockquote>
-		<p class="list__lead post__lead">skiplist</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
-<blockquote>
-<p>跳表是一种著名数据结构。</p>
-</blockquote>
-<p>原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。</p>
-<p>相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。</p>
-<p>本文主要讨论：</p>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/algmnotes-skiplist-impl/" rel="bookmark">
-			算法笔记：跳表（r2）
-			</a>
-		</h2>
-    </blockquote>
-		<p class="list__lead post__lead">skiplist</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h2 id="实现一个简单skiplist">实现一个简单skiplist</h2>
-<p>上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。</p>
-<p>然后由于好奇，我自己写了一个skiplist，这里记录下。</p>
-<p>该skiplist的特性：</p>
-<ul>
-<li>不支持concurrent</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist-impl/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/db_some_questions_about_rocksdb/" rel="bookmark">
-			rocksdb探究 - 一些问题
-			</a>
-		</h2>
-    </blockquote>
-		<p class="list__lead post__lead">一些rocksdb相关问题记录</p>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-01-07T21:26:49&#43;08:00">2020-01-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rocksdb/" rel="category">rocksdb</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<ol>
-<li>写请求batch内的多个操作是否会被拆开，为什么？</li>
-<li>block-cache里的缓存项是否会因为某个sst被compact而失效？</li>
-<li>event-listener的实现</li>
-<li>perf-context的实现</li>
-<li>ThreadLocalPtr的实现以及为什么</li>
-</ol>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/db_some_questions_about_rocksdb/">阅读更多</a>
-	</div>
-</article>
-<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -371,12 +193,169 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="list__footer-readmore" href="/posts/algmnotes-longestpalindrome/">阅读更多</a>
 	</div>
 </article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/algmnotes-count_2_of_a_number/" rel="bookmark">
+			算法笔记：计算1到n中2出现的个数
+			</a>
+		</h2>
+    </blockquote>
+		<p class="list__lead post__lead">枚举</p>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-06-01T20:26:39&#43;08:00">2018-06-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<p>这是读书时一篇旧文搬运.几年后再次回顾下算法.</p>
+<h2 id="问题">问题</h2>
+<p>给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。</p>
+<h2 id="思路">思路</h2>
+<h3 id="暴力">暴力</h3>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/algmnotes-count_2_of_a_number/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
+			分布式笔记 - Raft（1）
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h3 id="qa">Q&amp;A</h3>
+<h5 id="线性一致性">线性一致性？</h5>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
+<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/storage_deep_dive_for_raft/lec1/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/other_todolist/" rel="bookmark">
+			Todo list
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-11-07T02:26:41&#43;08:00">2017-11-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<ul>
+<li><input disabled="" type="checkbox"> pb使用总结:动态类型反射/non-copy</li>
+<li><input disabled="" type="checkbox"> 运维总结:huge page</li>
+<li><input disabled="" type="checkbox"> 运维总结:tcpdump抓包</li>
+<li><input disabled="" type="checkbox"> 运维总结:tsar/sar/iotop/iostat/top/perf top</li>
+<li><input disabled="" type="checkbox"> db笔记：lsm和btree的读/写放大分析</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/other_todolist/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/other_frequently-used-words/" rel="bookmark">
+			cheatsheet for FUW
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2016-11-07T21:20:49Z">2016-11-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h1 id="some-words-used-in-coding">some words used in coding</h1>
+<ul>
+<li>toggle</li>
+<li>quote</li>
+<li>snippet</li>
+<li>typo</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/other_frequently-used-words/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/other_thinkings/" rel="bookmark">
+			随想2
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2015-01-19T00:00:00Z">2015-01-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		  下面是一个hugo图像处理的示意 代码为    .Resize "300x"       .Resize "300x"      随想1
+  
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/other_thoughts_about_life/" rel="bookmark">
+			随想
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2011-12-20T07:26:49&#43;08:00">2011-12-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h3 id="杂-1">杂 1</h3>
+<p><a href="https://www.zhihu.com/question/288017836">既然所有的生命都要死亡，那么生命的意义是什么？</a></p>
+<ul>
+<li>在 bug 中寻找圆满</li>
+<li>冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。</li>
+<li>死亡带来意义，而非消解意义</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/other_thoughts_about_life/">阅读更多</a>
+	</div>
+</article>
 
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/posts/page/2/">«</a>
-	<span class="pagination__item pagination__item--current">3/5</span>
+	<span class="pagination__item pagination__item--current">3/4</span>
 	<a class="pagination__item pagination__item--next btn" href="/posts/page/4/">»</a>
 </div>
 
@@ -398,8 +377,8 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_lambda_expr_c14_namedthreadfactory/">c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_folly%E5%BA%93noter0-executor/">folly库note（r0）- Executor</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E5%87%BAenum%E7%9A%84%E6%96%87%E6%9C%AC%E5%80%BC/">如何打印出enum的文本值</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/">笔记：进程调试r1 - 工具</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/">笔记：进程调试r2 - 理论&amp;标准</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/">cpp language questions that I&#39;ve encountered.</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/other_digest-of-5.25/">digest of 5.25</a></li>
 		</ul>
 	</div>
 </div>

@@ -8,19 +8,19 @@
     <language>zh-cn</language><atom:link href="/tags/systemtap/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>systemtap笔记</title>
-      <link>/posts/debugging_systemtap_cheatsheet/</link>
+      <link>/drafts/debugging_systemtap_cheatsheet/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/debugging_systemtap_cheatsheet/</guid>
+      <guid>/drafts/debugging_systemtap_cheatsheet/</guid>
       <description></description>
     </item>
     
     <item>
       <title>笔记：systemtap相关</title>
-      <link>/posts/debugging_use-systemtap-to-debug/</link>
+      <link>/drafts/debugging_use-systemtap-to-debug/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/posts/debugging_use-systemtap-to-debug/</guid>
+      <guid>/drafts/debugging_use-systemtap-to-debug/</guid>
       <description>&lt;p&gt;本文会提及systemtap的以下几点：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如何列出某个可执行文件的所有probe位点&lt;/li&gt;
