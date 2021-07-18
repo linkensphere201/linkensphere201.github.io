@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>folly on Bad Fd</title>
+    <link>/tags/folly/</link>
+    <description>Recent content in folly on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/folly/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory</title>
+      <link>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</guid>
+      <description>&lt;h3 id=&#34;代码片段-and-分析&#34;&gt;代码片段 and 分析&lt;/h3&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

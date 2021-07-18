@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-06-08T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-07-18T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -71,6 +71,25 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/" rel="bookmark">
+			enable_shared_from_this的实现和CRTP Idiom
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-24T00:00:00Z">2021-03-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		
+	</div>
+</article>
+<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -300,44 +319,6 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 		<a class="list__footer-readmore" href="/posts/cppnotes-move-semantics-n-rvalue-reference-2/">阅读更多</a>
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/" rel="bookmark">
-			c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-02-02T00:00:00Z">2021-02-02</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>几年前，整理了一份rvalue相关笔记：<a href="https://zhuanlan.zhihu.com/p/111826434">以前的一份笔记</a>，梳理近况时，发现某些问题还是没有弄清楚。</p>
-<h2 id="universal-reference"><code>Universal Reference</code></h2>
-<ul>
-<li>
-<p>Q: 什么场景下需要考虑这个问题？
-A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。</p>
-<p>c++11引入右值引用之后，上述问题可以通过<code>universal reference</code>来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。</p>
-</li>
-<li>
-<p>Q: 什么是<code>Universal Reference</code>?
-A: 形如<code>T&amp;&amp;</code>, <code>T</code>不含有任何的cv限定符, 且<code>T</code>需要被推导</p>
-<blockquote>
-<p><code>G1</code>.
-If a variable or parameter is declared to have type T&amp;&amp; for some deduced type T, that variable or parameter is a universal reference.</p>
-</blockquote>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/cppnotes-move-semantics-n-rvalue-reference-1/">阅读更多</a>
-	</div>
-</article>
 
 </main>
 
@@ -361,11 +342,11 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_lambda_expr_c14_namedthreadfactory/">c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_folly%E5%BA%93noter0-executor/">folly库note（r0）- Executor</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E5%87%BAenum%E7%9A%84%E6%96%87%E6%9C%AC%E5%80%BC/">如何打印出enum的文本值</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/">笔记：进程调试r1 - 工具</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/">笔记：进程调试r2 - 理论&amp;标准</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/">cpp language questions that I&#39;ve encountered.</a></li>
 		</ul>
 	</div>
 </div>
@@ -415,6 +396,7 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 		<a class="widget-taglist__link widget__link btn" href="/tags/cmake/" title="cmake">cmake (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cpp14/" title="cpp14">cpp14 (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/debug-tools/" title="debug-tools">debug-tools (1)</a>
@@ -423,6 +405,7 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/enum-to-string/" title="enum-to-string">enum-to-string (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/executor/" title="executor">executor (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/folly/" title="folly">folly (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/inl/" title="inl">inl (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>

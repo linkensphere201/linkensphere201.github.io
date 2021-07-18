@@ -6,7 +6,25 @@
     <description>Recent content in Tags on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>cpp14</title>
+      <link>/tags/cpp14/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/cpp14/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>folly</title>
+      <link>/tags/folly/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/folly/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>enum-to-string</title>
       <link>/tags/enum-to-string/</link>

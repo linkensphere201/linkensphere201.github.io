@@ -6,7 +6,16 @@
     <description>Recent content in cppnotes on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 08 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/cppnotes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/cppnotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory</title>
+      <link>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</link>
+      <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</guid>
+      <description>&lt;h3 id=&#34;代码片段-and-分析&#34;&gt;代码片段 and 分析&lt;/h3&gt;</description>
+    </item>
+    
     <item>
       <title>folly库note（r0）- Executor</title>
       <link>/posts/cppnotes_folly%E5%BA%93noter0-executor/</link>
