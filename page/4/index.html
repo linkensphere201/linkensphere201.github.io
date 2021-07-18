@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-05-31T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-06-08T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -71,6 +71,60 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
+			分布式笔记 - Raft（1）
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h3 id="qa">Q&amp;A</h3>
+<h5 id="线性一致性">线性一致性？</h5>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
+<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/storage_deep_dive_for_raft/lec1/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/other_todolist/" rel="bookmark">
+			Todo list
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2017-11-07T02:26:41&#43;08:00">2017-11-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<ul>
+<li><input disabled="" type="checkbox"> pb使用总结:动态类型反射/non-copy</li>
+<li><input disabled="" type="checkbox"> 运维总结:huge page</li>
+<li><input disabled="" type="checkbox"> 运维总结:tcpdump抓包</li>
+<li><input disabled="" type="checkbox"> 运维总结:tsar/sar/iotop/iostat/top/perf top</li>
+<li><input disabled="" type="checkbox"> db笔记：lsm和btree的读/写放大分析</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/other_todolist/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -273,73 +327,13 @@ note:</p>
 		<a class="list__footer-readmore" href="/posts/debugging_use-systemtap-to-debug/">阅读更多</a>
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/db_dailywork_cheatsheet/" rel="bookmark">
-			笔记：一些日常cheatsheet
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<p>日常cheatsheet～</p>
-<ul>
-<li>run valgrind for a program</li>
-</ul>
-<pre><code>valgrind --tool=memcheck --leak-check=full --log-file=leak.log --soname-synonyms=somalloc=NONE &lt;some_exe&gt; [&lt;some_exe_args&gt;]
-</code></pre><ul>
-<li>run tcpdump to capture mysql queries:</li>
-</ul>
-<pre><code>tcpdump -r /tmp/a.cap -A -S -n -nn  | grep -i -E &quot;select|insert|update|delete|replace&quot; | sed 's%\(.*\)\([.]\{4\}\)\(.*\)%\3%' | less
-</code></pre><ul>
-<li>python scripts:</li>
-</ul>
-<pre><code>python -m SimpleHTTPServer 8123
-wget -c -r -nH -m --limit-rate=400m &quot;http://ip:8123/xxxx&quot;
-</code></pre><pre><code>python -c 'from zlib import crc32; print crc32(&quot;1476777&quot;) % 1024'
-</code></pre><pre><code>#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-import sys
-import json
-data = &quot;&quot;
-for line in sys.stdin:
-        data += line
-text = json.loads(data)
-print(text)
-</code></pre><ul>
-<li><code>tee</code> with a pipe output to screen and a file</li>
-</ul>
-<pre><code>echo &quot;hello&quot; | tee abc.txt
-</code></pre><ul>
-<li>
-<p>ps</p>
-</li>
-<li>
-<p>top</p>
-</li>
-<li>
-<p>tasr</p>
-</li>
-<li>
-<p>sar</p>
-</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/db_dailywork_cheatsheet/">阅读更多</a>
-	</div>
-</article>
 
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/page/3/">«</a>
-	<span class="pagination__item pagination__item--current">4/4</span>
+	<span class="pagination__item pagination__item--current">4/5</span>
+	<a class="pagination__item pagination__item--next btn" href="/page/5/">»</a>
 </div>
 
 			</div>
@@ -356,11 +350,11 @@ print(text)
 	<h4 class="widget__title">近期文章</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_folly%E5%BA%93noter0-executor/">folly库note（r0）- Executor</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/cppnotes_%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E5%87%BAenum%E7%9A%84%E6%96%87%E6%9C%AC%E5%80%BC/">如何打印出enum的文本值</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/">笔记：进程调试r1 - 工具</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r2-%E7%90%86%E8%AE%BA%E6%A0%87%E5%87%86/">笔记：进程调试r2 - 理论&amp;标准</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_cpp-language-encountered-questions-summeries/">cpp language questions that I&#39;ve encountered.</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/other_digest-of-5.25/">digest of 5.25</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/other_%E5%85%B3%E4%BA%8Ecmake%E6%89%BE%E4%B8%8D%E5%88%B0package/">cmake cheatsheet：找不到package; PUBLIC依赖和PRIVATE依赖; ...</a></li>
 		</ul>
 	</div>
 </div>
@@ -376,6 +370,9 @@ print(text)
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/c&#43;&#43;/">c&#43;&#43;</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/cppnotes/">cppnotes</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/db/">DB</a>
@@ -413,6 +410,8 @@ print(text)
 		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/enum-to-string/" title="enum-to-string">enum-to-string (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/executor/" title="executor">executor (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/inl/" title="inl">inl (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
@@ -424,6 +423,7 @@ print(text)
 		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/redis-list/" title="redis list">redis list (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/reflection/" title="reflection">reflection (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (3)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>

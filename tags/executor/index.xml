@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>executor on Bad Fd</title>
+    <link>/tags/executor/</link>
+    <description>Recent content in executor on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 08 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/executor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>folly库note（r0）- Executor</title>
+      <link>/posts/cppnotes_folly%E5%BA%93noter0-executor/</link>
+      <pubDate>Tue, 08 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes_folly%E5%BA%93noter0-executor/</guid>
+      <description>Executor  Executor是一个接口，主要定义了Keepalive这个Subclass.
+具体用法见UT：folly/folly/test/ExecutorTest.cpp.</description>
+    </item>
+    
+  </channel>
+</rss>
