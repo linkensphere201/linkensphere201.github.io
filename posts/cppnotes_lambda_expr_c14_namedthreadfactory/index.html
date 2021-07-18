@@ -8,17 +8,29 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory" />
-<meta property="og:description" content="代码片段 and 分析" />
+<meta property="og:description" content="代码片段 and 分析
+return std::thread(
+    [func = std::move(func), name = std::move(name)]() mutable {
+      folly::setThreadName(name);
+      func();
+    });
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/posts/cppnotes_lambda_expr_c14_namedthreadfactory/" />
 <meta property="article:published_time" content="2021-07-18T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-07-18T00:00:00+00:00" />
 
 		<meta itemprop="name" content="c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory">
-<meta itemprop="description" content="代码片段 and 分析">
+<meta itemprop="description" content="代码片段 and 分析
+return std::thread(
+    [func = std::move(func), name = std::move(name)]() mutable {
+      folly::setThreadName(name);
+      func();
+    });
+">
 <meta itemprop="datePublished" content="2021-07-18T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-07-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="154">
+<meta itemprop="wordCount" content="167">
 
 
 
@@ -100,7 +112,12 @@
 	</div>
 </div><div class="content post__content post__inner clearfix">
 			<h3 id="代码片段-and-分析">代码片段 and 分析</h3>
-e><p>其中这个lambda表达式语法是cpp14的</p>
+<pre><code>return std::thread(
+    [func = std::move(func), name = std::move(name)]() mutable {
+      folly::setThreadName(name);
+      func();
+    });
+</code></pre><p>其中这个lambda表达式语法是cpp14的</p>
 <p>from <a href="https://en.cppreference.com/w/cpp/language/lambda#Lambda_capture">cpp_ref</a></p>
 <pre><code>A capture with an initializer acts as if it declares and explicitly captures a variable declared with type auto, whose declarative region is the body of the lambda expression (that is, it is not in scope within its initializer), except that:
 

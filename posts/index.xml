@@ -13,7 +13,13 @@
       <pubDate>Sun, 18 Jul 2021 00:00:00 +0000</pubDate>
       
       <guid>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</guid>
-      <description>&lt;h3 id=&#34;代码片段-and-分析&#34;&gt;代码片段 and 分析&lt;/h3&gt;</description>
+      <description>&lt;h3 id=&#34;代码片段-and-分析&#34;&gt;代码片段 and 分析&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;return std::thread(
+    [func = std::move(func), name = std::move(name)]() mutable {
+      folly::setThreadName(name);
+      func();
+    });
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

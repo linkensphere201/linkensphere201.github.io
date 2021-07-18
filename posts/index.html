@@ -88,6 +88,12 @@
 	</header>
 	<div class="content list__excerpt post__content clearfix">
 		<h3 id="代码片段-and-分析">代码片段 and 分析</h3>
+<pre><code>return std::thread(
+    [func = std::move(func), name = std::move(name)]() mutable {
+      folly::setThreadName(name);
+      func();
+    });
+</code></pre>
 	</div>
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore" href="/posts/cppnotes_lambda_expr_c14_namedthreadfactory/">阅读更多</a>
