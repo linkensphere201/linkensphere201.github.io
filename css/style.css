@@ -680,16 +680,15 @@ button:not(:-moz-focusring):focus > .menu__btn-title {
   color: #404040;
   font-style:italic;
 }
-.post__content.h1,
-.post__content.h2,
-.post__content.h3,
-.post__content.h4,
-.post__content.h6,
-{
+.post__content h1,
+.post__content h2,
+.post__content h3,
+.post__content h4,
+.post__content h6 {
   font-size: 0.95rem;
 }
-.post__content.p {
-  font-size: 0.9rem;
+.post__content p {
+  font-size: 0.8rem;
 }
 .post__inner {
   font-style:normal;
