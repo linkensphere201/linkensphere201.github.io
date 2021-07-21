@@ -18,6 +18,11 @@
   </url>
   
   <url>
+    <loc>/posts/storage_deep_dive_for_raft/lec1/</loc>
+    <lastmod>2018-04-19T21:20:49+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/c&#43;&#43;_template_parameter_pack/</loc>
     <lastmod>2021-03-24T00:00:00+00:00</lastmod>
   </url>
@@ -439,11 +444,6 @@
   
   <url>
     <loc>/categories/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
-    <lastmod>2018-04-19T21:20:49+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/storage_deep_dive_for_raft/lec1/</loc>
     <lastmod>2018-04-19T21:20:49+00:00</lastmod>
   </url>
   

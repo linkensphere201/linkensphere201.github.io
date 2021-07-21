@@ -51,6 +51,19 @@ short duration lock&lt;/p&gt;</description>
     </item>
     
     <item>
+      <title>分布式笔记 - Raft（1）</title>
+      <link>/posts/storage_deep_dive_for_raft/lec1/</link>
+      <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
+      
+      <guid>/posts/storage_deep_dive_for_raft/lec1/</guid>
+      <description>&lt;h3 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h3&gt;
+&lt;h5 id=&#34;线性一致性&#34;&gt;线性一致性？&lt;/h5&gt;
+&lt;p&gt;个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。&lt;/p&gt;
+&lt;h5 id=&#34;fsm-finite-state-machine&#34;&gt;&lt;code&gt;fsm: finite-state-machine&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>parameter pack和递归模板展开</title>
       <link>/posts/c&#43;&#43;_template_parameter_pack/</link>
       <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
@@ -427,19 +440,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 &lt;p&gt;给定一个数字n，求1到n序列中2出现的总次数。n最大值可能是10^9。&lt;/p&gt;
 &lt;h2 id=&#34;思路&#34;&gt;思路&lt;/h2&gt;
 &lt;h3 id=&#34;暴力&#34;&gt;暴力&lt;/h3&gt;</description>
-    </item>
-    
-    <item>
-      <title>分布式笔记 - Raft（1）</title>
-      <link>/posts/storage_deep_dive_for_raft/lec1/</link>
-      <pubDate>Thu, 19 Apr 2018 21:20:49 +0000</pubDate>
-      
-      <guid>/posts/storage_deep_dive_for_raft/lec1/</guid>
-      <description>&lt;h3 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h3&gt;
-&lt;h5 id=&#34;线性一致性&#34;&gt;线性一致性？&lt;/h5&gt;
-&lt;p&gt;个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。&lt;/p&gt;
-&lt;h5 id=&#34;fsm-finite-state-machine&#34;&gt;&lt;code&gt;fsm: finite-state-machine&lt;/code&gt;&lt;/h5&gt;
-&lt;p&gt;个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）&lt;/p&gt;</description>
     </item>
     
     <item>

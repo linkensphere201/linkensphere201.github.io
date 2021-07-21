@@ -158,6 +158,32 @@ short duration lock</p>
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
+			<a href="/posts/storage_deep_dive_for_raft/lec1/" rel="bookmark">
+			分布式笔记 - Raft（1）
+			</a>
+		</h2>
+    </blockquote>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2018-04-19T21:20:49Z">2018-04-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="category">分布式</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h3 id="qa">Q&amp;A</h3>
+<h5 id="线性一致性">线性一致性？</h5>
+<p>个人认为，分布式系统的一致性与多核内存模型中涉及的一致性异曲同工，所以分布式系统的线性一致性我认为可以参考类似多核系统的线性一致性定义来理解。</p>
+<h5 id="fsm-finite-state-machine"><code>fsm: finite-state-machine</code></h5>
+<p>个人理解为有状态分布式服务的每个独立实例（进程+数据），本质上都可以是个有限状态机（fsm）</p>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/storage_deep_dive_for_raft/lec1/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
 			<a href="/posts/c&#43;&#43;_template_parameter_pack/" rel="bookmark">
 			parameter pack和递归模板展开
 			</a>
@@ -322,25 +348,6 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 具体用法见UT：folly/folly/test/ExecutorTest.cpp.
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/cppnotes_%E5%A6%82%E4%BD%95%E6%89%93%E5%8D%B0%E5%87%BAenum%E7%9A%84%E6%96%87%E6%9C%AC%E5%80%BC/" rel="bookmark">
-			如何打印出enum的文本值
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-06-08T00:00:00Z">2021-06-08</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/cppnotes/" rel="category">cppnotes</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
-</article>
 
 </main>
 
@@ -367,8 +374,8 @@ If a variable or parameter is declared to have type T&amp;&amp; for some deduced
 			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/db_txn_lec1/">db笔记 - 事务1:隔离级别</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/storage_deep_dive_for_raft/lec1/">分布式笔记 - Raft（1）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_recall-of-memory-order-model/">recall of memory order model</a></li>
 		</ul>
 	</div>
 </div>
