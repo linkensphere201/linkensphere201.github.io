@@ -4,17 +4,25 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CRTP - Bad Fd</title>
+	<title>move语义(p3) - Bad Fd</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="CRTP" />
-<meta property="og:description" content="a place to find myself" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/tags/crtp/" />
-<meta property="og:updated_time" content="2021-03-24T00:00:00+00:00" />
+		<meta property="og:title" content="move语义(p3)" />
+<meta property="og:description" content="例子 &ldquo;一路move进去&rdquo; &ldquo;省了copy的开销&rdquo; “rule of 7”" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/drafts/cppnotes_move-semantics-n-rvalue-reference-3/" />
+<meta property="article:published_time" content="2021-07-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-07-19T00:00:00+00:00" />
 
-		<meta itemprop="name" content="CRTP">
-<meta itemprop="description" content="a place to find myself">
+		<meta itemprop="name" content="move语义(p3)">
+<meta itemprop="description" content="例子 &ldquo;一路move进去&rdquo; &ldquo;省了copy的开销&rdquo; “rule of 7”">
+<meta itemprop="datePublished" content="2021-07-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-07-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="6">
+
+
+
+<meta itemprop="keywords" content="std::move," />
 
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -26,7 +34,6 @@
 
 	<link rel="stylesheet" href="/css/style.css">
 	
-	<link rel="alternate" type="application/rss+xml" href="/tags/crtp/index.xml" title="Bad Fd">
 
 	<link rel="shortcut icon" href="/favicon.ico">
 		
@@ -68,35 +75,62 @@
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main list" role="main">
-	<header class="main__header">
-		<h2 class="main__title">CRTP</h2>
-	</header><article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/c&#43;&#43;_enable_shared_from_this%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%92%8Ccrtp-idiom/" rel="bookmark">
-			enable_shared_from_this的实现和CRTP Idiom
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">move语义(p3)</h1>
+			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-03-24T00:00:00Z">2021-03-24</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/c&#43;&#43;/" rel="category">c&#43;&#43;</a>
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-07-19T00:00:00Z">2021-07-19</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/cppnotes/" rel="category">cppnotes</a>
 	</span>
 </div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		
-	</div>
-</article>
+		</header><div class="content post__content post__inner clearfix">
+			<h1 id="例子">例子</h1>
+<p>&ldquo;一路move进去&rdquo;
+&ldquo;省了copy的开销&rdquo;
+“rule of 7”</p>
 
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/stdmove/" rel="tag">std::move</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
 </main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="我 avatar" src="/resources/avatar1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 我</span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer, developing databases. used to work at Didi and Intel(intern), now working at vesoft
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/drafts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">笔记：进程调试r1 - 工具</p>
+		</a>
+	</div>
+</nav>
+
+<script src="https://utteranc.es/client.js" repo="linkensphere201/linkensphere201.github.io" issue-term="pathname"  label="utteranc-comment"  theme="github-light" crossorigin="anonymous" async></script>
 
 
 			</div>
-			
-<aside class="sidebar sidebar--left"><div class="widget-search widget">
+			<aside class="sidebar"><div class="widget-search widget">
 	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
 		<label>
 			<input class="widget-search__field" type="search" placeholder="搜索…" value="" name="q" aria-label="搜索…">
@@ -235,5 +269,7 @@
 </footer>
 	</div>
 <script async defer src="/js/menu.js"></script>
-<script src="/js/onload.js"></script></body>
+<script src="/js/onload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
 </html>

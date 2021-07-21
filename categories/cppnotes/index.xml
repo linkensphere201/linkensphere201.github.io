@@ -6,7 +6,16 @@
     <description>Recent content in cppnotes on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/cppnotes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/categories/cppnotes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>move语义(p3)</title>
+      <link>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</link>
+      <pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</guid>
+      <description>例子 &amp;ldquo;一路move进去&amp;rdquo; &amp;ldquo;省了copy的开销&amp;rdquo; “rule of 7”</description>
+    </item>
+    
     <item>
       <title>c&#43;&#43;14 lamdba表达式一个code小片段分析 -- from folly::NamedThreadFactory</title>
       <link>/posts/cppnotes_lambda_expr_c14_namedthreadfactory/</link>

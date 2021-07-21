@@ -6,7 +6,16 @@
     <description>Recent content in Drafts on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 31 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="/drafts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/drafts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>move语义(p3)</title>
+      <link>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</link>
+      <pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</guid>
+      <description>例子 &amp;ldquo;一路move进去&amp;rdquo; &amp;ldquo;省了copy的开销&amp;rdquo; “rule of 7”</description>
+    </item>
+    
     <item>
       <title>笔记：进程调试r1 - 工具</title>
       <link>/drafts/debugging_%E7%AC%94%E8%AE%B0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95r1-%E5%B7%A5%E5%85%B7/</link>

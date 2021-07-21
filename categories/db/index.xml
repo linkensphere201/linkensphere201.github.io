@@ -23,6 +23,19 @@
     </item>
     
     <item>
+      <title>db笔记 - 事务1:隔离级别</title>
+      <link>/posts/db_txn_lec1/</link>
+      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_txn_lec1/</guid>
+      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
+&lt;p&gt;read lock
+write lock
+long duration lock
+short duration lock&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>类redis-list的持久化编码和复杂度分析</title>
       <link>/drafts/db_%E7%B1%BBredis-list%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E7%BC%96%E7%A0%81%E5%92%8C%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/</link>
       <pubDate>Mon, 29 Mar 2021 00:00:00 +0000</pubDate>
@@ -77,19 +90,6 @@
       <description>&lt;p&gt;最近有同事找我讨论问题，觉得挺有趣的记录一下。&lt;/p&gt;
 &lt;h3 id=&#34;rocksdblruhandlekey的历史&#34;&gt;&lt;code&gt;rocksdb::LRUHandle::key()&lt;/code&gt;的历史&lt;/h3&gt;
 &lt;p&gt;第一个问题是&lt;code&gt;rocksdb::LRUHandle::key()&lt;/code&gt;, 这个函数返回该handle内部存储的key，但为啥某些情况下却返回value呢？&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>db笔记 - 事务1:隔离级别</title>
-      <link>/posts/db_txn_lec1/</link>
-      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_txn_lec1/</guid>
-      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
-&lt;p&gt;read lock
-write lock
-long duration lock
-short duration lock&lt;/p&gt;</description>
     </item>
     
     <item>

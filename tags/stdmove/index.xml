@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>std::move on Bad Fd</title>
+    <link>/tags/stdmove/</link>
+    <description>Recent content in std::move on Bad Fd</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 19 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/tags/stdmove/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>move语义(p3)</title>
+      <link>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</link>
+      <pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</guid>
+      <description>例子 &amp;ldquo;一路move进去&amp;rdquo; &amp;ldquo;省了copy的开销&amp;rdquo; “rule of 7”</description>
+    </item>
+    
+  </channel>
+</rss>

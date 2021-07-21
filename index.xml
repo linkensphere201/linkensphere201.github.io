@@ -6,7 +6,7 @@
     <description>Recent content on Bad Fd</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 18 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Jul 2021 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>rocksdb的blockcache的一些优化点</title>
       <link>/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/</link>
@@ -20,6 +20,111 @@
 &lt;ol&gt;
 &lt;li&gt;官方实现中没有回收机制.&lt;/li&gt;
 &lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>db笔记 - 事务1:隔离级别</title>
+      <link>/posts/db_txn_lec1/</link>
+      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/db_txn_lec1/</guid>
+      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
+&lt;p&gt;read lock
+write lock
+long duration lock
+short duration lock&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>算法笔记：跳表（r1）</title>
+      <link>/posts/algmnotes-skiplist/</link>
+      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/algmnotes-skiplist/</guid>
+      <description>&lt;p&gt;这是读书时一篇旧文搬运.几年后再次回顾下算法.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;跳表是一种著名数据结构。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。&lt;/p&gt;
+&lt;p&gt;相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。&lt;/p&gt;
+&lt;p&gt;本文主要讨论：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>parameter pack和递归模板展开</title>
+      <link>/posts/c&#43;&#43;_template_parameter_pack/</link>
+      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/c&#43;&#43;_template_parameter_pack/</guid>
+      <description>&lt;h2 id=&#34;需求&#34;&gt;需求&lt;/h2&gt;
+&lt;p&gt;做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
+libevent的回调类似：&lt;code&gt;void LibeventCallback(int fd, short flag, void* arg);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;要求：
+1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>recall of memory order model</title>
+      <link>/posts/c&#43;&#43;_recall-of-memory-order-model/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/c&#43;&#43;_recall-of-memory-order-model/</guid>
+      <description>&lt;h2 id=&#34;c内存序&#34;&gt;c++内存序&lt;/h2&gt;
+&lt;h2 id=&#34;题外话&#34;&gt;题外话&lt;/h2&gt;
+&lt;h4 id=&#34;cache-coherency-vs-memory-consistency&#34;&gt;Cache Coherency vs. Memory Consistency&lt;/h4&gt;
+&lt;p&gt;这两个概念容易混淆，重新捋一下。&lt;/p&gt;
+&lt;p&gt;关于Cache Coherency：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</title>
+      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</link>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</guid>
+      <description>&lt;p&gt;回顾：&lt;/p&gt;
+&lt;p&gt;G1-G4:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
+If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;G2&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</title>
+      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</link>
+      <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</guid>
+      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，梳理近况时，发现某些问题还是没有弄清楚。&lt;/p&gt;
+&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Q: 什么场景下需要考虑这个问题？
+A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。&lt;/p&gt;
+&lt;p&gt;c++11引入右值引用之后，上述问题可以通过&lt;code&gt;universal reference&lt;/code&gt;来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
+A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
+If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>move语义(p3)</title>
+      <link>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</link>
+      <pubDate>Mon, 19 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/drafts/cppnotes_move-semantics-n-rvalue-reference-3/</guid>
+      <description>例子 &amp;ldquo;一路move进去&amp;rdquo; &amp;ldquo;省了copy的开销&amp;rdquo; “rule of 7”</description>
     </item>
     
     <item>
@@ -126,19 +231,6 @@ check usage：folly::Future&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>parameter pack和递归模板展开</title>
-      <link>/posts/c&#43;&#43;_template_parameter_pack/</link>
-      <pubDate>Wed, 24 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/c&#43;&#43;_template_parameter_pack/</guid>
-      <description>&lt;h2 id=&#34;需求&#34;&gt;需求&lt;/h2&gt;
-&lt;p&gt;做一个libevent的wrapper，有个需求，用户对某个fd的可读事件感兴趣，要求在产生这个事件时，调用他传入的某个可调用对象及其参数。
-libevent的回调类似：&lt;code&gt;void LibeventCallback(int fd, short flag, void* arg);&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;要求：
-1、用户传入的可调用对象fn，拿的参数是可变的，第一个参数为某个特定类型，用于感知fd和flag，后续其他为用户自定义参数&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>lsm读写放大分析（r1）</title>
       <link>/drafts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r1/</link>
       <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>
@@ -154,19 +246,6 @@ libevent的回调类似：&lt;code&gt;void LibeventCallback(int fd, short flag, 
       
       <guid>/drafts/db_lsm%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90r2/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>recall of memory order model</title>
-      <link>/posts/c&#43;&#43;_recall-of-memory-order-model/</link>
-      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/c&#43;&#43;_recall-of-memory-order-model/</guid>
-      <description>&lt;h2 id=&#34;c内存序&#34;&gt;c++内存序&lt;/h2&gt;
-&lt;h2 id=&#34;题外话&#34;&gt;题外话&lt;/h2&gt;
-&lt;h4 id=&#34;cache-coherency-vs-memory-consistency&#34;&gt;Cache Coherency vs. Memory Consistency&lt;/h4&gt;
-&lt;p&gt;这两个概念容易混淆，重新捋一下。&lt;/p&gt;
-&lt;p&gt;关于Cache Coherency：&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -215,61 +294,6 @@ impl of std::forward, std::move
     </item>
     
     <item>
-      <title>db笔记 - 事务1:隔离级别</title>
-      <link>/posts/db_txn_lec1/</link>
-      <pubDate>Sun, 14 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/db_txn_lec1/</guid>
-      <description>&lt;h2 id=&#34;锁&#34;&gt;锁&lt;/h2&gt;
-&lt;p&gt;read lock
-write lock
-long duration lock
-short duration lock&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (2)</title>
-      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</link>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-2/</guid>
-      <description>&lt;p&gt;回顾：&lt;/p&gt;
-&lt;p&gt;G1-G4:&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
-If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;G2&lt;/code&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
-    </item>
-    
-    <item>
-      <title>c&#43;&#43; notes：recall of move-semantics and rvalue-reference (1)</title>
-      <link>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</link>
-      <pubDate>Tue, 02 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/cppnotes-move-semantics-n-rvalue-reference-1/</guid>
-      <description>&lt;p&gt;几年前，整理了一份rvalue相关笔记：&lt;a href=&#34;https://zhuanlan.zhihu.com/p/111826434&#34;&gt;以前的一份笔记&lt;/a&gt;，梳理近况时，发现某些问题还是没有弄清楚。&lt;/p&gt;
-&lt;h2 id=&#34;universal-reference&#34;&gt;&lt;code&gt;Universal Reference&lt;/code&gt;&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Q: 什么场景下需要考虑这个问题？
-A：模板元编程时，需要考虑兼容各种传入参数类型时（尤其是『左值/右值』）。基本上我感觉就是为了处理完美转发问题。比如写一个工厂函数模板，需要同时兼容传入的参数是左值和右值的情况，核心点是一个右值无法用于初始化一个左值引用，c++11之前要解决这个问题，要么写很多重复偏特化模板，要么付出拷贝参数的代价。&lt;/p&gt;
-&lt;p&gt;c++11引入右值引用之后，上述问题可以通过&lt;code&gt;universal reference&lt;/code&gt;来解决，即传入参数是左值时，形参的类型推导为左值引用，是右值时，推导为右值引用，同时只需要提供一套模板即可。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Q: 什么是&lt;code&gt;Universal Reference&lt;/code&gt;?
-A: 形如&lt;code&gt;T&amp;amp;&amp;amp;&lt;/code&gt;, &lt;code&gt;T&lt;/code&gt;不含有任何的cv限定符, 且&lt;code&gt;T&lt;/code&gt;需要被推导&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;code&gt;G1&lt;/code&gt;.
-If a variable or parameter is declared to have type T&amp;amp;&amp;amp; for some deduced type T, that variable or parameter is a universal reference.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
       <title>db笔记 - sse</title>
       <link>/posts/db_talk_about_sse/</link>
       <pubDate>Mon, 01 Feb 2021 00:00:00 +0000</pubDate>
@@ -294,21 +318,6 @@ but what the fuck is USE_SSE ?&lt;/p&gt;
 &lt;p&gt;很煞笔的一天，最近两次面试的试水都挂了（但之前面的两个小公司都拿到offer，小公司没有现场编程题），根因都是现场编程题不太理想。这个也不能怪别人，自己长期以来排斥刷题，觉得刷题纯度太低了，加上到目前为止就没有一次现场编程挂过。&lt;/p&gt;
 &lt;p&gt;这波有种熟悉的感觉回来了：大二参加acm预选被血虐留下的心理阴影，在那之后再也没碰过OJ。&lt;/p&gt;
 &lt;p&gt;另外，问到的一个关于LSM读写放大的优化也答得不是特别理想，因为工作上对这块的优化确实没有做，我看了下都是使用了默认的参数，更别说对compact等进行深度定制（引擎这块上不太深入，这也与工作中至今为止主要负责的模块不是这块有关）。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>算法笔记：跳表（r1）</title>
-      <link>/posts/algmnotes-skiplist/</link>
-      <pubDate>Sun, 01 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/algmnotes-skiplist/</guid>
-      <description>&lt;p&gt;这是读书时一篇旧文搬运.几年后再次回顾下算法.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;跳表是一种著名数据结构。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;原理应该不用介绍了，rocksdb/redis内部都有使用skiplist。&lt;/p&gt;
-&lt;p&gt;相对于红黑树，它的优势我认为是实现简单，并且容易无锁化。&lt;/p&gt;
-&lt;p&gt;本文主要讨论：&lt;/p&gt;</description>
     </item>
     
     <item>
