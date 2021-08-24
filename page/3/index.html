@@ -12,7 +12,7 @@
 <meta property="og:description" content="a place to find myself" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/" />
-<meta property="og:updated_time" content="2021-07-19T00:00:00+00:00" />
+<meta property="og:updated_time" content="2021-08-21T00:00:00+00:00" />
 
 		<meta itemprop="name" content="Bad Fd">
 <meta itemprop="description" content="a place to find myself">
@@ -71,6 +71,35 @@
 			
 <main class="main list" role="main">
 	<article class="list__item post">
+	<header class="list__header">
+    <blockquote class="headline">
+    <h2 class="list__title post__title">
+			<a href="/posts/algmnotes-skiplist-impl/" rel="bookmark">
+			算法笔记：跳表（r2）
+			</a>
+		</h2>
+    </blockquote>
+		<p class="list__lead post__lead">skiplist</p>
+		<div class="list__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-01T00:00:00Z">2020-03-01</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/algorithm/" rel="category">algorithm</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		<h2 id="实现一个简单skiplist">实现一个简单skiplist</h2>
+<p>上一篇笔记里回顾了跳表的性质和思想，并且看了一眼rocksdb里的skiplist实现。</p>
+<p>然后由于好奇，我自己写了一个skiplist，这里记录下。</p>
+<p>该skiplist的特性：</p>
+<ul>
+<li>不支持concurrent</li>
+</ul>
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore" href="/posts/algmnotes-skiplist-impl/">阅读更多</a>
+	</div>
+</article>
+<article class="list__item post">
 	<header class="list__header">
     <blockquote class="headline">
     <h2 class="list__title post__title">
@@ -324,34 +353,6 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
   
 	</div>
 </article>
-<article class="list__item post">
-	<header class="list__header">
-    <blockquote class="headline">
-    <h2 class="list__title post__title">
-			<a href="/posts/other_thoughts_about_life/" rel="bookmark">
-			随想
-			</a>
-		</h2>
-    </blockquote>
-		<div class="list__meta meta">
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2011-12-20T07:26:49&#43;08:00">2011-12-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/%E5%85%B6%E4%BB%96/" rel="category">其他</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		<h3 id="杂-1">杂 1</h3>
-<p><a href="https://www.zhihu.com/question/288017836">既然所有的生命都要死亡，那么生命的意义是什么？</a></p>
-<ul>
-<li>在 bug 中寻找圆满</li>
-<li>冯伦被误诊为癌症，那是他第一次开始思考死亡，以前很重视的事情都变得轻了，最沉重的，还是生命。</li>
-<li>死亡带来意义，而非消解意义</li>
-</ul>
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore" href="/posts/other_thoughts_about_life/">阅读更多</a>
-	</div>
-</article>
 
 </main>
 
@@ -379,7 +380,7 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 			<li class="widget__item"><a class="widget__link" href="/posts/db_txn_lec1/">db笔记 - 事务1:隔离级别</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/storage_deep_dive_for_raft/lec1/">分布式笔记 - Raft（1）</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/c&#43;&#43;_template_parameter_pack/">parameter pack和递归模板展开</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/">rocksdb性能压测</a></li>
 		</ul>
 	</div>
 </div>
@@ -449,9 +450,10 @@ a. io线程在收到一个包后，会先把自己设为idle（具体点就是�
 		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/perf/" title="perf">perf (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/redis-list/" title="redis list">redis list (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/reflection/" title="reflection">reflection (1)</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (5)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>

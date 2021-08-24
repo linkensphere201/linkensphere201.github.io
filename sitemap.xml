@@ -23,6 +23,16 @@
   </url>
   
   <url>
+    <loc>/drafts/db_rocksdb%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/db_rocksdb%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/c&#43;&#43;_template_parameter_pack/</loc>
     <lastmod>2021-03-24T00:00:00+00:00</lastmod>
   </url>
@@ -49,12 +59,42 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-07-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-07-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/db/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/drafts/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/perf/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rocksdb/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-08-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -63,17 +103,7 @@
   </url>
   
   <url>
-    <loc>/drafts/</loc>
-    <lastmod>2021-07-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/stdmove/</loc>
-    <lastmod>2021-07-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-07-19T00:00:00+00:00</lastmod>
   </url>
   
@@ -89,11 +119,6 @@
   
   <url>
     <loc>/tags/folly/</loc>
-    <lastmod>2021-07-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
     <lastmod>2021-07-18T00:00:00+00:00</lastmod>
   </url>
   
@@ -193,11 +218,6 @@
   </url>
   
   <url>
-    <loc>/categories/db/</loc>
-    <lastmod>2021-03-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/redis-list/</loc>
     <lastmod>2021-03-29T00:00:00+00:00</lastmod>
   </url>
@@ -214,11 +234,6 @@
   
   <url>
     <loc>/tags/blockcache/</loc>
-    <lastmod>2021-03-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/rocksdb/</loc>
     <lastmod>2021-03-26T00:00:00+00:00</lastmod>
   </url>
   
