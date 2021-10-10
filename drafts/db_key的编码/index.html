@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>key的编码 - Bad Fd</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="key的编码" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/drafts/db_key%E7%9A%84%E7%BC%96%E7%A0%81/" />
+<meta property="article:published_time" content="2021-09-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-09-12T00:00:00+00:00" />
+
+		<meta itemprop="name" content="key的编码">
+<meta itemprop="description" content="">
+<meta itemprop="datePublished" content="2021-09-12T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2021-09-12T00:00:00+00:00" />
+<meta itemprop="wordCount" content="0">
+
+
+
+<meta itemprop="keywords" content="kv编码方式," />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata|Noto+Serif+SC:400,400i,700">
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="/css/style.css">
+	
+
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body" onload="onLoad()">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div id="bannerback" class="logo  logo--mixed">
+		<a class="logo__link" href="/" title="Badfd" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/img/logo.png">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title logo__texttitle">Badfd</div>
+				</div>
+		</a>
+    <ul class="logo__item logo__item_r logo__text">
+    <li>
+    <a href="/menus/about/">
+    <div>
+      <div class="logo__title_fr">About</div>
+    </div>
+    </a>
+    </li>
+    <li>
+    <a href="/menus/work-notes/">
+    <div>
+      <div class="logo__title_fr">Links</div>
+    </div>
+    </a>
+    </li>
+    </ul>
+	</div>
+
+	</div>
+</header>
+
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">key的编码</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2021-09-12T00:00:00Z">2021-09-12</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/db/" rel="category">DB</a>
+	</span>
+</div></div>
+		</header><div class="content post__content post__inner clearfix">
+			
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/kv%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/" rel="tag">kv编码方式</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="我 avatar" src="/resources/avatar1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">关于 我</span>
+	</div>
+	<div class="authorbox__description">
+		a c/c++ programmer, developing databases. used to work at Didi and Intel(intern), now working at vesoft
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/drafts/db_rocksdb%E6%80%A7%E8%83%BD%E5%8E%8B%E6%B5%8B/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;上一篇</span>
+			<p class="pager__title">rocksdb性能压测</p>
+		</a>
+	</div>
+</nav>
+
+<script src="https://utteranc.es/client.js" repo="linkensphere201/linkensphere201.github.io" issue-term="pathname"  label="utteranc-comment"  theme="github-light" crossorigin="anonymous" async></script>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="搜索…" value="" name="q" aria-label="搜索…">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">近期文章</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/db_rocksdb%E7%9A%84blockcache%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BC%98%E5%8C%96%E7%82%B9/">rocksdb的blockcache的一些优化点</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/db_txn_lec1/">db笔记 - 事务1:隔离级别</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/algmnotes-skiplist/">算法笔记：跳表（r1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/storage_deep_dive_for_raft/lec1/">分布式笔记 - Raft（1）</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/rust_rust%E7%9A%84%E5%BC%95%E7%94%A8%E8%A7%84%E5%88%99%E5%B0%8F%E4%BE%8B1/">rust的引用规则小例1</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-categories widget">
+	<h4 class="widget__title">分类</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/algmnotes/">algmnotes</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/algorithm/">algorithm</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/c&#43;&#43;/">c&#43;&#43;</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/cppnotes/">cppnotes</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/db/">DB</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/debugging/">debugging</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/other/">other</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/rocksdb/">rocksdb</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/rust/">rust</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%85%B6%E4%BB%96/">其他</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">标签</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/blockcache/" title="blockcache">blockcache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/c/c&#43;&#43;-idioms/" title="c/c&#43;&#43;-idioms">c/c&#43;&#43;-idioms (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cheatsheet/" title="cheatsheet">cheatsheet (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cmake/" title="cmake">cmake (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/compile-flags/" title="compile flags">compile flags (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/container-iterator/" title="container iterator">container iterator (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cpp14/" title="cpp14">cpp14 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/crtp/" title="CRTP">CRTP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug/" title="debug">debug (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/debug-tools/" title="debug-tools">debug-tools (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/digest/" title="digest">digest (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/dp/" title="DP">DP (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/enable_shared_from_this/" title="enable_shared_from_this">enable_shared_from_this (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/enum-to-string/" title="enum-to-string">enum-to-string (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/executor/" title="executor">executor (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/folly/" title="folly">folly (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/hugo/" title="hugo">hugo (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/inl/" title="inl">inl (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kv%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/" title="kv编码方式">kv编码方式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lrucache/" title="lrucache">lrucache (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lsb-standard/" title="LSB-Standard">LSB-Standard (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lsm/" title="lsm">lsm (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-fence/" title="memory fence">memory fence (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/memory-order/" title="memory order">memory order (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/move-semantics/" title="move-semantics">move-semantics (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/new-expression/" title="new expression">new expression (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/parameter_pack/" title="parameter_pack">parameter_pack (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/perf/" title="perf">perf (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/redis-list/" title="redis list">redis list (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/reflection/" title="reflection">reflection (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb/" title="rocksdb">rocksdb (5)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rocksdb-recovery/" title="rocksdb-recovery">rocksdb-recovery (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rpc-framework/" title="rpc framework">rpc framework (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rust/" title="rust">rust (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rvalue-references/" title="rvalue-references">rvalue-references (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/shared_ptr/" title="shared_ptr">shared_ptr (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/skiplist/" title="skiplist">skiplist (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/sse/" title="sse">sse (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stdmove/" title="std::move">std::move (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stl/" title="stl">stl (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/systemtap/" title="systemtap">systemtap (2)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/template/" title="template">template (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/txn/" title="txn">txn (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/type_traits/" title="type_traits">type_traits (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/write-ahead-log/" title="write-ahead-log">write-ahead-log (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%85%B6%E4%BB%96/" title="其他">其他 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" title="分布式">分布式 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/" title="复杂度分析">复杂度分析 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%95%B0%E4%BD%8D%E6%9E%9A%E4%B8%BE/" title="数位枚举">数位枚举 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" title="最长回文子串">最长回文子串 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E6%9D%82%E8%B0%88/" title="杂谈">杂谈 (3)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E4%BC%98%E5%8C%96/" title="读写放大优化">读写放大优化 (1)</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/%E8%AF%BB%E5%86%99%E6%94%BE%E5%A4%A7%E5%88%86%E6%9E%90/" title="读写放大分析">读写放大分析 (1)</a>
+	</div>
+</div>
+<div class="widget-social widget">
+	<h4 class="widget-social__title widget__title">社交</h4>
+	<div class="widget-social__content widget__content">
+		<div class="widget-social__item widget__item">
+			<a class="widget-social__link widget__link btn" title="GitHub" rel="noopener noreferrer" href="https://github.com/linkensphere201" target="_blank">
+				<svg class="widget-social__link-icon icon icon-github" width="24" height="24" viewBox="0 0 384 374"><path d="m192 0c-106.1 0-192 85.8-192 191.7 0 84.7 55 156.6 131.3 181.9 9.6 1.8 13.1-4.2 13.1-9.2 0-4.6-.2-16.6-.3-32.6-53.4 11.6-64.7-25.7-64.7-25.7-8.7-22.1-21.3-28-21.3-28-17.4-11.9 1.3-11.6 1.3-11.6 19.3 1.4 29.4 19.8 29.4 19.8 17.1 29.3 44.9 20.8 55.9 15.9 1.7-12.4 6.7-20.8 12.2-25.6-42.6-4.8-87.5-21.3-87.5-94.8 0-20.9 7.5-38 19.8-51.4-2-4.9-8.6-24.3 1.9-50.7 0 0 16.1-5.2 52.8 19.7 15.3-4.2 31.7-6.4 48.1-6.5 16.3.1 32.7 2.2 48.1 6.5 36.7-24.8 52.8-19.7 52.8-19.7 10.5 26.4 3.9 45.9 1.9 50.7 12.3 13.4 19.7 30.5 19.7 51.4 0 73.7-44.9 89.9-87.7 94.6 6.9 5.9 13 17.6 13 35.5 0 25.6-.2 46.3-.2 52.6 0 5.1 3.5 11.1 13.2 9.2 76.2-25.5 131.2-97.3 131.2-182 0-105.9-86-191.7-192-191.7z"/></svg>
+				<span>GitHub</span>
+			</a>
+		</div>
+
+		
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Hazy2019. Generated by HUGO and Mainroad theme.
+			<span class="footer__copyright-credits">基于 <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> 引擎和 <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> 主题</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/onload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
